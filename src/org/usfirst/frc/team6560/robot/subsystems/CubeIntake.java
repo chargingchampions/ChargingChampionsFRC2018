@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6560.robot.subsystems;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -8,8 +9,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class CubeIntake extends Subsystem {
 
-	CANTalon intakeMotor1 = new CANTalon(3);
-    CANTalon intakeMotor2 = new CANTalon(2);
+	WPI_TalonSRX intakeMotor1 = new WPI_TalonSRX(3);
+	WPI_TalonSRX intakeMotor2 = new WPI_TalonSRX(2);
     
     public CubeIntake() {
     	intakeMotor1.setSafetyEnabled(false);

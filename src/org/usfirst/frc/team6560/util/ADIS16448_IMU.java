@@ -20,6 +20,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
@@ -1083,7 +1084,7 @@ public class ADIS16448_IMU extends GyroBase implements Gyro, PIDSource, LiveWind
    */
   @Override
   public void updateTable() {
-    ITable table = getTable();
+    NetworkTable table = NetworkTable.getTable("Gyro");
     if (table != null) {
       table.putNumber("Value", getAngle());
       table.putNumber("Pitch", getPitch());
@@ -1097,4 +1098,16 @@ public class ADIS16448_IMU extends GyroBase implements Gyro, PIDSource, LiveWind
       table.putNumber("AngleZ", getAngleZ());
     }
   }
+
+@Override
+public void startLiveWindowMode() {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void stopLiveWindowMode() {
+	// TODO Auto-generated method stub
+	
+}
 }

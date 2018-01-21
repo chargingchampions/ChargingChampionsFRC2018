@@ -1,6 +1,6 @@
 package org.usfirst.frc.team6560.robot.subsystems;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.usfirst.frc.team6560.util.ADIS16448_IMU;
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
@@ -16,10 +16,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drive extends Subsystem {
 
-	CANTalon frontLeftDrive;
-	CANTalon rearLeftDrive;
-	CANTalon frontRightDrive;
-	CANTalon rearRightDrive;
+	WPI_TalonSRX frontLeftDrive;
+	WPI_TalonSRX rearLeftDrive;
+	WPI_TalonSRX frontRightDrive;
+	WPI_TalonSRX rearRightDrive;
 	RobotDrive drivetrain;
 	
 	//Sensors
@@ -28,10 +28,10 @@ public class Drive extends Subsystem {
 	public ADIS16448_IMU imu;
 	
 	public Drive() {
-		frontLeftDrive = new CANTalon(CAN.DRIVE_FRONTLEFT);
-		rearLeftDrive = new CANTalon(CAN.DRIVE_REARLEFT);
-		frontRightDrive = new CANTalon(CAN.DRIVE_FRONTRIGHT);
-		rearRightDrive = new CANTalon(CAN.DRIVE_REARRIGHT);
+		frontLeftDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTLEFT);
+		rearLeftDrive = new WPI_TalonSRX(CAN.DRIVE_REARLEFT);
+		frontRightDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTRIGHT);
+		rearRightDrive = new WPI_TalonSRX(CAN.DRIVE_REARRIGHT);
 		drivetrain = new RobotDrive(frontLeftDrive, rearLeftDrive, frontRightDrive, rearRightDrive);
 		
 		ultra = new AnalogInput(0);
