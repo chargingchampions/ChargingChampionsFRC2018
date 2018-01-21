@@ -16,6 +16,7 @@ public class Robot extends IterativeRobot {
 	public static VisionNetworkTables visionNetworkTables;
 	public static Pneumatics pneumatics;
 	public static CubeIntake cubeIntake;
+	public static Arm arm;
 	
 	//remove the following if it causes a NetworkTable exception
 	public static Preferences prefs;
@@ -28,6 +29,7 @@ public class Robot extends IterativeRobot {
 		visionNetworkTables = new VisionNetworkTables();
 		pneumatics = new Pneumatics();
 		cubeIntake = new CubeIntake();
+		arm = new Arm();
 		oi = new OI();
 		
 		SmartDashboard.putData("Auto mode", chooser);
