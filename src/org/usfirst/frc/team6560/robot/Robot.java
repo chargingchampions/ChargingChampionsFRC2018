@@ -27,7 +27,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		drive = new Drive();
 		visionNetworkTables = new VisionNetworkTables();
-		pneumatics = new Pneumatics();
+		//pneumatics = new Pneumatics();
 		cubeIntake = new CubeIntake();
 		arm = new Arm();
 		oi = new OI();

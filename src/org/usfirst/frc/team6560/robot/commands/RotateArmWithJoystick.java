@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RotateArm extends Command {
+public class RotateArmWithJoystick extends Command {
 
-    public RotateArm() {
+    public RotateArmWithJoystick() {
         requires(Robot.arm);
     }
 

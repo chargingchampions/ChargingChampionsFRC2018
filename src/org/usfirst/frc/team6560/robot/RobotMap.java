@@ -36,6 +36,10 @@ public class RobotMap {
 		public static final int DRIVE_REARLEFT = 0;
 		public static final int DRIVE_FRONTRIGHT = 0;
 		public static final int DRIVE_REARRIGHT = 0;
+		public static final int GRABBER_ROTATION = 6;
+		public static final int GRABBER_RIGHT = 14;
+		public static final int GRABBER_LEFT = 1;
+		public static final int ARM = 4;
 		
 		public static final int SOLENOID_0 = 0;
 		public static final int SOLENOID_1 = 1;

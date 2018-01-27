@@ -32,9 +32,9 @@ public class OI {
 		JoystickButton button11 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_11);
 		JoystickButton button12 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_12);
 		
-		trigger.whileHeld(new OpenArms());
-		button3.whileHeld(new IntakeCube(0.5));
-		button4.whileHeld(new ShootCube(0.5));
+		//trigger.whileHeld(new OpenArms());
+		//rightThumb.whileHeld(new IntakeCube(1.0));
+		//button4.whileHeld(new ShootCube(0.5));
 	}
 	
 	public double getXAxis() {
