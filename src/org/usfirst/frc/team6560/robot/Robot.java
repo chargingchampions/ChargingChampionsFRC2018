@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6560.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,6 +8,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team6560.robot.RobotMap.CAN;
 import org.usfirst.frc.team6560.robot.subsystems.*;
 
 public class Robot extends IterativeRobot {
@@ -27,7 +30,6 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		drive = new Drive();
 		visionNetworkTables = new VisionNetworkTables();
-		//pneumatics = new Pneumatics();
 		cubeIntake = new CubeIntake();
 		arm = new Arm();
 		oi = new OI();
@@ -35,6 +37,10 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		//remove the following if it causes a NetworkTable exception
 		prefs = Preferences.getInstance();
+		
+		Compressor compressor_0 = new Compressor(CAN.COMPRESSOR_ID);
+		compressor_0.setClosedLoopControl(true);
+		compressor_0.start();
 	}
 
 	@Override
