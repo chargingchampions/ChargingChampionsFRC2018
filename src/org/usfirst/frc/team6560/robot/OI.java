@@ -14,42 +14,90 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	Joystick logitechJoystick;
+	public final Joystick gamepad;
+	public final Joystick logitechJoystick;
 	
 	public OI() {
+		gamepad = new Joystick(Joysticks.GAMEPAD);
 		logitechJoystick = new Joystick(Joysticks.LOGITECH_JOYSTICK_ID);
+		
+		JoystickButton aButton = new JoystickButton(gamepad, Joysticks.A_BUTTON);
+		JoystickButton bButton = new JoystickButton(gamepad, Joysticks.B_BUTTON);
+		JoystickButton xButton = new JoystickButton(gamepad, Joysticks.X_BUTTON);
+		JoystickButton yButton = new JoystickButton(gamepad, Joysticks.Y_BUTTON);
+		JoystickButton leftIndex = new JoystickButton(gamepad, Joysticks.LEFT_INDEX_BUTTON);
+		JoystickButton rightIndex = new JoystickButton(gamepad, Joysticks.RIGHT_INDEX_BUTTON);
+		JoystickButton backButton = new JoystickButton(gamepad, Joysticks.BACK_BUTTON);
+		JoystickButton startButton = new JoystickButton(gamepad, Joysticks.START_BUTTON);
+		JoystickButton leftAxisButton = new JoystickButton(gamepad, Joysticks.LEFT_AXIS_BUTTON);
+		JoystickButton rightAxisButton = new JoystickButton(gamepad, Joysticks.RIGHT_AXIS_BUTTON);
 
-		JoystickButton trigger = new JoystickButton(logitechJoystick, Joysticks.TRIGGER_BUTTON);
-		JoystickButton rightThumb = new JoystickButton(logitechJoystick, Joysticks.RIGHT_THUMB_BUTTON);
-		JoystickButton button3 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_3);
-		JoystickButton button4 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_4);
-		JoystickButton button5 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_5);
-		JoystickButton button6 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_6);
-		JoystickButton button7 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_7);
-		JoystickButton button8 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_8);
-		JoystickButton button9 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_9);
-		JoystickButton button10 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_10);
-		JoystickButton button11 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_11);
-		JoystickButton button12 = new JoystickButton(logitechJoystick, Joysticks.BUTTON_12);
+
+		JoystickButton secondTrigger = new JoystickButton(logitechJoystick, Joysticks.SECOND_TRIGGER_BUTTON);
+		JoystickButton secondRightThumb = new JoystickButton(logitechJoystick, Joysticks.SECOND_RIGHT_THUMB_BUTTON);
+		JoystickButton secondButton3 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_3);
+		JoystickButton secondButton4 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_4);
+		JoystickButton secondButton5 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_5);
+		JoystickButton secondButton6 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_6);
+		JoystickButton secondButton7 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_7);
+		JoystickButton secondButton8 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_8);
+		JoystickButton secondButton9 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_9);
+		JoystickButton secondButton10 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_10);
+		JoystickButton secondButton11 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_11);
+		JoystickButton secondButton12 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_12);
 		
 		//trigger.whileHeld(new OpenArms());
 		//rightThumb.whileHeld(new IntakeCube(1.0));
 		//button4.whileHeld(new ShootCube(0.5));
 	}
 	
-	public double getXAxis() {
-		return logitechJoystick.getRawAxis(Joysticks.X_AXIS);
+	//Axis
+	public double getLeftXAxis() {
+		return gamepad.getRawAxis(Joysticks.LEFT_X_AXIS);
 	}
 
-	public double getYAxis() {
-		return logitechJoystick.getRawAxis(Joysticks.Y_AXIS);
+	public double getLeftYAxis() {
+		return gamepad.getRawAxis(Joysticks.LEFT_Y_AXIS);
 	}
 
-	public double getZAxis() {
-		return logitechJoystick.getRawAxis(Joysticks.Z_AXIS);
+	public double getLeftTrigger() {
+		return gamepad.getRawAxis(Joysticks.LEFT_TRIGGER);
 	}
 
-	public double getSlider() {
-		return logitechJoystick.getRawAxis(Joysticks.SLIDER);
+	public double getRightTrigger() {
+		return gamepad.getRawAxis(Joysticks.RIGHT_TRIGGER);
+	}
+
+	public double getRightXAxis() {
+		return gamepad.getRawAxis(Joysticks.RIGHT_X_AXIS);
+	}
+
+	public double getRightYAxis() {
+		return gamepad.getRawAxis(Joysticks.RIGHT_Y_AXIS);
+	}
+
+	public int getPOV() {
+		return gamepad.getPOV();
+	}
+
+	
+	public double getSecondXAxis() {
+		return logitechJoystick.getRawAxis(Joysticks.SECOND_X_AXIS);
+	}
+
+	public double getSecondYAxis() {
+		return logitechJoystick.getRawAxis(Joysticks.SECOND_Y_AXIS);
+	}
+
+	public double getSecondZAxis() {
+		return logitechJoystick.getRawAxis(Joysticks.SECOND_Z_AXIS);
+	}
+
+	public double getSecondSlider() {
+		return logitechJoystick.getRawAxis(Joysticks.SECOND_SLIDER);
+	}
+	
+	public double getSecondTrigger() {
+		return logitechJoystick.getRawAxis(Joysticks.SECOND_TRIGGER_BUTTON);
 	}
 }

@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.usfirst.frc.team6560.util.ADIS16448_IMU;
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
-import org.usfirst.frc.team6560.robot.commands.MecanumDriveWithJoysticks;
+import org.usfirst.frc.team6560.robot.commands.TankDriveWithJoysticks;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -44,8 +44,8 @@ public class Drive extends Subsystem {
 		imu.reset();
 	}
 	
-	public void mecanumDriveWithJoysticks(double x, double y, double rotation, double gyroAngle) {
-		drivetrain.mecanumDrive_Cartesian(x, y, rotation, gyroAngle);
+	public void tankDriveWithJoysticks(double left, double right) {
+		drivetrain.tankDrive(left, right);
 	}
 	
 	public void driveStraight(double speed) {
@@ -64,6 +64,6 @@ public class Drive extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-        setDefaultCommand(new MecanumDriveWithJoysticks());
+        setDefaultCommand(new TankDriveWithJoysticks());
     }
 }

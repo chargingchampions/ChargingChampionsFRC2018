@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RotateArmWithJoystick extends Command {
+public class TankDriveWithJoysticks extends Command {
 
-    public RotateArmWithJoystick() {
-        requires(Robot.arm);
+    public TankDriveWithJoysticks() {
+        requires(Robot.drive);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +19,7 @@ public class RotateArmWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.arm.rotate(Robot.oi.getSecondYAxis());
+    	Robot.drive.tankDriveWithJoysticks(Robot.oi.getLeftYAxis(), Robot.oi.getRightYAxis());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,7 +29,7 @@ public class RotateArmWithJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.arm.stopRotate();
+    	Robot.drive.stopDrive();
     }
 
     // Called when another command which requires one or more of the same

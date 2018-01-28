@@ -29,7 +29,7 @@ public class VisionDrive extends Command {
     protected void execute() {
     	double xOffset = Robot.visionNetworkTables.getXOffset();
     	//run based on input above
-    	Robot.drive.mecanumDriveWithJoysticks(xOffset*visionMotorSpeed, 0.0, 0.0, 0.0);
+    	//Robot.drive.mecanumDriveWithJoysticks(xOffset*visionMotorSpeed, 0.0, 0.0, 0.0);
     	Timer.delay(visionWaitTime);
     }
 
