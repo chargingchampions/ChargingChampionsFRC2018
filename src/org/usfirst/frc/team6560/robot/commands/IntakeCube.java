@@ -9,18 +9,15 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class IntakeCube extends Command {
 
-	double speedToIntake;
-	
-    public IntakeCube(double speed) {
+    public IntakeCube() {
     	requires(Robot.cubeIntake);
-    	speedToIntake = speed;
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.cubeIntake.intakeCube(speedToIntake);
+    	Robot.cubeIntake.intakeCube(0.7);
     }
 
     protected boolean isFinished() {

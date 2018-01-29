@@ -17,7 +17,6 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drive drive;
 	public static VisionNetworkTables visionNetworkTables;
-	public static Pneumatics pneumatics;
 	public static CubeIntake cubeIntake;
 	public static Arm arm;
 	
@@ -37,10 +36,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		//remove the following if it causes a NetworkTable exception
 		prefs = Preferences.getInstance();
-		
-		Compressor compressor_0 = new Compressor(CAN.COMPRESSOR_ID);
-		compressor_0.setClosedLoopControl(true);
-		compressor_0.start();
 	}
 
 	@Override

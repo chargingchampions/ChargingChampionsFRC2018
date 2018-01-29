@@ -46,9 +46,11 @@ public class OI {
 		JoystickButton secondButton11 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_11);
 		JoystickButton secondButton12 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_12);
 		
-		//trigger.whileHeld(new OpenArms());
+		secondRightThumb.whileHeld(new OpenArms());
+		secondTrigger.whileHeld(new IntakeCube());
 		//rightThumb.whileHeld(new IntakeCube(1.0));
 		//button4.whileHeld(new ShootCube(0.5));
+		
 	}
 	
 	//Axis
@@ -97,7 +99,4 @@ public class OI {
 		return logitechJoystick.getRawAxis(Joysticks.SECOND_SLIDER);
 	}
 	
-	public double getSecondTrigger() {
-		return logitechJoystick.getRawAxis(Joysticks.SECOND_TRIGGER_BUTTON);
-	}
 }
