@@ -8,19 +8,16 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ShootCube extends Command {
-
-	double speedToShoot;
 	
-    public ShootCube(double speed) {
+    public ShootCube() {
     	requires(Robot.cubeIntake);
-    	speedToShoot = speed;
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.cubeIntake.shootCube(speedToShoot);
+    	Robot.cubeIntake.shootCube(-0.7);
     }
 
     protected boolean isFinished() {

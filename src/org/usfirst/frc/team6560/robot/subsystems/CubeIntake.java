@@ -16,14 +16,12 @@ public class CubeIntake extends Subsystem {
 	WPI_TalonSRX intakeMotor1 = new WPI_TalonSRX(CAN.GRABBER_LEFT);
 	WPI_TalonSRX intakeMotor2 = new WPI_TalonSRX(CAN.GRABBER_RIGHT);
 	WPI_TalonSRX rotationMotor = new WPI_TalonSRX(CAN.GRABBER_ROTATION);
-	Solenoid solenoid0 = new Solenoid(CAN.SOLENOID_0);
-	Compressor compressor_0 = new Compressor(CAN.COMPRESSOR_ID);
 	
     public CubeIntake() {
     	intakeMotor1.setSafetyEnabled(false);
     	intakeMotor2.setSafetyEnabled(false);
-    	compressor_0.setClosedLoopControl(true);
-    	compressor_0.start();
+    	intakeMotor1.setInverted(true);
+    	intakeMotor2.setInverted(true);
     }
 
     public void intakeCube(double speed) {
@@ -45,17 +43,13 @@ public class CubeIntake extends Subsystem {
     	rotationMotor.set(speed);
     }
     
-    public void openArm() {
-    	solenoid0.set(true);
+    public void stopRotateGrabber() {
+    	rotationMotor.set(0);
     }
     
-    public void closeArm() {
-    	solenoid0.set(false);
-    }
     
     
     public void initDefaultCommand() {
-    	compressor_0.start();
     	setDefaultCommand(new IntakeCubeWithJoystick());
     }
 }

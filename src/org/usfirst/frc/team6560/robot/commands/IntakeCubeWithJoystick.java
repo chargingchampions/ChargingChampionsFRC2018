@@ -15,11 +15,12 @@ public class IntakeCubeWithJoystick extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.cubeIntake.stopRotateGrabber();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntake.rotateGrabber(Robot.oi.getSecondSlider());
+    	Robot.cubeIntake.intakeCube(Robot.oi.getSecondSlider());
     }
 
     // Make this return true when this Command no longer needs to run execute()

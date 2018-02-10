@@ -7,19 +7,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class OpenArms extends Command {
+public class IncreaseDriveSpeed extends Command {
 
-    public OpenArms() {
-        requires(Robot.pneumatics);
+    public IncreaseDriveSpeed() {
+    	//technically requires nothing
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.drive.increaseDriveSpeed();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.pneumatics.openArm();
+    	//Robot.drive.increaseDriveSpeed();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,12 +30,10 @@ public class OpenArms extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.pneumatics.closeArm();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team6560.robot;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,7 +8,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team6560.robot.RobotMap.CAN;
 import org.usfirst.frc.team6560.robot.subsystems.*;
 
 public class Robot extends IterativeRobot {
@@ -19,6 +17,7 @@ public class Robot extends IterativeRobot {
 	public static VisionNetworkTables visionNetworkTables;
 	public static CubeIntake cubeIntake;
 	public static Arm arm;
+	public static Pneumatics pneumatics;
 	
 	//remove the following if it causes a NetworkTable exception
 	public static Preferences prefs;
@@ -31,6 +30,7 @@ public class Robot extends IterativeRobot {
 		visionNetworkTables = new VisionNetworkTables();
 		cubeIntake = new CubeIntake();
 		arm = new Arm();
+		pneumatics = new Pneumatics();
 		oi = new OI();
 		
 		SmartDashboard.putData("Auto mode", chooser);
@@ -67,6 +67,7 @@ public class Robot extends IterativeRobot {
 	
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Robot.drive.globalDriveSpeed);
 	}
 
 	public void testPeriodic() {

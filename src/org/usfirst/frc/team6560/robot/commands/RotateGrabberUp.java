@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class OpenArms extends Command {
+public class RotateGrabberUp extends Command {
 
-    public OpenArms() {
-        requires(Robot.pneumatics);
+    public RotateGrabberUp() {
+        requires(Robot.cubeIntake);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +19,7 @@ public class OpenArms extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.pneumatics.openArm();
+    	Robot.cubeIntake.rotateGrabber(0.6);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -29,12 +29,11 @@ public class OpenArms extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.pneumatics.closeArm();
+    	Robot.cubeIntake.stopRotateGrabber();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

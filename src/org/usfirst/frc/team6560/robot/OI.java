@@ -1,9 +1,16 @@
 package org.usfirst.frc.team6560.robot;
 
 import org.usfirst.frc.team6560.robot.RobotMap.Joysticks;
+import org.usfirst.frc.team6560.robot.commands.DecreaseDriveSpeed;
+import org.usfirst.frc.team6560.robot.commands.IncreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.IntakeCube;
+import org.usfirst.frc.team6560.robot.commands.IntakeCubeWithJoystick;
 import org.usfirst.frc.team6560.robot.commands.OpenArms;
+import org.usfirst.frc.team6560.robot.commands.RotateGrabberDown;
+import org.usfirst.frc.team6560.robot.commands.RotateGrabberUp;
 import org.usfirst.frc.team6560.robot.commands.ShootCube;
+import org.usfirst.frc.team6560.robot.commands.StopRotateGrabber;
+import org.usfirst.frc.team6560.robot.commands.TankDriveStraight;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -46,8 +53,17 @@ public class OI {
 		JoystickButton secondButton11 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_11);
 		JoystickButton secondButton12 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_12);
 		
+		//secondButton4.whileHeld(new ShootCube());
 		secondRightThumb.whileHeld(new OpenArms());
-		secondTrigger.whileHeld(new IntakeCube());
+		yButton.whileHeld(new TankDriveStraight());
+		secondButton7.whenPressed(new RotateGrabberUp());
+		secondButton8.whenPressed(new RotateGrabberDown());
+		secondButton7.whenReleased(new IntakeCubeWithJoystick());
+		secondButton8.whenReleased(new IntakeCubeWithJoystick());
+		bButton.whileHeld(new IncreaseDriveSpeed());
+		xButton.whileHeld(new DecreaseDriveSpeed());
+		
+		//secondTrigger.whileHeld(new IntakeCube());
 		//rightThumb.whileHeld(new IntakeCube(1.0));
 		//button4.whileHeld(new ShootCube(0.5));
 		
