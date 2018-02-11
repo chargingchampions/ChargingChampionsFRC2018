@@ -17,7 +17,8 @@ public class IntakeCube extends Command {
     }
 
     protected void execute() {
-    	Robot.cubeIntake.intakeCube(0.7);
+    	Robot.cubeIntake.intakeCube(0.4);
+    	Robot.cubeIntake.setDefaultPosition();
     }
 
     protected boolean isFinished() {

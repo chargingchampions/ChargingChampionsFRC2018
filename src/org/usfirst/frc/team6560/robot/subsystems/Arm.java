@@ -39,5 +39,9 @@ public class Arm extends Subsystem {
     public void initDefaultCommand() {
     	setDefaultCommand(new RotateArmWithJoystick());
     }
+    
+    public void setDefaultPosition() {
+    	//jointMotor2.getSensorCollection().setPulseWidthPosition(newPosition, timeoutMs);
+    }
 }
 

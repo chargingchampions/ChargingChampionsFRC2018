@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6560.robot.subsystems;
 
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
+import org.usfirst.frc.team6560.robot.commands.IntakeCube;
 import org.usfirst.frc.team6560.robot.commands.IntakeCubeWithJoystick;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -21,7 +22,7 @@ public class CubeIntake extends Subsystem {
     	intakeMotor1.setSafetyEnabled(false);
     	intakeMotor2.setSafetyEnabled(false);
     	intakeMotor1.setInverted(true);
-    	intakeMotor2.setInverted(true);
+    	intakeMotor2.setInverted(false);
     }
 
     public void intakeCube(double speed) {
@@ -49,6 +50,14 @@ public class CubeIntake extends Subsystem {
     
     public int getGrabberRotationAbsolutePosition() {
     	return rotationMotor.getSensorCollection().getPulseWidthPosition();
+    }
+    
+    public void setDefaultPosition() {
+    	rotationMotor.getSensorCollection().setPulseWidthPosition(241488, 100);
+    }
+    
+    public void setHorizontalPosition() {
+    	rotationMotor.getSensorCollection().setPulseWidthPosition(162521, 100);
     }
     
     
