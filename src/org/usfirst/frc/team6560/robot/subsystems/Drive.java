@@ -83,7 +83,7 @@ public class Drive extends Subsystem {
 	}
 	
 	public void decreaseDriveSpeed() {
-		if (globalDriveSpeed-0.1>=0.0) {
+		if (globalDriveSpeed-0.1>=0.1) {
 			globalDriveSpeed-=0.1;
 		}
 	}

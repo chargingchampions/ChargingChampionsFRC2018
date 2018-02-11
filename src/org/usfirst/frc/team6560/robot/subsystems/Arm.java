@@ -32,6 +32,10 @@ public class Arm extends Subsystem {
     	jointMotor2.set(0);
     }
     
+    public int getArmRotationAbsolutePosition() {
+    	return jointMotor2.getSensorCollection().getPulseWidthPosition();
+    }
+    
     public void initDefaultCommand() {
     	setDefaultCommand(new RotateArmWithJoystick());
     }

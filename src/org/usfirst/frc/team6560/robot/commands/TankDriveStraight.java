@@ -19,7 +19,7 @@ public class TankDriveStraight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drive.tankDriveWithJoysticks(0.6, 0.6);
+    	Robot.drive.tankDriveWithJoysticks(-1.0, -1.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

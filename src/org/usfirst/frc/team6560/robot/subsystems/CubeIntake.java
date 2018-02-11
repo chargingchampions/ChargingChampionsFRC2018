@@ -47,6 +47,10 @@ public class CubeIntake extends Subsystem {
     	rotationMotor.set(0);
     }
     
+    public int getGrabberRotationAbsolutePosition() {
+    	return rotationMotor.getSensorCollection().getPulseWidthPosition();
+    }
+    
     
     
     public void initDefaultCommand() {
