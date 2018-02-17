@@ -9,10 +9,10 @@ package org.usfirst.frc.team6560.robot;
 public class RobotMap {
 
 	public static class CAN {
-		public static final int DRIVE_FRONTLEFT = 9;
-		public static final int DRIVE_REARLEFT = 10;
-		public static final int DRIVE_FRONTRIGHT = 4;
-		public static final int DRIVE_REARRIGHT = 5;
+		public static final int DRIVE_FRONTLEFT =0;
+		public static final int DRIVE_REARLEFT = 1;
+		public static final int DRIVE_FRONTRIGHT = 14;
+		public static final int DRIVE_REARRIGHT = 60;
 		public static final int GRABBER_ROTATION = 1;
 		public static final int GRABBER_RIGHT = 2;
 		public static final int GRABBER_LEFT = 6;
