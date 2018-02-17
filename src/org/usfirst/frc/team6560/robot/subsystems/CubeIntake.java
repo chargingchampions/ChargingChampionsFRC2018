@@ -21,8 +21,8 @@ public class CubeIntake extends Subsystem {
     public CubeIntake() {
     	intakeMotor1.setSafetyEnabled(false);
     	intakeMotor2.setSafetyEnabled(false);
-    	intakeMotor1.setInverted(true);
-    	intakeMotor2.setInverted(false);
+    	intakeMotor1.setInverted(false);
+    	intakeMotor2.setInverted(true);
     	
     	rotationMotor.configForwardSoftLimitThreshold(292488, 0);
     	rotationMotor.configReverseSoftLimitThreshold(142521, 0);

@@ -19,6 +19,7 @@ public class Arm extends Subsystem {
     public Arm() {
     	jointMotor1.setSafetyEnabled(false);
     	jointMotor2.setSafetyEnabled(false);
+    	jointMotor2.setInverted(true);
     	
     }
 
