@@ -23,6 +23,11 @@ public class CubeIntake extends Subsystem {
     	intakeMotor2.setSafetyEnabled(false);
     	intakeMotor1.setInverted(true);
     	intakeMotor2.setInverted(false);
+    	
+    	rotationMotor.configForwardSoftLimitThreshold(292488, 0);
+    	rotationMotor.configReverseSoftLimitThreshold(142521, 0);
+    	rotationMotor.configForwardSoftLimitEnable(false, 0);
+    	rotationMotor.configReverseSoftLimitEnable(false, 0);
     }
 
     public void intakeCube(double speed) {
@@ -53,11 +58,21 @@ public class CubeIntake extends Subsystem {
     }
     
     public void setDefaultPosition() {
-    	rotationMotor.getSensorCollection().setPulseWidthPosition(241488, 100);
+    	rotateGrabber(0.7);
     }
     
     public void setHorizontalPosition() {
-    	rotationMotor.getSensorCollection().setPulseWidthPosition(162521, 100);
+    	rotateGrabber(-0.7);
+    }
+    
+    public void disableSoftLimits() {
+    	rotationMotor.configForwardSoftLimitEnable(false, 0);
+    	rotationMotor.configReverseSoftLimitEnable(false, 0);
+    }
+    
+    public void enableSoftLimits() {
+    	rotationMotor.configForwardSoftLimitEnable(true, 0);
+    	rotationMotor.configReverseSoftLimitEnable(true, 0);
     }
     
     

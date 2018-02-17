@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SetGrabberHorizontal extends Command {
+public class SetGrabberDefault extends Command {
 
-    public SetGrabberHorizontal() {
+    public SetGrabberDefault() {
         requires(Robot.cubeIntake);
         requires(Robot.pneumatics);
     }
@@ -18,7 +18,7 @@ public class SetGrabberHorizontal extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.cubeIntake.enableSoftLimits();
-    	Robot.cubeIntake.setHorizontalPosition();
+    	Robot.cubeIntake.setDefaultPosition();
     }
 
     // Called repeatedly when this Command is scheduled to run

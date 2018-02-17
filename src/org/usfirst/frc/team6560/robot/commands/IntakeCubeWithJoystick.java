@@ -15,6 +15,7 @@ public class IntakeCubeWithJoystick extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.cubeIntake.disableSoftLimits();
     	Robot.cubeIntake.stopRotateGrabber();
     }
 

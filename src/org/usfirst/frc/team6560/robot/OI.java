@@ -8,6 +8,7 @@ import org.usfirst.frc.team6560.robot.commands.IntakeCubeWithJoystick;
 import org.usfirst.frc.team6560.robot.commands.OpenArms;
 import org.usfirst.frc.team6560.robot.commands.RotateGrabberDown;
 import org.usfirst.frc.team6560.robot.commands.RotateGrabberUp;
+import org.usfirst.frc.team6560.robot.commands.SetGrabberDefault;
 import org.usfirst.frc.team6560.robot.commands.SetGrabberHorizontal;
 import org.usfirst.frc.team6560.robot.commands.ShootCube;
 import org.usfirst.frc.team6560.robot.commands.StopRotateGrabber;
@@ -65,6 +66,10 @@ public class OI {
 		xButton.whileHeld(new DecreaseDriveSpeed());
 		secondTrigger.whenPressed(new ShootCube());
 		secondTrigger.whenReleased(new IntakeCubeWithJoystick());
+		secondButton3.whenPressed(new SetGrabberHorizontal());
+		secondButton3.whenReleased(new IntakeCubeWithJoystick());
+		secondButton4.whenPressed(new SetGrabberDefault());
+		secondButton4.whenReleased(new IntakeCubeWithJoystick());
 		
 		//secondTrigger.whileHeld(new IntakeCube());
 		//rightThumb.whileHeld(new IntakeCube(1.0));
