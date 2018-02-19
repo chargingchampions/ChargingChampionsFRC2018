@@ -1,7 +1,7 @@
 package org.usfirst.frc.team6560.robot.commands;
 
 import org.usfirst.frc.team6560.robot.Robot;
-
+import org.usfirst.frc.team6560.robot.subsystems.Drive;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -19,7 +19,7 @@ public class TankDriveStraight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drive.tankDriveWithJoysticks(-1.0, -1.0);
+    	Robot.drive.driveStraight(Drive.globalDriveSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -72,6 +72,12 @@ public class Drive extends Subsystem {
 		rearRightDrive.set(0);
 	}
 	
+	public void driveStraight(double speed) {
+		gyro.reset();
+		double angle = gyro.getAngle();
+		drivetrain.arcadeDrive(-speed, -1 * angle);
+	}
+	
 	public double getGyroAngle() {
 		return gyro.getAngle();
 	}
