@@ -5,9 +5,7 @@ import org.usfirst.frc.team6560.robot.commands.RotateArmWithJoystick;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
@@ -23,6 +21,7 @@ public class Arm extends PIDSubsystem {
     	jointMotor2.setSafetyEnabled(false);	
     	jointMotor2.setInverted(true);
     	getPIDController().setContinuous(false);
+    	getPIDController().disable();
     	
     }
 

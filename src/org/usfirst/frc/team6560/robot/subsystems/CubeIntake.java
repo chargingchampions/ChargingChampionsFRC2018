@@ -1,24 +1,26 @@
 package org.usfirst.frc.team6560.robot.subsystems;
 
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
-import org.usfirst.frc.team6560.robot.commands.IntakeCube;
 import org.usfirst.frc.team6560.robot.commands.IntakeCubeWithJoystick;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
  *
  */
-public class CubeIntake extends Subsystem {
+public class CubeIntake extends PIDSubsystem {
 
 	WPI_TalonSRX intakeMotor1 = new WPI_TalonSRX(CAN.GRABBER_LEFT);
 	WPI_TalonSRX intakeMotor2 = new WPI_TalonSRX(CAN.GRABBER_RIGHT);
 	WPI_TalonSRX rotationMotor = new WPI_TalonSRX(CAN.GRABBER_ROTATION);
 	
     public CubeIntake() {
+    	super("Grabber", -0.007, 0.0, 0.0);
+    	setAbsoluteTolerance(1000);
+    	getPIDController().setContinuous(false);
+    	getPIDController().disable();
+    	getPIDController().setSetpoint(3980);
     	intakeMotor1.setSafetyEnabled(false);
     	intakeMotor2.setSafetyEnabled(false);
     	intakeMotor1.setInverted(false);
@@ -58,11 +60,11 @@ public class CubeIntake extends Subsystem {
     }
     
     public void setDefaultPosition() {
-    	rotateGrabber(0.7);
+    	//set PID value
     }
     
     public void setHorizontalPosition() {
-    	rotateGrabber(-0.7);
+    	//set PID value
     }
     
     public void disableSoftLimits() {
@@ -75,10 +77,31 @@ public class CubeIntake extends Subsystem {
     	rotationMotor.configReverseSoftLimitEnable(true, 0);
     }
     
+    public void disablePIDControl() {
+    	getPIDController().disable();
+    }
+    
+    public void enablePIDControl() {
+    	getPIDController().enable();
+    }
+    
     
     
     public void initDefaultCommand() {
     	setDefaultCommand(new IntakeCubeWithJoystick());
     }
+
+	@Override
+	protected double returnPIDInput() {
+		// TODO Auto-generated method stub
+		return rotationMotor.getSensorCollection().getPulseWidthPosition();
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+		// TODO Auto-generated method stub
+		rotationMotor.pidWrite(output*0.3);
+		
+	}
 }
 

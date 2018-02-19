@@ -2,6 +2,7 @@ package org.usfirst.frc.team6560.robot;
 
 import org.usfirst.frc.team6560.robot.RobotMap.Joysticks;
 import org.usfirst.frc.team6560.robot.commands.DecreaseDriveSpeed;
+import org.usfirst.frc.team6560.robot.commands.DisableGrabberPID;
 import org.usfirst.frc.team6560.robot.commands.IncreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.IntakeCube;
 import org.usfirst.frc.team6560.robot.commands.IntakeCubeWithJoystick;
@@ -13,6 +14,7 @@ import org.usfirst.frc.team6560.robot.commands.SetGrabberHorizontal;
 import org.usfirst.frc.team6560.robot.commands.ShootCube;
 import org.usfirst.frc.team6560.robot.commands.StopRotateGrabber;
 import org.usfirst.frc.team6560.robot.commands.TankDriveStraight;
+import org.usfirst.frc.team6560.robot.commands.EnableGrabberPID;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -66,10 +68,10 @@ public class OI {
 		xButton.whileHeld(new DecreaseDriveSpeed());
 		secondTrigger.whenPressed(new ShootCube());
 		secondTrigger.whenReleased(new IntakeCubeWithJoystick());
-		secondButton3.whenPressed(new SetGrabberHorizontal());
-		secondButton3.whenReleased(new IntakeCubeWithJoystick());
-		secondButton4.whenPressed(new SetGrabberDefault());
-		secondButton4.whenReleased(new IntakeCubeWithJoystick());
+		secondButton9.whenPressed(new EnableGrabberPID());
+		secondButton9.whenReleased(new IntakeCubeWithJoystick());
+		secondButton10.whenPressed(new DisableGrabberPID());
+		secondButton10.whenReleased(new IntakeCubeWithJoystick());
 		
 		//secondTrigger.whileHeld(new IntakeCube());
 		//rightThumb.whileHeld(new IntakeCube(1.0));
