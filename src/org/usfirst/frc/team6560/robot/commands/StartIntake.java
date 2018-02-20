@@ -2,6 +2,7 @@ package org.usfirst.frc.team6560.robot.commands;
 
 import org.usfirst.frc.team6560.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -21,6 +22,7 @@ public class StartIntake extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.pneumatics.openArm();
+    	Timer.delay(0.2);
     	Robot.cubeIntake.intakeCube(0.4);
     }
 
@@ -36,6 +38,9 @@ public class StartIntake extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	
+    	for (int i = 10; i > 0; i--) {
+    		Timer.delay(0.1);
+    		Robot.cubeIntake.intakeCube(0.2+((i/10)*0.2));
+    	}
     }
 }
