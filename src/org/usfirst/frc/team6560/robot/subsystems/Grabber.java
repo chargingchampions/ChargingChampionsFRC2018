@@ -19,10 +19,10 @@ public class Grabber extends PIDSubsystem {
 	WPI_TalonSRX rotationMotor = new WPI_TalonSRX(CAN.GRABBER_ROTATION);
 	
     public Grabber() {
-    	super("Grabber", Robot.prefs.getDouble("Grabber P Value", -0.007), Robot.prefs.getDouble("Grabber I Value", 0.0), Robot.prefs.getDouble("Grabber D Value", 0.0));
+    	super("Grabber", Robot.grabberPVal, Robot.grabberIVal, Robot.grabberDVal);
     	rotationMotor.setSafetyEnabled(false);
     	rotationMotor.getSensorCollection().setQuadraturePosition(0,  1);
-    	setAbsoluteTolerance(Robot.prefs.getDouble("Grabber Absolute Tolerance", 1000));
+    	setAbsoluteTolerance(Robot.grabberAbsTol);
     	getPIDController().setContinuous(false);
     	getPIDController().disable();
     	getPIDController().setSetpoint(0);

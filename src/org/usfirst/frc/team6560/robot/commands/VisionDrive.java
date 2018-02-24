@@ -20,9 +20,9 @@ public class VisionDrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	visionMotorSpeed = Robot.prefs.getDouble("Vision Motor Speed", 1.0);
-		visionWaitTime = Robot.prefs.getDouble("Vision Wait Time", 0.100);
-		minOffset = Robot.prefs.getDouble("Minimum Offset", 0.1);
+    	visionMotorSpeed = Robot.visionMotorSpeed;
+		visionWaitTime = Robot.visionWaitTime;
+		minOffset = Robot.visionTolerance;
     }
 
     // Called repeatedly when this Command is scheduled to run
