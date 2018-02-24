@@ -1,4 +1,4 @@
-package org.usfirst.frc.team6560.robot.commands;
+package org.usfirst.frc.team6560.robot.commands.grabber;
 
 import org.usfirst.frc.team6560.robot.Robot;
 
@@ -7,20 +7,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DecreaseDriveSpeed extends Command {
+public class RotateGrabberStop extends Command {
 
-    public DecreaseDriveSpeed() {
-    	//technically requires nothing
+    public RotateGrabberStop() {
+        requires(Robot.grabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.decreaseDriveSpeed();
+    	Robot.grabber.stopRotateGrabber();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.drive.decreaseDriveSpeed();
     }
 
     // Make this return true when this Command no longer needs to run execute()

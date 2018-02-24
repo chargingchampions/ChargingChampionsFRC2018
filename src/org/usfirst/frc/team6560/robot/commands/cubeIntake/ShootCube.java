@@ -1,4 +1,4 @@
-package org.usfirst.frc.team6560.robot.commands;
+package org.usfirst.frc.team6560.robot.commands.cubeIntake;
 
 import org.usfirst.frc.team6560.robot.Robot;
 

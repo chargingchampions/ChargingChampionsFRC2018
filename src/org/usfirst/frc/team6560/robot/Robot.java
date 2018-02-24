@@ -15,9 +15,9 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drive drive;
 	public static VisionNetworkTables visionNetworkTables;
-	public static CubeIntake cubeIntake;
+	public static Grabber grabber;
 	public static Arm arm;
-	public static Pneumatics pneumatics;
+	public static CubeIntake cubeIntake;
 	
 	//remove the following if it causes a NetworkTable exception
 	public static Preferences prefs;
@@ -28,14 +28,17 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		drive = new Drive();
 		visionNetworkTables = new VisionNetworkTables();
-		cubeIntake = new CubeIntake();
+		grabber = new Grabber();
 		arm = new Arm();
-		pneumatics = new Pneumatics();
+		cubeIntake = new CubeIntake();
 		oi = new OI();
 		
 		SmartDashboard.putData("Auto mode", chooser);
 		//remove the following if it causes a NetworkTable exception
 		prefs = Preferences.getInstance();
+		
+		LiveWindow.addSensor("Arm", "Quadrature Encoder", Robot.arm);
+		LiveWindow.addSensor("Grabber", "Quadrature Encoder", Robot.grabber);
 	}
 
 	@Override
@@ -68,11 +71,13 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Robot.drive.globalDriveSpeed);
-		SmartDashboard.putNumber("Grabber Encoder Absolute Position", Robot.cubeIntake.getGrabberRotationAbsolutePosition());
-		SmartDashboard.putNumber("Arm Encoder Absolute Position", Robot.arm.getArmRotationAbsolutePosition());
+		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
+		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
 	}
 
 	public void testPeriodic() {
+		LiveWindow.addSensor("Arm", "Quadrature Encoder", Robot.arm);
+		LiveWindow.addSensor("Grabber", "Quadrature Encoder", Robot.grabber);
 		LiveWindow.run();
 	}
 }
