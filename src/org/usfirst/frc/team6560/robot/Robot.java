@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightToDistance;
 import org.usfirst.frc.team6560.robot.subsystems.*;
 
 public class Robot extends IterativeRobot {
@@ -36,6 +37,27 @@ public class Robot extends IterativeRobot {
 		prefs = Preferences.getInstance();
 		
 		//insert preference values here
+		prefs.putDouble("Grabber P Value", 0.0);
+		prefs.putDouble("Grabber I Value", 0.0);
+		prefs.putDouble("Grabber D Value", 0.0);
+		prefs.putDouble("Grabber Absolute Tolerance", 1000);
+		prefs.putDouble("Arm P Value", 0.0);
+		prefs.putDouble("Arm I Value", 0.0);
+		prefs.putDouble("Arm D Value", 0.0);
+		prefs.putDouble("Arm Absolute Tolerance", 1000);
+		
+		prefs.putDouble("Arm Intake Setpoint", 0);
+		prefs.putDouble("Grabber Safety Setpoint", 4000);
+		prefs.putDouble("Grabber Intake Setpoint", 3000);
+		prefs.putDouble("Arm Scale Setpoint", 10000);
+		prefs.putDouble("Grabber Scale Setpoint", 3000);
+		prefs.putDouble("Arm Switch Setpoint", 5000);
+		prefs.putDouble("Grabber Switch Setpoint", 3000);
+		
+		prefs.putDouble("Vision Motor Speed", 0.7);
+		prefs.putDouble("Vision Wait Time", 0.5);
+		prefs.putDouble("Vision Tolerance", 10);
+		
 		grabberPVal = prefs.getDouble("Grabber P Value", 0.0);
 		grabberIVal = prefs.getDouble("Grabber I Value", 0.0);
 		grabberDVal = prefs.getDouble("Grabber D Value", 0.0);
@@ -45,13 +67,13 @@ public class Robot extends IterativeRobot {
 		armDVal = prefs.getDouble("Arm D Value", 0.0);
 		armAbsTol = prefs.getDouble("Arm Absolute Tolerance", 1000);
 		
-		armIntakeSetpoint = Robot.prefs.getDouble("Arm Intake Setpoint", 0);
-		grabberSafetySetpoint = Robot.prefs.getDouble("Grabber Safety Setpoint", 4000);
-		grabberIntakeSetpoint = Robot.prefs.getDouble("Grabber Intake Setpoint", 3000);
-		armScaleSetpoint = Robot.prefs.getDouble("Arm Scale Setpoint", 10000);
-		grabberScaleSetpoint = Robot.prefs.getDouble("Grabber Scale Setpoint", 3000);
-		armSwitchSetpoint = Robot.prefs.getDouble("Arm Switch Setpoint", 5000);
-		grabberSwitchSetpoint = Robot.prefs.getDouble("Grabber Switch Setpoint", 3000);
+		armIntakeSetpoint = prefs.getDouble("Arm Intake Setpoint", 0);
+		grabberSafetySetpoint = prefs.getDouble("Grabber Safety Setpoint", 4000);
+		grabberIntakeSetpoint = prefs.getDouble("Grabber Intake Setpoint", 3000);
+		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 10000);
+		grabberScaleSetpoint = prefs.getDouble("Grabber Scale Setpoint", 3000);
+		armSwitchSetpoint = prefs.getDouble("Arm Switch Setpoint", 5000);
+		grabberSwitchSetpoint = prefs.getDouble("Grabber Switch Setpoint", 3000);
 		
 		visionMotorSpeed = prefs.getDouble("Vision Motor Speed", 0.7);
 		visionWaitTime = prefs.getDouble("Vision Wait Time", 0.5);
@@ -70,6 +92,9 @@ public class Robot extends IterativeRobot {
 		
 		LiveWindow.addSensor("Arm", "Quadrature Encoder", Robot.arm);
 		LiveWindow.addSensor("Grabber", "Quadrature Encoder", Robot.grabber);
+		
+		SmartDashboard.putNumber("distance", 0.0);
+		SmartDashboard.putNumber("speed", 0.0);
 	}
 
 	@Override
@@ -100,10 +125,14 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public void teleopPeriodic() {
+		
+		double distance = SmartDashboard.getNumber("distance", 0.0);
+		double speed = SmartDashboard.getNumber("speed", 0.0);
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Robot.drive.globalDriveSpeed);
 		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
 		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
+		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed));
 	}
 
 	public void testPeriodic() {
