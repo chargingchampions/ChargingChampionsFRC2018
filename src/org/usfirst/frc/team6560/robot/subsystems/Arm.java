@@ -17,13 +17,13 @@ public class Arm extends PIDSubsystem {
 	WPI_TalonSRX jointMotor2 = new WPI_TalonSRX(CAN.ARM2);
     
     public Arm() {
-    	super("Arm", Robot.prefs.getDouble("Arm P Value", 0.007), Robot.prefs.getDouble("Arm I Value", 0.0), Robot.prefs.getDouble("Arm D Value", 0.0));
+    	super("Arm", Robot.armPVal, Robot.armIVal, Robot.armDVal);
     	jointMotor1.set(ControlMode.Follower, jointMotor2.getDeviceID());
     	jointMotor1.setSafetyEnabled(false);
     	jointMotor2.setSafetyEnabled(false);
     	jointMotor2.setInverted(true);
     	jointMotor2.getSensorCollection().setQuadraturePosition(0, 1);
-    	setAbsoluteTolerance(Robot.prefs.getDouble("Arm Absolute Tolerance", 1000));
+    	setAbsoluteTolerance(Robot.armAbsTol);
     	getPIDController().setContinuous(false);
     	getPIDController().disable();
     	getPIDController().setSetpoint(0);
