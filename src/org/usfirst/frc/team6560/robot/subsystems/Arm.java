@@ -1,7 +1,7 @@
 package org.usfirst.frc.team6560.robot.subsystems;
 
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
-import org.usfirst.frc.team6560.robot.commands.RotateArmWithJoystick;
+import org.usfirst.frc.team6560.robot.commands.arm.RotateArmWithJoystick;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -22,9 +22,8 @@ public class Arm extends PIDSubsystem {
     	jointMotor1.setSafetyEnabled(false);
     	jointMotor2.setSafetyEnabled(false);
     	jointMotor2.setInverted(true);
-    	jointMotor1.setInverted(true);
     	jointMotor2.getSensorCollection().setQuadraturePosition(0, 1);
-    	setAbsoluteTolerance(3000);
+    	//setAbsoluteTolerance(3000);
     	getPIDController().setContinuous(false);
     	getPIDController().disable();
     	getPIDController().setSetpoint(0);

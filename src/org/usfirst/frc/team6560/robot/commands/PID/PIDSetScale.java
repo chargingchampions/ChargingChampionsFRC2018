@@ -1,26 +1,31 @@
-package org.usfirst.frc.team6560.robot.commands;
+package org.usfirst.frc.team6560.robot.commands.PID;
 
 import org.usfirst.frc.team6560.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DecreaseDriveSpeed extends Command {
+public class PIDSetScale extends Command {
 
-    public DecreaseDriveSpeed() {
-    	//technically requires nothing
+    public PIDSetScale() {
+        requires(Robot.arm);
+        requires(Robot.grabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.decreaseDriveSpeed();
+    	Robot.arm.enable();
+    	Robot.grabber.enable();
+    	Robot.arm.setSetpoint(10000);
+    	Timer.delay(3);
+    	Robot.grabber.setSetpoint(3000);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.drive.decreaseDriveSpeed();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,5 +40,7 @@ public class DecreaseDriveSpeed extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.arm.disable();
+    	Robot.grabber.disable();
     }
 }

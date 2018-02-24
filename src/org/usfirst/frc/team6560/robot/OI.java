@@ -1,16 +1,17 @@
 package org.usfirst.frc.team6560.robot;
 
 import org.usfirst.frc.team6560.robot.RobotMap.Joysticks;
-import org.usfirst.frc.team6560.robot.commands.DecreaseDriveSpeed;
-import org.usfirst.frc.team6560.robot.commands.IncreaseDriveSpeed;
-import org.usfirst.frc.team6560.robot.commands.IntakeCubeSlowly;
-import org.usfirst.frc.team6560.robot.commands.PIDSetIntake;
-import org.usfirst.frc.team6560.robot.commands.PIDSetSwitch;
-import org.usfirst.frc.team6560.robot.commands.RotateGrabberDown;
-import org.usfirst.frc.team6560.robot.commands.RotateGrabberUp;
-import org.usfirst.frc.team6560.robot.commands.ShootCube;
-import org.usfirst.frc.team6560.robot.commands.StartIntake;
-import org.usfirst.frc.team6560.robot.commands.TankDriveStraight;
+import org.usfirst.frc.team6560.robot.commands.PID.PIDSetIntake;
+import org.usfirst.frc.team6560.robot.commands.PID.PIDSetSwitch;
+import org.usfirst.frc.team6560.robot.commands.cubeIntake.IntakeCubeSlowly;
+import org.usfirst.frc.team6560.robot.commands.cubeIntake.ShootCube;
+import org.usfirst.frc.team6560.robot.commands.cubeIntake.StartIntake;
+import org.usfirst.frc.team6560.robot.commands.drive.DecreaseDriveSpeed;
+import org.usfirst.frc.team6560.robot.commands.drive.IncreaseDriveSpeed;
+import org.usfirst.frc.team6560.robot.commands.drive.TankDriveStraight;
+import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberDown;
+import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberStop;
+import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberUp;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -64,9 +65,9 @@ public class OI {
 		
 		//grabber rotation buttons
 		secondButton12.whenPressed(new RotateGrabberUp());
-		secondButton12.whenReleased(new IntakeCubeSlowly());
+		secondButton12.whenReleased(new RotateGrabberStop());
 		secondButton11.whenPressed(new RotateGrabberDown());
-		secondButton11.whenReleased(new IntakeCubeSlowly());
+		secondButton11.whenReleased(new RotateGrabberStop());
 		secondButton9.whenPressed(new PIDSetIntake());
 		secondButton10.whenPressed(new PIDSetSwitch());
 		//intake buttons

@@ -36,6 +36,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		//remove the following if it causes a NetworkTable exception
 		prefs = Preferences.getInstance();
+		
+		LiveWindow.addSensor("Arm", "Quadrature Encoder", Robot.arm);
+		LiveWindow.addSensor("Grabber", "Quadrature Encoder", Robot.grabber);
 	}
 
 	@Override
@@ -74,8 +77,5 @@ public class Robot extends IterativeRobot {
 
 	public void testPeriodic() {
 		LiveWindow.run();
-		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Robot.drive.globalDriveSpeed);
-		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getGrabberRotationRelativePosition());
-		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getArmRotationRelativePosition());
 	}
 }

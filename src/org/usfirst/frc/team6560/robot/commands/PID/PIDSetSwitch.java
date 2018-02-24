@@ -1,4 +1,4 @@
-package org.usfirst.frc.team6560.robot.commands;
+package org.usfirst.frc.team6560.robot.commands.PID;
 
 import org.usfirst.frc.team6560.robot.Robot;
 
@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PIDSetIntake extends Command {
+public class PIDSetSwitch extends Command {
 
-    public PIDSetIntake() {
+    public PIDSetSwitch() {
         requires(Robot.arm);
         requires(Robot.grabber);
     }
@@ -19,7 +19,7 @@ public class PIDSetIntake extends Command {
     protected void initialize() {
     	Robot.arm.enable();
     	Robot.grabber.enable();
-    	Robot.arm.setSetpoint(0);
+    	Robot.arm.setSetpoint(10000);
     	Timer.delay(3);
     	Robot.grabber.setSetpoint(3000);
     }

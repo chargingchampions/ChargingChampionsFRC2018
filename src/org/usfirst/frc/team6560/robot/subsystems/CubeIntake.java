@@ -1,7 +1,7 @@
 package org.usfirst.frc.team6560.robot.subsystems;
 
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
-import org.usfirst.frc.team6560.robot.commands.IntakeCubeSlowly;
+import org.usfirst.frc.team6560.robot.commands.cubeIntake.IntakeCubeSlowly;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;

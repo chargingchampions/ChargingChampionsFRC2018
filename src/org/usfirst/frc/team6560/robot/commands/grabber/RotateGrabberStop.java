@@ -1,27 +1,21 @@
-package org.usfirst.frc.team6560.robot.commands;
+package org.usfirst.frc.team6560.robot.commands.grabber;
 
 import org.usfirst.frc.team6560.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class PIDSetScale extends Command {
+public class RotateGrabberStop extends Command {
 
-    public PIDSetScale() {
-        requires(Robot.arm);
+    public RotateGrabberStop() {
         requires(Robot.grabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.arm.enable();
-    	Robot.grabber.enable();
-    	Robot.arm.setSetpoint(10000);
-    	Timer.delay(3);
-    	Robot.grabber.setSetpoint(3000);
+    	Robot.grabber.stopRotateGrabber();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -40,7 +34,5 @@ public class PIDSetScale extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.arm.disable();
-    	Robot.grabber.disable();
     }
 }

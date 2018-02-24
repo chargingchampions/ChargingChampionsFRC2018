@@ -1,4 +1,4 @@
-package org.usfirst.frc.team6560.robot.commands;
+package org.usfirst.frc.team6560.robot.commands.cubeIntake;
 
 import org.usfirst.frc.team6560.robot.Robot;
 
@@ -7,20 +7,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class IncreaseDriveSpeed extends Command {
+public class IntakeCubeSlowly extends Command {
 
-    public IncreaseDriveSpeed() {
-    	//technically requires nothing
+    public IntakeCubeSlowly() {
+        requires(Robot.cubeIntake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.increaseDriveSpeed();
+    	Robot.cubeIntake.closeArm();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.drive.increaseDriveSpeed();
+    	Robot.cubeIntake.intakeCube((0.1)*(Robot.oi.getSecondSlider()-1));
     }
 
     // Make this return true when this Command no longer needs to run execute()
