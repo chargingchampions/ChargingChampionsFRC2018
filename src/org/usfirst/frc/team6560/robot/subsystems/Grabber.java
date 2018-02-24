@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6560.robot.subsystems;
 
+import org.usfirst.frc.team6560.robot.Robot;
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
 import org.usfirst.frc.team6560.robot.commands.cubeIntake.IntakeCubeSlowly;
 import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberStop;
@@ -18,10 +19,10 @@ public class Grabber extends PIDSubsystem {
 	WPI_TalonSRX rotationMotor = new WPI_TalonSRX(CAN.GRABBER_ROTATION);
 	
     public Grabber() {
-    	super("Grabber", -0.007, 0.0, 0.0);
+    	super("Grabber", Robot.prefs.getDouble("Grabber P Value", -0.007), Robot.prefs.getDouble("Grabber I Value", 0.0), Robot.prefs.getDouble("Grabber D Value", 0.0));
     	rotationMotor.setSafetyEnabled(false);
     	rotationMotor.getSensorCollection().setQuadraturePosition(0,  1);
-    	//setAbsoluteTolerance(1000);
+    	setAbsoluteTolerance(Robot.prefs.getDouble("Grabber Absolute Tolerance", 1000));
     	getPIDController().setContinuous(false);
     	getPIDController().disable();
     	getPIDController().setSetpoint(0);
@@ -37,10 +38,6 @@ public class Grabber extends PIDSubsystem {
     
     public void stopRotateGrabber() {
     	rotationMotor.set(0);
-    }
-    
-    public int getGrabberRotationRelativePosition() {
-    	return rotationMotor.getSensorCollection().getQuadraturePosition();
     }
     
     public void initDefaultCommand() {

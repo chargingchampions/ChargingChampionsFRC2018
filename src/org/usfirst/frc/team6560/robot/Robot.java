@@ -71,11 +71,13 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Robot.drive.globalDriveSpeed);
-		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getGrabberRotationRelativePosition());
-		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getArmRotationRelativePosition());
+		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
+		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
 	}
 
 	public void testPeriodic() {
+		LiveWindow.addSensor("Arm", "Quadrature Encoder", Robot.arm);
+		LiveWindow.addSensor("Grabber", "Quadrature Encoder", Robot.grabber);
 		LiveWindow.run();
 	}
 }
