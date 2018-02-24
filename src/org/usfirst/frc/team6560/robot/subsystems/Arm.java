@@ -22,6 +22,7 @@ public class Arm extends PIDSubsystem {
     	jointMotor1.setSafetyEnabled(false);
     	jointMotor2.setSafetyEnabled(false);
     	jointMotor2.setInverted(true);
+    	jointMotor1.setInverted(true);
     	jointMotor2.getSensorCollection().setQuadraturePosition(0, 1);
     	setAbsoluteTolerance(3000);
     	getPIDController().setContinuous(false);

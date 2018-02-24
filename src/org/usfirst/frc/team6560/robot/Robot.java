@@ -74,5 +74,8 @@ public class Robot extends IterativeRobot {
 
 	public void testPeriodic() {
 		LiveWindow.run();
+		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Robot.drive.globalDriveSpeed);
+		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getGrabberRotationRelativePosition());
+		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getArmRotationRelativePosition());
 	}
 }
