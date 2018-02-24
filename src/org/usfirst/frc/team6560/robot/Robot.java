@@ -19,6 +19,7 @@ public class Robot extends IterativeRobot {
 	public static Arm arm;
 	public static CubeIntake cubeIntake;
 	
+	
 	//remove the following if it causes a NetworkTable exception
 	public static Preferences prefs;
 

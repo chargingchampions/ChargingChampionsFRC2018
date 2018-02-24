@@ -8,6 +8,7 @@ import org.usfirst.frc.team6560.robot.commands.drive.TankDriveWithJoysticks;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -32,9 +33,11 @@ public class Drive extends Subsystem {
 	public ADXRS450_Gyro gyro;
 	public ADIS16448_IMU imu;
 	
+	public Encoder drive_enc_left;
+	public Encoder drive_enc_right;
+	
 	public Drive() {
 		globalDriveSpeed = 0.7;
-		
 		
 		frontLeftDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTLEFT);
 		rearLeftDrive = new WPI_TalonSRX(CAN.DRIVE_REARLEFT);
@@ -48,17 +51,21 @@ public class Drive extends Subsystem {
 		frontRightDrive.setInverted(true);
 		rearRightDrive.setInverted(true);
 
-
 		drivetrain = new DifferentialDrive(left, right);
 		
 		ultra = new AnalogInput(0);
 		gyro = new ADXRS450_Gyro();
 		imu = new ADIS16448_IMU();
-		
 		gyro.calibrate();
 		gyro.reset();
 		imu.calibrate();
 		imu.reset();
+		
+		drive_enc_left = new Encoder(0, 0, true, Encoder.EncodingType.k2X); //TODO: Determine DIO ports
+		drive_enc_right = new Encoder(0, 0, true, Encoder.EncodingType.k2X);
+		initializeEncoders();
+		//Should have identical initializations
+		//k2x vs. k4x vs. k1x
 	}
 	
 	public void tankDriveWithJoysticks(double left, double right) {
@@ -72,11 +79,26 @@ public class Drive extends Subsystem {
 		rearRightDrive.set(0);
 	}
 	
-	public void driveStraight(double speed) {
+	public void initializeEncoders() {
+		//TODO: what is this
+		drive_enc_left.setMaxPeriod(0);
+		drive_enc_left.setMinRate(0);
+		drive_enc_left.setDistancePerPulse(0);
+		drive_enc_left.setReverseDirection(true);
+		drive_enc_left.setSamplesToAverage(0);
+		drive_enc_right.setMaxPeriod(0);
+		drive_enc_right.setMinRate(0);
+		drive_enc_right.setDistancePerPulse(0);
+		drive_enc_right.setReverseDirection(true);
+		drive_enc_right.setSamplesToAverage(0);
+	}
+	
+	public void driveStraightWithGyro(double speed) {
 		gyro.reset();
 		double angle = gyro.getAngle();
 		drivetrain.arcadeDrive(-speed, -1 * angle);
 	}
+	
 	
 	public double getGyroAngle() {
 		return gyro.getAngle();
@@ -97,4 +119,5 @@ public class Drive extends Subsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new TankDriveWithJoysticks());
     }
+    
 }
