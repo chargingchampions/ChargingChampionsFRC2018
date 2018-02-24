@@ -80,17 +80,16 @@ public class Drive extends Subsystem {
 	}
 	
 	public void initializeEncoders() {
-		//TODO: what is this
-		drive_enc_left.setMaxPeriod(0);
-		drive_enc_left.setMinRate(0);
-		drive_enc_left.setDistancePerPulse(0);
-		drive_enc_left.setReverseDirection(true);
-		drive_enc_left.setSamplesToAverage(0);
-		drive_enc_right.setMaxPeriod(0);
-		drive_enc_right.setMinRate(0);
-		drive_enc_right.setDistancePerPulse(0);
+		//TODO: ??????????????????????????? learn this stuff
+		//drive_enc_left.setMinRate(0);
+		drive_enc_left.setDistancePerPulse((3 * Math.PI) / 128);
+		//1 revolution / 256 pulses * 6pi inches diameter / 1 revolution
+		drive_enc_left.setReverseDirection(false);
+		//drive_enc_left.setSamplesToAverage(0);
+		//drive_enc_right.setMinRate(0);
+		drive_enc_right.setDistancePerPulse((3 * Math.PI) / 128);
 		drive_enc_right.setReverseDirection(true);
-		drive_enc_right.setSamplesToAverage(0);
+		//drive_enc_right.setSamplesToAverage(0);
 	}
 	
 	public void driveStraightWithGyro(double speed) {
@@ -102,6 +101,11 @@ public class Drive extends Subsystem {
 	
 	public double getGyroAngle() {
 		return gyro.getAngle();
+	}
+	
+	public double getSpeed() {
+		return (drive_enc_left.getRate() + drive_enc_right.getRate()) / 2;
+		//Divide encoder rates from both sides by 2 
 	}
 	
 	public void increaseDriveSpeed() {
