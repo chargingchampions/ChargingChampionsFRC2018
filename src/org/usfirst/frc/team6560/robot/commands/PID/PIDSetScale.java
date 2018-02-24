@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class PIDSetScale extends Command {
+	
+	boolean safe, arrived;
 
     public PIDSetScale() {
         requires(Robot.arm);
@@ -17,15 +19,31 @@ public class PIDSetScale extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.arm.enable();
-    	Robot.grabber.enable();
+    	safe = false;
+    	arrived = false;
+    	Robot.arm.disable();
     	Robot.arm.setSetpoint(Robot.prefs.getDouble("Arm Scale Setpoint", 10000));
-    	Timer.delay(3);
-    	Robot.grabber.setSetpoint(Robot.prefs.getDouble("Grabber Scale Setpoint", 3000));
+    	Robot.grabber.setSetpoint(Robot.prefs.getDouble("Grabber Safety Setpoint", 4000));
+    	Robot.grabber.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (!safe) {
+    		if (Math.abs(Robot.grabber.getPosition() - Robot.grabber.getSetpoint()) < Robot.prefs.getDouble("Grabber Absolute Tolerance", 1000)) {
+    			safe = true;
+    		} else {
+    	    	Robot.arm.enable();
+    		}
+    	}
+    	
+    	if (!arrived) {
+    		if (Math.abs(Robot.arm.getPosition() - Robot.arm.getSetpoint()) < Robot.prefs.getDouble("Arm Absolute Tolerance", 5000)) {
+    			arrived = true;
+    		}
+    	} else {
+	    	Robot.grabber.setSetpoint(Robot.prefs.getDouble("Grabber Scale Setpoint", 3000));
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
