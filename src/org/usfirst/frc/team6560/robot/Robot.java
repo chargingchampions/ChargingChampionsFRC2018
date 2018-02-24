@@ -27,6 +27,8 @@ public class Robot extends IterativeRobot {
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	public void robotInit() {
+		//remove the following if it causes a NetworkTable exception
+		prefs = Preferences.getInstance();
 		drive = new Drive();
 		visionNetworkTables = new VisionNetworkTables();
 		grabber = new Grabber();
@@ -35,8 +37,6 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		SmartDashboard.putData("Auto mode", chooser);
-		//remove the following if it causes a NetworkTable exception
-		prefs = Preferences.getInstance();
 		
 		LiveWindow.addSensor("Arm", "Quadrature Encoder", Robot.arm);
 		LiveWindow.addSensor("Grabber", "Quadrature Encoder", Robot.grabber);
