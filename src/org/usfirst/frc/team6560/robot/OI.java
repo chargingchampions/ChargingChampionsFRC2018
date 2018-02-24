@@ -3,15 +3,13 @@ package org.usfirst.frc.team6560.robot;
 import org.usfirst.frc.team6560.robot.RobotMap.Joysticks;
 import org.usfirst.frc.team6560.robot.commands.DecreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.IncreaseDriveSpeed;
-import org.usfirst.frc.team6560.robot.commands.IntakeCube;
-import org.usfirst.frc.team6560.robot.commands.IntakeCubeWithJoystick;
-import org.usfirst.frc.team6560.robot.commands.OpenArms;
+import org.usfirst.frc.team6560.robot.commands.IntakeCubeSlowly;
 import org.usfirst.frc.team6560.robot.commands.RotateGrabberDown;
 import org.usfirst.frc.team6560.robot.commands.RotateGrabberUp;
 import org.usfirst.frc.team6560.robot.commands.SetGrabberDefault;
 import org.usfirst.frc.team6560.robot.commands.SetGrabberHorizontal;
 import org.usfirst.frc.team6560.robot.commands.ShootCube;
-import org.usfirst.frc.team6560.robot.commands.StopRotateGrabber;
+import org.usfirst.frc.team6560.robot.commands.StartIntake;
 import org.usfirst.frc.team6560.robot.commands.TankDriveStraight;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -56,20 +54,26 @@ public class OI {
 		JoystickButton secondButton12 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_12);
 		
 		//secondButton4.whileHeld(new ShootCube());
-		secondRightThumb.whileHeld(new OpenArms());
+		
+		//drive buttons
 		yButton.whileHeld(new TankDriveStraight());
-		secondButton7.whenPressed(new RotateGrabberUp());
-		secondButton8.whenPressed(new RotateGrabberDown());
-		secondButton7.whenReleased(new IntakeCubeWithJoystick());
-		secondButton8.whenReleased(new IntakeCubeWithJoystick());
 		bButton.whileHeld(new IncreaseDriveSpeed());
 		xButton.whileHeld(new DecreaseDriveSpeed());
+		
+		//arm rotation buttons
+		
+		//grabber rotation buttons
+		secondButton12.whenPressed(new RotateGrabberUp());
+		secondButton12.whenReleased(new IntakeCubeSlowly());
+		secondButton11.whenPressed(new RotateGrabberDown());
+		secondButton11.whenReleased(new IntakeCubeSlowly());
+		secondButton9.whenPressed(new SetGrabberHorizontal());
+		secondButton10.whenPressed(new SetGrabberDefault());
+		//intake buttons
+		secondRightThumb.whenPressed(new StartIntake());
+		secondRightThumb.whenReleased(new IntakeCubeSlowly());
 		secondTrigger.whenPressed(new ShootCube());
-		secondTrigger.whenReleased(new IntakeCubeWithJoystick());
-		secondButton3.whenPressed(new SetGrabberHorizontal());
-		secondButton3.whenReleased(new IntakeCubeWithJoystick());
-		secondButton4.whenPressed(new SetGrabberDefault());
-		secondButton4.whenReleased(new IntakeCubeWithJoystick());
+		secondTrigger.whenReleased(new IntakeCubeSlowly());
 		
 		//secondTrigger.whileHeld(new IntakeCube());
 		//rightThumb.whileHeld(new IntakeCube(1.0));

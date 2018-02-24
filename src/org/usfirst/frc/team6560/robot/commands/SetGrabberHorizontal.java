@@ -12,13 +12,12 @@ public class SetGrabberHorizontal extends Command {
 
     public SetGrabberHorizontal() {
         requires(Robot.cubeIntake);
-        requires(Robot.pneumatics);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.cubeIntake.enableSoftLimits();
-    	Robot.cubeIntake.setHorizontalPosition();
+    	Robot.cubeIntake.setSetpoint(325);
+    	Robot.cubeIntake.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,11 +31,11 @@ public class SetGrabberHorizontal extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.cubeIntake.disableSoftLimits();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.cubeIntake.disable();
     }
 }
