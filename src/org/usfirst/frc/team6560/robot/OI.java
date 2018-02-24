@@ -4,10 +4,10 @@ import org.usfirst.frc.team6560.robot.RobotMap.Joysticks;
 import org.usfirst.frc.team6560.robot.commands.DecreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.IncreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.IntakeCubeSlowly;
+import org.usfirst.frc.team6560.robot.commands.PIDSetIntake;
+import org.usfirst.frc.team6560.robot.commands.PIDSetSwitch;
 import org.usfirst.frc.team6560.robot.commands.RotateGrabberDown;
 import org.usfirst.frc.team6560.robot.commands.RotateGrabberUp;
-import org.usfirst.frc.team6560.robot.commands.SetGrabberDefault;
-import org.usfirst.frc.team6560.robot.commands.SetGrabberHorizontal;
 import org.usfirst.frc.team6560.robot.commands.ShootCube;
 import org.usfirst.frc.team6560.robot.commands.StartIntake;
 import org.usfirst.frc.team6560.robot.commands.TankDriveStraight;
@@ -67,8 +67,8 @@ public class OI {
 		secondButton12.whenReleased(new IntakeCubeSlowly());
 		secondButton11.whenPressed(new RotateGrabberDown());
 		secondButton11.whenReleased(new IntakeCubeSlowly());
-		secondButton9.whenPressed(new SetGrabberHorizontal());
-		secondButton10.whenPressed(new SetGrabberDefault());
+		secondButton9.whenPressed(new PIDSetIntake());
+		secondButton10.whenPressed(new PIDSetSwitch());
 		//intake buttons
 		secondRightThumb.whenPressed(new StartIntake());
 		secondRightThumb.whenReleased(new IntakeCubeSlowly());

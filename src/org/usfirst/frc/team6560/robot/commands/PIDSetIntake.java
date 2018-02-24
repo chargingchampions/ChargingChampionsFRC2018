@@ -8,16 +8,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SetGrabberDefault extends Command {
+public class PIDSetIntake extends Command {
 
-    public SetGrabberDefault() {
-        requires(Robot.cubeIntake);
+    public PIDSetIntake() {
+        requires(Robot.arm);
+        requires(Robot.grabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.cubeIntake.setSetpoint(-1276);
-    	Robot.cubeIntake.enable();
+    	Robot.arm.enable();
+    	Robot.grabber.enable();
+    	Robot.arm.setSetpoint(0);
+    	Timer.delay(3);
+    	Robot.grabber.setSetpoint(3000);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,6 +40,7 @@ public class SetGrabberDefault extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.cubeIntake.disable();
+    	Robot.arm.disable();
+    	Robot.grabber.disable();
     }
 }

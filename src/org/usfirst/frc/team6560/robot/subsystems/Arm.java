@@ -18,14 +18,15 @@ public class Arm extends PIDSubsystem {
     
     public Arm() {
     	super("Arm", 0.07, 0.0, 0.0);
-    	setAbsoluteTolerance(1000);
+    	jointMotor1.set(ControlMode.Follower, jointMotor2.getDeviceID());
+    	jointMotor1.setSafetyEnabled(false);
+    	jointMotor2.setSafetyEnabled(false);
+    	jointMotor2.setInverted(true);
+    	jointMotor2.getSensorCollection().setQuadraturePosition(0, 1);
+    	setAbsoluteTolerance(3000);
     	getPIDController().setContinuous(false);
     	getPIDController().disable();
-    	getPIDController().setSetpoint(3980);
-    	jointMotor1.setSafetyEnabled(false);
-    	jointMotor2.setSafetyEnabled(false);	
-    	jointMotor2.setInverted(true);
-    	jointMotor1.set(ControlMode.Follower, jointMotor2.getDeviceID());
+    	getPIDController().setSetpoint(0);
     	
     }
 
@@ -37,8 +38,8 @@ public class Arm extends PIDSubsystem {
     	jointMotor2.set(0);
     }
     
-    public int getArmRotationAbsolutePosition() {
-    	return jointMotor2.getSensorCollection().getPulseWidthPosition();
+    public int getArmRotationRelativePosition() {
+    	return jointMotor2.getSensorCollection().getQuadraturePosition();
     }
     
     public void initDefaultCommand() {
@@ -46,7 +47,7 @@ public class Arm extends PIDSubsystem {
     }
     
     protected double returnPIDInput() {
-    	return jointMotor2.getSensorCollection().getPulseWidthPosition();
+    	return jointMotor2.getSensorCollection().getQuadraturePosition();
     }
     
    

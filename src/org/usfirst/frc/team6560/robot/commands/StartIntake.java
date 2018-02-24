@@ -12,7 +12,6 @@ public class StartIntake extends Command {
 
     public StartIntake() {
         requires(Robot.cubeIntake);
-        requires(Robot.pneumatics);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +20,7 @@ public class StartIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.pneumatics.openArm();
+    	Robot.cubeIntake.openArm();
     	Timer.delay(0.2);
     	Robot.cubeIntake.intakeCube(0.4);
     }
@@ -38,6 +37,7 @@ public class StartIntake extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.cubeIntake.closeArm();
     	for (int i = 10; i > 0; i--) {
     		Timer.delay(0.1);
     		Robot.cubeIntake.intakeCube(0.2+((i/10)*0.2));

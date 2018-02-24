@@ -10,17 +10,17 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RotateGrabberUp extends Command {
 
     public RotateGrabberUp() {
-        requires(Robot.cubeIntake);
+        requires(Robot.grabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.cubeIntake.disable();
+    	Robot.grabber.disable();
+    	Robot.grabber.rotateGrabber(0.7);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntake.rotateGrabber(0.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -30,11 +30,11 @@ public class RotateGrabberUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.cubeIntake.stopRotateGrabber();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.grabber.stopRotateGrabber();;
     }
 }
