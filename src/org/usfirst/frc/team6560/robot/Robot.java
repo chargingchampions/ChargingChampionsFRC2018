@@ -37,11 +37,11 @@ public class Robot extends IterativeRobot {
 		prefs = Preferences.getInstance();
 		
 		//insert preference values here
-		prefs.putDouble("Grabber P Value", 0.0);
+		prefs.putDouble("Grabber P Value", 0.007);
 		prefs.putDouble("Grabber I Value", 0.0);
 		prefs.putDouble("Grabber D Value", 0.0);
 		prefs.putDouble("Grabber Absolute Tolerance", 1000);
-		prefs.putDouble("Arm P Value", 0.0);
+		prefs.putDouble("Arm P Value", 0.007);
 		prefs.putDouble("Arm I Value", 0.0);
 		prefs.putDouble("Arm D Value", 0.0);
 		prefs.putDouble("Arm Absolute Tolerance", 1000);
@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Arm Intake Setpoint", 0);
 		prefs.putDouble("Grabber Safety Setpoint", 4000);
 		prefs.putDouble("Grabber Intake Setpoint", 3000);
-		prefs.putDouble("Arm Scale Setpoint", 10000);
+		prefs.putDouble("Arm Scale Setpoint", 38305.0);
 		prefs.putDouble("Grabber Scale Setpoint", 3000);
 		prefs.putDouble("Arm Switch Setpoint", 5000);
 		prefs.putDouble("Grabber Switch Setpoint", 3000);
@@ -58,11 +58,11 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Vision Wait Time", 0.5);
 		prefs.putDouble("Vision Tolerance", 10);
 		
-		grabberPVal = prefs.getDouble("Grabber P Value", 0.0);
+		grabberPVal = prefs.getDouble("Grabber P Value", 0.007);
 		grabberIVal = prefs.getDouble("Grabber I Value", 0.0);
 		grabberDVal = prefs.getDouble("Grabber D Value", 0.0);
 		grabberAbsTol = prefs.getDouble("Grabber Absolute Tolerance", 1000);
-		armPVal = prefs.getDouble("Arm P Value", 0.0);
+		armPVal = prefs.getDouble("Arm P Value", 0.007);
 		armIVal = prefs.getDouble("Arm I Value", 0.0);
 		armDVal = prefs.getDouble("Arm D Value", 0.0);
 		armAbsTol = prefs.getDouble("Arm Absolute Tolerance", 1000);
@@ -70,7 +70,7 @@ public class Robot extends IterativeRobot {
 		armIntakeSetpoint = prefs.getDouble("Arm Intake Setpoint", 0);
 		grabberSafetySetpoint = prefs.getDouble("Grabber Safety Setpoint", 4000);
 		grabberIntakeSetpoint = prefs.getDouble("Grabber Intake Setpoint", 3000);
-		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 10000);
+		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 38305.0);
 		grabberScaleSetpoint = prefs.getDouble("Grabber Scale Setpoint", 3000);
 		armSwitchSetpoint = prefs.getDouble("Arm Switch Setpoint", 5000);
 		grabberSwitchSetpoint = prefs.getDouble("Grabber Switch Setpoint", 3000);
@@ -122,6 +122,8 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		arm.resetQuadraturePosition();
+		grabber.resetQuadraturePosition();
 	}
 	
 	public void teleopPeriodic() {

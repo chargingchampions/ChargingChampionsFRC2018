@@ -40,6 +40,10 @@ public class Arm extends PIDSubsystem {
     	jointMotor2.set(0);
     }
     
+    public void resetQuadraturePosition() {
+    	jointMotor2.getSensorCollection().setQuadraturePosition(0, 1);
+    }
+    
     public void initDefaultCommand() {
     	setDefaultCommand(new RotateArmWithJoystick());
     }

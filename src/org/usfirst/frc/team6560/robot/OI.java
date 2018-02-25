@@ -2,6 +2,7 @@ package org.usfirst.frc.team6560.robot;
 
 import org.usfirst.frc.team6560.robot.RobotMap.Joysticks;
 import org.usfirst.frc.team6560.robot.commands.PID.PIDSetIntake;
+import org.usfirst.frc.team6560.robot.commands.PID.PIDSetScale;
 import org.usfirst.frc.team6560.robot.commands.PID.PIDSetSwitch;
 import org.usfirst.frc.team6560.robot.commands.cubeIntake.IntakeCubeSlowly;
 import org.usfirst.frc.team6560.robot.commands.cubeIntake.ShootCube;
@@ -70,6 +71,7 @@ public class OI {
 		secondButton11.whenReleased(new RotateGrabberStop());
 		secondButton9.whenPressed(new PIDSetIntake());
 		secondButton10.whenPressed(new PIDSetSwitch());
+		secondButton7.whenPressed(new PIDSetScale());
 		//intake buttons
 		secondRightThumb.whenPressed(new StartIntake());
 		secondRightThumb.whenReleased(new IntakeCubeSlowly());

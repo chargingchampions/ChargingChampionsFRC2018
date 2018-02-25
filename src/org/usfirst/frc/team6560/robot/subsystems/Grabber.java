@@ -40,6 +40,10 @@ public class Grabber extends PIDSubsystem {
     	rotationMotor.set(0);
     }
     
+    public void resetQuadraturePosition() {
+    	rotationMotor.getSensorCollection().setQuadraturePosition(0,  1);
+    }
+    
     public void initDefaultCommand() {
     	setDefaultCommand(new RotateGrabberStop());
     }
