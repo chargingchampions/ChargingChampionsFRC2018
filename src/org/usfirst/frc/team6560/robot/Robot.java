@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6560.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import edu.wpi.cscore.UsbCamera;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightToDistance;
 import org.usfirst.frc.team6560.robot.subsystems.*;
 
@@ -19,6 +20,7 @@ public class Robot extends IterativeRobot {
 	public static Grabber grabber;
 	public static Arm arm;
 	public static CubeIntake cubeIntake;
+	public static UsbCamera topviewCamera; 
 	
 	
 	//remove the following if it causes a NetworkTable exception
@@ -87,6 +89,7 @@ public class Robot extends IterativeRobot {
 		arm = new Arm();
 		cubeIntake = new CubeIntake();
 		oi = new OI();
+		topviewCamera = CameraServer.getInstance().startAutomaticCapture();
 		
 		SmartDashboard.putData("Auto mode", chooser);
 		
