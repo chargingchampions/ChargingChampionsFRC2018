@@ -14,7 +14,7 @@ public class VisionDrive extends Command {
 	double minOffset;
 
     public VisionDrive() {
-        requires(Robot.drive);
+        //requires(Robot.drive);
         requires(Robot.visionNetworkTables);
     }
 

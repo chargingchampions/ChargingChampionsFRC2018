@@ -50,11 +50,11 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Grabber P Value", 0.0003);
 		prefs.putDouble("Grabber I Value", 0.0);
 		prefs.putDouble("Grabber D Value", 0.0);
-		prefs.putDouble("Grabber Absolute Tolerance", 1000);
+		prefs.putDouble("Grabber Absolute Tolerance", 200);
 		prefs.putDouble("Arm P Value", 0.0007);
 		prefs.putDouble("Arm I Value", 0.0);
 		prefs.putDouble("Arm D Value", 0.0);
-		prefs.putDouble("Arm Absolute Tolerance", 1000);
+		prefs.putDouble("Arm Absolute Tolerance", 500);
 		
 		prefs.putDouble("Drive P Value", 0.007);
 		prefs.putDouble("Drive I Value", 0.0);
@@ -63,11 +63,11 @@ public class Robot extends IterativeRobot {
 		
 		
 		prefs.putDouble("Arm Intake Setpoint", 0);
-		prefs.putDouble("Grabber Safety Setpoint", 4000);
+		prefs.putDouble("Grabber Safety Setpoint", 0);
 		prefs.putDouble("Grabber Intake Setpoint", 3000);
-		prefs.putDouble("Arm Scale Setpoint", 38305.0);
+		prefs.putDouble("Arm Scale Setpoint", 29805.0);
 		prefs.putDouble("Grabber Scale Setpoint", 3000);
-		prefs.putDouble("Arm Switch Setpoint", 5000);
+		prefs.putDouble("Arm Switch Setpoint", 0.0);
 		prefs.putDouble("Grabber Switch Setpoint", 3000);
 		
 		prefs.putDouble("Vision Motor Speed", 0.7);

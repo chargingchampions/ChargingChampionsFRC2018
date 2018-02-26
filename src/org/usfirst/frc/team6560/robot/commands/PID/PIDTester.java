@@ -1,4 +1,4 @@
-package org.usfirst.frc.team6560.robot.commands.grabber;
+package org.usfirst.frc.team6560.robot.commands.PID;
 
 import org.usfirst.frc.team6560.robot.Robot;
 
@@ -7,16 +7,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RotateGrabberUp extends Command {
+public class PIDTester extends Command {
 
-    public RotateGrabberUp() {
+    public PIDTester() {
+        requires(Robot.arm);
         requires(Robot.grabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.grabber.disable();
-    	Robot.grabber.rotateGrabber(0.4);
+    	Robot.arm.enable();
+    	Robot.grabber.enable();
+    	Robot.arm.setSetpoint(Robot.armScaleSetpoint);
+    	Robot.grabber.setSetpoint(Robot.grabberScaleSetpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -25,12 +28,13 @@ public class RotateGrabberUp extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Math.abs(Robot.arm.getPosition() - Robot.arm.getSetpoint()) < Robot.armAbsTol && Math.abs(Robot.grabber.getPosition() - Robot.grabber.getSetpoint()) < Robot.grabberAbsTol;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.grabber.stopRotateGrabber();
+    	Robot.arm.disable();
+    	Robot.grabber.disable();
     }
 
     // Called when another command which requires one or more of the same
