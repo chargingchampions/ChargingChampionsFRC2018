@@ -95,6 +95,7 @@ public class Drive extends Subsystem {
 	public void driveStraightWithGyro(double speed) {
 		gyro.reset();
 		double angle = gyro.getAngle();
+		System.out.println("The gryo heading used to correct straight drive is " + angle);
 		drivetrain.arcadeDrive(-speed, -1 * angle);
 	}
 	
@@ -103,10 +104,10 @@ public class Drive extends Subsystem {
 		return gyro.getAngle();
 	}
 	
-	public void turnToAngle(double angle) {
-		gyro.reset();
-		drivetrain.arcadeDrive(0.0, (angle-gyro.getAngle())/360);
+	public void arcadeDrive(double speed, double angle) {
+		drivetrain.arcadeDrive(speed, angle);
 	}
+	
 	public double getSpeed() {
 		return (drive_enc_left.getRate() + drive_enc_right.getRate()) / 2;
 		//Divide encoder rates from both sides by 2 

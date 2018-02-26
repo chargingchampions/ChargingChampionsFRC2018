@@ -4,6 +4,7 @@ import org.usfirst.frc.team6560.robot.commands.PID.PIDSetIntake;
 import org.usfirst.frc.team6560.robot.commands.PID.PIDSetSwitch;
 import org.usfirst.frc.team6560.robot.commands.cubeIntake.OpenIntakeArms;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightToDistance;
+import org.usfirst.frc.team6560.robot.commands.drive.DriveWithGyroPossibleMistakeByAlbertLinYay;
 import org.usfirst.frc.team6560.robot.commands.drive.TankDriveStraight;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -16,7 +17,7 @@ public class LeftLeft extends CommandGroup {
     public LeftLeft() {
     	addParallel(new PIDSetSwitch()); //TODO: fix safety value
     	addSequential(new DriveStraightToDistance(168.0, 0.75));
-    	addSequential(new TankDriveStraight());
+    	addSequential(new DriveWithGyroPossibleMistakeByAlbertLinYay(0.0, 90, 0.03));
     	//TODO: turn to angle
     	addSequential(new DriveStraightToDistance(6.0, 0.6));
     	addSequential(new OpenIntakeArms());
