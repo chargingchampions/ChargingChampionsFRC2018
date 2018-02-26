@@ -55,7 +55,7 @@ public class Grabber extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		rotationMotor.pidWrite(output*0.3);
+		rotationMotor.pidWrite(output);
 		
 	}
 }

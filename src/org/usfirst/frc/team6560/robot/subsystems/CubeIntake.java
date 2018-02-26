@@ -26,8 +26,8 @@ public class CubeIntake extends Subsystem {
     	
     	intakeMotor1.setSafetyEnabled(false);
     	intakeMotor2.setSafetyEnabled(false);
-    	intakeMotor1.setInverted(false);
-    	intakeMotor2.setInverted(true);
+    	intakeMotor1.setInverted(true);
+    	intakeMotor2.setInverted(false);
     	intakeMotor2.set(ControlMode.Follower, intakeMotor1.getDeviceID());
 	}
 

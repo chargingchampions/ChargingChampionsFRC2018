@@ -103,6 +103,10 @@ public class Drive extends Subsystem {
 		return gyro.getAngle();
 	}
 	
+	public void turnToAngle(double angle) {
+		gyro.reset();
+		drivetrain.arcadeDrive(0.0, (angle-gyro.getAngle())/360);
+	}
 	public double getSpeed() {
 		return (drive_enc_left.getRate() + drive_enc_right.getRate()) / 2;
 		//Divide encoder rates from both sides by 2 

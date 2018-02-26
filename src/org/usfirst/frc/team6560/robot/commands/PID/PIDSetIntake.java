@@ -19,12 +19,14 @@ public class PIDSetIntake extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("Intake PID starting...");
     	safe = false;
     	arrived = false;
     	Robot.arm.disable();
 		Robot.arm.setSetpoint(Robot.armIntakeSetpoint);
     	Robot.grabber.setSetpoint(Robot.grabberSafetySetpoint);
     	Robot.grabber.enable();
+    	System.out.println("Intake PID grabber set to safety!");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,17 +34,21 @@ public class PIDSetIntake extends Command {
     	if (!safe) {
     		if (Math.abs(Robot.grabber.getPosition() - Robot.grabber.getSetpoint()) < Robot.grabberAbsTol) {
     			safe = true;
+    			System.out.println("Intake PID is safe!");
     		} else {
     	    	Robot.arm.enable();
+    	    	System.out.println("Intake PID for arm has been enabled!");
     		}
     	}
     	
     	if (!arrived) {
     		if (Math.abs(Robot.arm.getPosition() - Robot.arm.getSetpoint()) < Robot.armAbsTol) {
     			arrived = true;
+    			System.out.println("Intake PID arm has arrived!");
     		}
     	} else {
 	    	Robot.grabber.setSetpoint(Robot.grabberIntakeSetpoint);
+	    	System.out.println("Intake PID for grabber has been set!");
     	}
     }
 
@@ -53,6 +59,7 @@ public class PIDSetIntake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("Intake PID EXITING!!!!");
     	Robot.arm.disable();
     	Robot.grabber.disable();
     }

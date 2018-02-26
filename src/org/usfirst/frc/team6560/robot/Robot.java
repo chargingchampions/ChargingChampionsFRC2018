@@ -9,6 +9,13 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
+
+import org.usfirst.frc.team6560.robot.commands.auto.CenterLeft;
+import org.usfirst.frc.team6560.robot.commands.auto.CenterRight;
+import org.usfirst.frc.team6560.robot.commands.auto.LeftLeft;
+import org.usfirst.frc.team6560.robot.commands.auto.LeftRight;
+import org.usfirst.frc.team6560.robot.commands.auto.RightLeft;
+import org.usfirst.frc.team6560.robot.commands.auto.RightRight;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightToDistance;
 import org.usfirst.frc.team6560.robot.subsystems.*;
 
@@ -27,6 +34,7 @@ public class Robot extends IterativeRobot {
 	public static Preferences prefs;
 	
 	public static double grabberPVal, grabberIVal, grabberDVal, grabberAbsTol, armPVal, armIVal, armDVal, armAbsTol,
+	drivePVal, driveIVal, driveDVal, driveAbsTol,
 	grabberSafetySetpoint, grabberIntakeSetpoint, grabberSwitchSetpoint, grabberScaleSetpoint,
 	armIntakeSetpoint, armSwitchSetpoint, armScaleSetpoint,
 	visionMotorSpeed, visionWaitTime, visionTolerance;
@@ -39,14 +47,24 @@ public class Robot extends IterativeRobot {
 		prefs = Preferences.getInstance();
 		
 		//insert preference values here
-		prefs.putDouble("Grabber P Value", 0.007);
+		prefs.putDouble("Grabber P Value", 0.0007);
 		prefs.putDouble("Grabber I Value", 0.0);
 		prefs.putDouble("Grabber D Value", 0.0);
 		prefs.putDouble("Grabber Absolute Tolerance", 1000);
-		prefs.putDouble("Arm P Value", 0.007);
+		prefs.putDouble("Arm P Value", 0.0007);
 		prefs.putDouble("Arm I Value", 0.0);
 		prefs.putDouble("Arm D Value", 0.0);
 		prefs.putDouble("Arm Absolute Tolerance", 1000);
+		
+		prefs.putDouble("Drive P Value", 0.007);
+		prefs.putDouble("Drive I Value", 0.0);
+		prefs.putDouble("Drive D Value", 0.0);
+		prefs.putDouble("Drive Absolute Tolerance", 2);
+		
+		drivePVal = prefs.getDouble("Drive P Value", 0.007);
+		driveIVal = prefs.getDouble("Drive I Value", 0.0);
+		driveDVal = prefs.getDouble("Drive D Value", 0.0);
+		driveAbsTol = prefs.getDouble("Drive Absolute Tolerance", 2);
 		
 		prefs.putDouble("Arm Intake Setpoint", 0);
 		prefs.putDouble("Grabber Safety Setpoint", 4000);
@@ -60,11 +78,11 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Vision Wait Time", 0.5);
 		prefs.putDouble("Vision Tolerance", 10);
 		
-		grabberPVal = prefs.getDouble("Grabber P Value", 0.007);
+		grabberPVal = prefs.getDouble("Grabber P Value", 0.0007);
 		grabberIVal = prefs.getDouble("Grabber I Value", 0.0);
 		grabberDVal = prefs.getDouble("Grabber D Value", 0.0);
 		grabberAbsTol = prefs.getDouble("Grabber Absolute Tolerance", 1000);
-		armPVal = prefs.getDouble("Arm P Value", 0.007);
+		armPVal = prefs.getDouble("Arm P Value", 0.0007);
 		armIVal = prefs.getDouble("Arm I Value", 0.0);
 		armDVal = prefs.getDouble("Arm D Value", 0.0);
 		armAbsTol = prefs.getDouble("Arm Absolute Tolerance", 1000);
@@ -91,6 +109,12 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		topviewCamera = CameraServer.getInstance().startAutomaticCapture();
 		
+		chooser.addObject("Left station - left switch", new LeftLeft());
+		chooser.addObject("Left station - right switch", new LeftRight());
+		chooser.addObject("Mid station - left switch", new CenterLeft());
+		chooser.addObject("Mid station - right switch", new CenterRight());
+		chooser.addObject("Right station - left switch", new RightLeft());
+		chooser.addObject("Right station - right switch", new RightRight());
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		LiveWindow.addSensor("Arm", "Quadrature Encoder", Robot.arm);
@@ -98,6 +122,7 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putNumber("distance", 0.0);
 		SmartDashboard.putNumber("speed", 0.0);
+		SmartDashboard.putNumber("angle to turn to", 0.0);
 	}
 
 	@Override
@@ -133,11 +158,15 @@ public class Robot extends IterativeRobot {
 		
 		double distance = SmartDashboard.getNumber("distance", 0.0);
 		double speed = SmartDashboard.getNumber("speed", 0.0);
+		double angleToTurnTo = SmartDashboard.getNumber("angle to turn to", 0.0);
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Robot.drive.globalDriveSpeed);
+		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Drive.globalDriveSpeed);
 		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
 		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
 		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed));
+		//SmartDashboard.putData("Auto LeftLeft", new LeftLeft());
+		//THE ABOVE CAUSED THE MOTOR CONTROLLER ERROR... MAYBE? OR IT WAS THE TURN TO DRIVE METHOD IN DRIVE
+		
 	}
 
 	public void testPeriodic() {

@@ -9,13 +9,17 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveStraightToDistance extends Command {
 
-	double distanceToDrive;
+	double distanceToDriveAdjusted;
 	double speedToDrive;
 
     public DriveStraightToDistance(double distance, double speed) {
         requires(Robot.drive);
-        distanceToDrive = distance;
-        speedToDrive = speed;
+        distanceToDriveAdjusted = Math.abs(distance)/(1+ 0.4166667*speed);
+        if (distance < 0) {
+        	speedToDrive = -1*Math.abs(speed);
+        } else {
+        	speedToDrive = Math.abs(speed);
+        	}     
     }
 
     protected void initialize() {
@@ -28,7 +32,7 @@ public class DriveStraightToDistance extends Command {
     }
 
     protected boolean isFinished() {
-        return (Robot.drive.drive_enc_left.getDistance() + Robot.drive.drive_enc_right.getDistance()) / 2 >= distanceToDrive;
+        return (Math.abs(Robot.drive.drive_enc_left.getDistance() + Robot.drive.drive_enc_right.getDistance())) / 2 >= Math.abs(distanceToDriveAdjusted);
     }
 
     protected void end() {

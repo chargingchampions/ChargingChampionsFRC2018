@@ -1,13 +1,19 @@
 package org.usfirst.frc.team6560.robot.commands.auto;
 
+import org.usfirst.frc.team6560.robot.commands.drive.*;
+import org.usfirst.frc.team6560.robot.commands.arm.*;
+import org.usfirst.frc.team6560.robot.commands.cubeIntake.*;
+import org.usfirst.frc.team6560.robot.commands.grabber.*;
+import org.usfirst.frc.team6560.robot.commands.PID.*;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class RightRed extends CommandGroup {
+public class CenterLeft extends CommandGroup {
 
-    public RightRed() {
+    public CenterLeft() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,5 +30,6 @@ public class RightRed extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	addSequential(new DriveStraightToDistance(0.0, 0.0));
     }
 }

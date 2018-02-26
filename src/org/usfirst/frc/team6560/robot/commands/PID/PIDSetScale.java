@@ -19,12 +19,14 @@ public class PIDSetScale extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("PID Scale starting...");
     	safe = false;
     	arrived = false;
     	Robot.arm.disable();
     	Robot.arm.setSetpoint(Robot.armScaleSetpoint);
     	Robot.grabber.setSetpoint(Robot.grabberSafetySetpoint);
     	Robot.grabber.enable();
+    	System.out.println("PID Scale grabber set to safety!");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,17 +34,21 @@ public class PIDSetScale extends Command {
     	if (!safe) {
     		if (Math.abs(Robot.grabber.getPosition() - Robot.grabber.getSetpoint()) < Robot.grabberAbsTol) {
     			safe = true;
+    			System.out.println("Scale PID safe!");
     		} else {
     	    	Robot.arm.enable();
+    	    	System.out.println("Scale PID arm enabled!");
     		}
     	}
     	
     	if (!arrived) {
     		if (Math.abs(Robot.arm.getPosition() - Robot.arm.getSetpoint()) < Robot.armAbsTol) {
     			arrived = true;
+    			System.out.println("Scale PID arm arrived!");
     		}
     	} else {
 	    	Robot.grabber.setSetpoint(Robot.grabberScaleSetpoint);
+	    	System.out.println("Scale PID grabber set to scale!");
     	}
     }
 
@@ -53,6 +59,7 @@ public class PIDSetScale extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("Scale PID EXITING!!!!");
     	Robot.arm.disable();
     	Robot.grabber.disable();
     }

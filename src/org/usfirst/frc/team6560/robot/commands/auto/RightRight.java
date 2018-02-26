@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class RightBlue extends CommandGroup {
+public class RightRight extends CommandGroup {
 
-    public RightBlue() {
+    public RightRight() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
