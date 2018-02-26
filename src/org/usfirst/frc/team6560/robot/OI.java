@@ -1,10 +1,10 @@
 package org.usfirst.frc.team6560.robot;
 
 import org.usfirst.frc.team6560.robot.RobotMap.Joysticks;
+import org.usfirst.frc.team6560.robot.commands.PID.PIDSetDefault;
 import org.usfirst.frc.team6560.robot.commands.PID.PIDSetIntake;
 import org.usfirst.frc.team6560.robot.commands.PID.PIDSetScale;
 import org.usfirst.frc.team6560.robot.commands.PID.PIDSetSwitch;
-import org.usfirst.frc.team6560.robot.commands.PID.PIDTester;
 import org.usfirst.frc.team6560.robot.commands.cubeIntake.IntakeCubeSlowly;
 import org.usfirst.frc.team6560.robot.commands.cubeIntake.ShootCube;
 import org.usfirst.frc.team6560.robot.commands.cubeIntake.StartIntake;
@@ -73,7 +73,7 @@ public class OI {
 		secondButton9.whenPressed(new PIDSetIntake());
 		secondButton10.whenPressed(new PIDSetSwitch());
 		secondButton7.whenPressed(new PIDSetScale());
-		secondButton8.whenPressed(new PIDTester());
+		secondButton8.whenPressed(new PIDSetDefault());
 		//intake buttons
 		secondRightThumb.whenPressed(new StartIntake());
 		secondRightThumb.whenReleased(new IntakeCubeSlowly());

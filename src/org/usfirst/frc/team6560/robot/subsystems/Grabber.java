@@ -26,6 +26,7 @@ public class Grabber extends PIDSubsystem {
     	getPIDController().setContinuous(false);
     	getPIDController().disable();
     	getPIDController().setSetpoint(0);
+    	//TODO: add a soft limit encoder value that updates based on arm encoder, probably a trig function
     	
     }
 

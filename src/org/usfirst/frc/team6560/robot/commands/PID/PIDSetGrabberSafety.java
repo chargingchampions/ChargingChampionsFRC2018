@@ -7,19 +7,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PIDTester extends Command {
+public class PIDSetGrabberSafety extends Command {
 
-    public PIDTester() {
-        requires(Robot.arm);
+    public PIDSetGrabberSafety() {
         requires(Robot.grabber);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.arm.enable();
+    	Robot.grabber.setSetpoint(Robot.grabberSafetySetpoint);
     	Robot.grabber.enable();
-    	Robot.arm.setSetpoint(Robot.armScaleSetpoint);
-    	Robot.grabber.setSetpoint(Robot.grabberScaleSetpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,12 +25,11 @@ public class PIDTester extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Robot.arm.getPosition() - Robot.arm.getSetpoint()) < Robot.armAbsTol && Math.abs(Robot.grabber.getPosition() - Robot.grabber.getSetpoint()) < Robot.grabberAbsTol;
+        return Math.abs(Robot.grabber.getPosition() - Robot.grabber.getSetpoint()) < Robot.grabberAbsTol;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.arm.disable();
     	Robot.grabber.disable();
     }
 

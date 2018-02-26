@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class PIDSetSwitch extends CommandGroup {
+public class PIDSetDefault extends CommandGroup {
 
-    public PIDSetSwitch() {
+    public PIDSetDefault() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -25,7 +25,6 @@ public class PIDSetSwitch extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addSequential(new PIDSetGrabberSafety());
-    	addSequential(new PIDSetArmSwitch());
-    	addSequential(new PIDSetGrabberSwitch());
+    	addSequential(new PIDSetArmIntake());
     }
 }
