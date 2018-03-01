@@ -155,13 +155,15 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Drive Rotate I Value", 0.0);
 		prefs.putDouble("Drive Rotate D Value", 0.0);
 		
-		prefs.putDouble("Arm Intake Setpoint", 0);
+		
 		prefs.putDouble("Grabber Safety Setpoint", 0);
 		prefs.putDouble("Grabber Intake Setpoint", 3000);
-		prefs.putDouble("Arm Scale Setpoint", 29805.0);
-		prefs.putDouble("Grabber Scale Setpoint", 3000);
-		prefs.putDouble("Arm Switch Setpoint", 0.0);
 		prefs.putDouble("Grabber Switch Setpoint", 3000);
+		prefs.putDouble("Grabber Scale Setpoint", 3000);
+		
+		prefs.putDouble("Arm Intake Setpoint", 0);
+		prefs.putDouble("Arm Scale Setpoint", 29805.0);
+		prefs.putDouble("Arm Switch Setpoint", 0.0);
 		
 		prefs.putDouble("Vision Motor Speed", 0.7);
 		prefs.putDouble("Vision Wait Time", 0.5);
@@ -192,13 +194,14 @@ public class Robot extends IterativeRobot {
 		driveRotateIVal = prefs.getDouble("Drive Rotate I Value", 0.0);
 		driveRotateDVal = prefs.getDouble("Drive Rotate D Value", 0.0);
 		
-		armIntakeSetpoint = prefs.getDouble("Arm Intake Setpoint", 0);
 		grabberSafetySetpoint = prefs.getDouble("Grabber Safety Setpoint", 4000);
 		grabberIntakeSetpoint = prefs.getDouble("Grabber Intake Setpoint", 3000);
-		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 38305.0);
-		grabberScaleSetpoint = prefs.getDouble("Grabber Scale Setpoint", 3000);
-		armSwitchSetpoint = prefs.getDouble("Arm Switch Setpoint", 5000);
 		grabberSwitchSetpoint = prefs.getDouble("Grabber Switch Setpoint", 3000);
+		grabberScaleSetpoint = prefs.getDouble("Grabber Scale Setpoint", 3000);
+		
+		armIntakeSetpoint = prefs.getDouble("Arm Intake Setpoint", 0);
+		armSwitchSetpoint = prefs.getDouble("Arm Switch Setpoint", 5000);
+		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 38305.0);
 		
 		visionMotorSpeed = prefs.getDouble("Vision Motor Speed", 0.7);
 		visionWaitTime = prefs.getDouble("Vision Wait Time", 0.5);
