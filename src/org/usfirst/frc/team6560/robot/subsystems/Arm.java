@@ -22,12 +22,14 @@ public class Arm extends PIDSubsystem {
     	jointMotor1.setSafetyEnabled(false);
     	jointMotor2.setSafetyEnabled(false);
     	jointMotor2.setInverted(true);
-    	jointMotor2.getSensorCollection().setQuadraturePosition(0, 1);
+    	jointMotor2.getSensorCollection().setQuadraturePosition(0, 100);
     	setAbsoluteTolerance(Robot.armAbsTol);
     	getPIDController().setContinuous(false);
     	getPIDController().disable();
     	getPIDController().setSetpoint(0);
     	
+    	jointMotor2.configForwardSoftLimitThreshold(Robot.armUpperSoftLimit, 100);
+    	jointMotor2.configForwardSoftLimitEnable(true, 100);
     	
     	
     }

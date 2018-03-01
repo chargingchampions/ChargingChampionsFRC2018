@@ -23,12 +23,13 @@ public class DriveStraightToDistance extends Command {
     }
 
     protected void initialize() {
+    	Robot.drive.gyro.reset();
     	Robot.drive.drive_enc_left.reset();
     	Robot.drive.drive_enc_right.reset();
     }
 
     protected void execute() {
-    	Robot.drive.driveStraightWithGyro(speedToDrive);
+    	Robot.drive.driveStraightWithGyro(speedToDrive*(Math.abs(distanceToDriveAdjusted - Math.abs(Robot.drive.drive_enc_left.getDistance() + Robot.drive.drive_enc_right.getDistance()))/distanceToDriveAdjusted));
     }
 
     protected boolean isFinished() {
