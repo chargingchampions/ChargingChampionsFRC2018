@@ -12,9 +12,9 @@ public class DriveStraightToDistance extends Command {
 	double distanceToDriveAdjusted;
 	double speedToDrive;
 
-    public DriveStraightToDistance(double distance, double speed) {
+    public DriveStraightToDistance(double distance, double speed, double proportionalityConstant) {
         requires(Robot.drive);
-        distanceToDriveAdjusted = Math.abs(distance)/(1+ 0.4166667*speed);
+        distanceToDriveAdjusted = Math.abs(distance)*proportionalityConstant;
         if (distance < 0) {
         	speedToDrive = -1*Math.abs(speed);
         } else {

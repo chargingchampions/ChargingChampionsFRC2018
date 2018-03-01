@@ -16,12 +16,12 @@ public class LeftLeft extends CommandGroup {
 
     public LeftLeft() {
     	addParallel(new PIDSetSwitch()); //TODO: fix safety value
-    	addSequential(new DriveStraightToDistance(168.0, 0.75));
+    	addSequential(new DriveStraightToDistance(168.0, 0.75, 0.75));
     	addSequential(new DriveWithGyroPossibleMistakeByAlbertLinYay(0.0, 90, 0.03));
     	//TODO: turn to angle
-    	addSequential(new DriveStraightToDistance(6.0, 0.6));
+    	addSequential(new DriveStraightToDistance(6.0, 0.6, 0.75));
     	addSequential(new OpenIntakeArms());
-    	addSequential(new DriveStraightToDistance(-15.0, 0.6));
+    	addSequential(new DriveStraightToDistance(-15.0, 0.6, 0.75));
     	addSequential(new PIDSetIntake());
     }
 }
