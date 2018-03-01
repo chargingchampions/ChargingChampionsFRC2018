@@ -33,8 +33,10 @@ public class Robot extends IterativeRobot {
 	//remove the following if it causes a NetworkTable exception
 	public static Preferences prefs;
 	
-	public static double grabberPVal, grabberIVal, grabberDVal, grabberAbsTol, armPVal, armIVal, armDVal, armAbsTol,
+	public static double grabberPVal, grabberIVal, grabberDVal, grabberAbsTol,
+	armPVal, armIVal, armDVal, armAbsTol,
 	drivePVal, driveIVal, driveDVal, driveAbsTol,
+	driveRotatePVal, driveRotateIVal, driveRotateDVal,
 	grabberSafetySetpoint, grabberIntakeSetpoint, grabberSwitchSetpoint, grabberScaleSetpoint,
 	armIntakeSetpoint, armSwitchSetpoint, armScaleSetpoint,
 	visionMotorSpeed, visionWaitTime, visionTolerance;
@@ -149,6 +151,9 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Drive D Value", 0.0);
 		prefs.putDouble("Drive Absolute Tolerance", 2);
 		
+		prefs.putDouble("Drive Rotate P Value", 0.001);
+		prefs.putDouble("Drive Rotate I Value", 0.0);
+		prefs.putDouble("Drive Rotate D Value", 0.0);
 		
 		prefs.putDouble("Arm Intake Setpoint", 0);
 		prefs.putDouble("Grabber Safety Setpoint", 0);
@@ -182,6 +187,10 @@ public class Robot extends IterativeRobot {
 		driveIVal = prefs.getDouble("Drive I Value", 0.0);
 		driveDVal = prefs.getDouble("Drive D Value", 0.0);
 		driveAbsTol = prefs.getDouble("Drive Absolute Tolerance", 2);
+		
+		driveRotatePVal = prefs.getDouble("Drive Rotate P Value", 0.001);
+		driveRotateIVal = prefs.getDouble("Drive Rotate I Value", 0.0);
+		driveRotateDVal = prefs.getDouble("Drive Rotate D Value", 0.0);
 		
 		armIntakeSetpoint = prefs.getDouble("Arm Intake Setpoint", 0);
 		grabberSafetySetpoint = prefs.getDouble("Grabber Safety Setpoint", 4000);
