@@ -46,67 +46,12 @@ public class Robot extends IterativeRobot {
 
 	public void robotInit() {
 		//remove the following if it causes a NetworkTable exception
+		//Putting and loading preferences
 		prefs = Preferences.getInstance();
+		putPrefsNumbers();
+		initializePrefs();
 		
-		//insert preference values here
-		prefs.putDouble("Grabber P Value", 0.0003);
-		prefs.putDouble("Grabber I Value", 0.0);
-		prefs.putDouble("Grabber D Value", 0.0);
-		prefs.putDouble("Grabber Absolute Tolerance", 200);
-		prefs.putDouble("Arm P Value", 0.0007);
-		prefs.putDouble("Arm I Value", 0.0);
-		prefs.putDouble("Arm D Value", 0.0);
-		prefs.putDouble("Arm Absolute Tolerance", 500);
-		
-		prefs.putDouble("Drive P Value", 0.007);
-		prefs.putDouble("Drive I Value", 0.0);
-		prefs.putDouble("Drive D Value", 0.0);
-		prefs.putDouble("Drive Absolute Tolerance", 2);
-		
-		
-		prefs.putDouble("Arm Intake Setpoint", 0);
-		prefs.putDouble("Grabber Safety Setpoint", 0);
-		prefs.putDouble("Grabber Intake Setpoint", 3000);
-		prefs.putDouble("Arm Scale Setpoint", 29805.0);
-		prefs.putDouble("Grabber Scale Setpoint", 3000);
-		prefs.putDouble("Arm Switch Setpoint", 0.0);
-		prefs.putDouble("Grabber Switch Setpoint", 3000);
-		
-		prefs.putDouble("Vision Motor Speed", 0.7);
-		prefs.putDouble("Vision Wait Time", 0.5);
-		prefs.putDouble("Vision Tolerance", 10);
-		
-		prefs.putInt("Grabber Lower Soft Limit", 1300);
-		prefs.putInt("Arm Upper Soft Limit", 40000);
-		
-		grabberPVal = prefs.getDouble("Grabber P Value", 0.0003);
-		grabberIVal = prefs.getDouble("Grabber I Value", 0.0);
-		grabberDVal = prefs.getDouble("Grabber D Value", 0.0);
-		grabberAbsTol = prefs.getDouble("Grabber Absolute Tolerance", 1000);
-		armPVal = prefs.getDouble("Arm P Value", 0.0007);
-		armIVal = prefs.getDouble("Arm I Value", 0.0);
-		armDVal = prefs.getDouble("Arm D Value", 0.0);
-		armAbsTol = prefs.getDouble("Arm Absolute Tolerance", 1000);
-		drivePVal = prefs.getDouble("Drive P Value", 0.007);
-		driveIVal = prefs.getDouble("Drive I Value", 0.0);
-		driveDVal = prefs.getDouble("Drive D Value", 0.0);
-		driveAbsTol = prefs.getDouble("Drive Absolute Tolerance", 2);
-		
-		armIntakeSetpoint = prefs.getDouble("Arm Intake Setpoint", 0);
-		grabberSafetySetpoint = prefs.getDouble("Grabber Safety Setpoint", 4000);
-		grabberIntakeSetpoint = prefs.getDouble("Grabber Intake Setpoint", 3000);
-		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 38305.0);
-		grabberScaleSetpoint = prefs.getDouble("Grabber Scale Setpoint", 3000);
-		armSwitchSetpoint = prefs.getDouble("Arm Switch Setpoint", 5000);
-		grabberSwitchSetpoint = prefs.getDouble("Grabber Switch Setpoint", 3000);
-		
-		visionMotorSpeed = prefs.getDouble("Vision Motor Speed", 0.7);
-		visionWaitTime = prefs.getDouble("Vision Wait Time", 0.5);
-		visionTolerance = prefs.getDouble("Vision Tolerance", 10);
-		
-		grabberLowerSoftLimit = prefs.getInt("Grabber Lower Soft Limit", 1300);
-		armUpperSoftLimit = prefs.getInt("Arm Upper Soft Limit", 40000);
-		
+		//initializing subsystems
 		drive = new Drive();
 		visionNetworkTables = new VisionNetworkTables();
 		grabber = new Grabber();
@@ -115,6 +60,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		topviewCamera = CameraServer.getInstance().startAutomaticCapture();
 		
+		//adding auto options
 		chooser.addObject("Left station - left switch", new LeftLeft());
 		chooser.addObject("Left station - right switch", new LeftRight());
 		chooser.addObject("Mid station - left switch", new CenterLeft());
@@ -159,31 +105,8 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		arm.resetQuadraturePosition();
 		grabber.resetQuadraturePosition();
-		grabberPVal = prefs.getDouble("Grabber P Value", 0.0003);
-		grabberIVal = prefs.getDouble("Grabber I Value", 0.0);
-		grabberDVal = prefs.getDouble("Grabber D Value", 0.0);
-		grabberAbsTol = prefs.getDouble("Grabber Absolute Tolerance", 1000);
-		armPVal = prefs.getDouble("Arm P Value", 0.0007);
-		armIVal = prefs.getDouble("Arm I Value", 0.0);
-		armDVal = prefs.getDouble("Arm D Value", 0.0);
-		armAbsTol = prefs.getDouble("Arm Absolute Tolerance", 1000);
-		drivePVal = prefs.getDouble("Drive P Value", 0.007);
-		driveIVal = prefs.getDouble("Drive I Value", 0.0);
-		driveDVal = prefs.getDouble("Drive D Value", 0.0);
-		driveAbsTol = prefs.getDouble("Drive Absolute Tolerance", 2);
-		
-		armIntakeSetpoint = prefs.getDouble("Arm Intake Setpoint", 0);
-		grabberSafetySetpoint = prefs.getDouble("Grabber Safety Setpoint", 4000);
-		grabberIntakeSetpoint = prefs.getDouble("Grabber Intake Setpoint", 3000);
-		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 38305.0);
-		grabberScaleSetpoint = prefs.getDouble("Grabber Scale Setpoint", 3000);
-		armSwitchSetpoint = prefs.getDouble("Arm Switch Setpoint", 5000);
-		grabberSwitchSetpoint = prefs.getDouble("Grabber Switch Setpoint", 3000);
-		
-		visionMotorSpeed = prefs.getDouble("Vision Motor Speed", 0.7);
-		visionWaitTime = prefs.getDouble("Vision Wait Time", 0.5);
-		visionTolerance = prefs.getDouble("Vision Tolerance", 10);
-		
+		initializePrefs();
+		//TODO: update the PID vals and other stuff in initialization of subsystems, which only occurs upon turning on the robot
 	}
 	
 	public void teleopPeriodic() {
@@ -207,5 +130,72 @@ public class Robot extends IterativeRobot {
 		LiveWindow.addSensor("Arm", "Quadrature Encoder", Robot.arm);
 		LiveWindow.addSensor("Grabber", "Quadrature Encoder", Robot.grabber);
 		LiveWindow.run();
+	}
+	
+	public void putPrefsNumbers() {
+		//insert preference values here
+		prefs.putDouble("Grabber P Value", 0.0003);
+		prefs.putDouble("Grabber I Value", 0.0);
+		prefs.putDouble("Grabber D Value", 0.0);
+		prefs.putDouble("Grabber Absolute Tolerance", 200);
+		
+		prefs.putDouble("Arm P Value", 0.0007);
+		prefs.putDouble("Arm I Value", 0.0);
+		prefs.putDouble("Arm D Value", 0.0);
+		prefs.putDouble("Arm Absolute Tolerance", 500);
+		
+		prefs.putDouble("Drive P Value", 0.007);
+		prefs.putDouble("Drive I Value", 0.0);
+		prefs.putDouble("Drive D Value", 0.0);
+		prefs.putDouble("Drive Absolute Tolerance", 2);
+		
+		
+		prefs.putDouble("Arm Intake Setpoint", 0);
+		prefs.putDouble("Grabber Safety Setpoint", 0);
+		prefs.putDouble("Grabber Intake Setpoint", 3000);
+		prefs.putDouble("Arm Scale Setpoint", 29805.0);
+		prefs.putDouble("Grabber Scale Setpoint", 3000);
+		prefs.putDouble("Arm Switch Setpoint", 0.0);
+		prefs.putDouble("Grabber Switch Setpoint", 3000);
+		
+		prefs.putDouble("Vision Motor Speed", 0.7);
+		prefs.putDouble("Vision Wait Time", 0.5);
+		prefs.putDouble("Vision Tolerance", 10);
+		
+		prefs.putInt("Grabber Lower Soft Limit", 1300);
+		prefs.putInt("Arm Upper Soft Limit", 40000);
+		
+	}
+	
+	public void initializePrefs() {
+		grabberPVal = prefs.getDouble("Grabber P Value", 0.0003);
+		grabberIVal = prefs.getDouble("Grabber I Value", 0.0);
+		grabberDVal = prefs.getDouble("Grabber D Value", 0.0);
+		grabberAbsTol = prefs.getDouble("Grabber Absolute Tolerance", 1000);
+		
+		armPVal = prefs.getDouble("Arm P Value", 0.0007);
+		armIVal = prefs.getDouble("Arm I Value", 0.0);
+		armDVal = prefs.getDouble("Arm D Value", 0.0);
+		armAbsTol = prefs.getDouble("Arm Absolute Tolerance", 1000);
+		
+		drivePVal = prefs.getDouble("Drive P Value", 0.007);
+		driveIVal = prefs.getDouble("Drive I Value", 0.0);
+		driveDVal = prefs.getDouble("Drive D Value", 0.0);
+		driveAbsTol = prefs.getDouble("Drive Absolute Tolerance", 2);
+		
+		armIntakeSetpoint = prefs.getDouble("Arm Intake Setpoint", 0);
+		grabberSafetySetpoint = prefs.getDouble("Grabber Safety Setpoint", 4000);
+		grabberIntakeSetpoint = prefs.getDouble("Grabber Intake Setpoint", 3000);
+		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 38305.0);
+		grabberScaleSetpoint = prefs.getDouble("Grabber Scale Setpoint", 3000);
+		armSwitchSetpoint = prefs.getDouble("Arm Switch Setpoint", 5000);
+		grabberSwitchSetpoint = prefs.getDouble("Grabber Switch Setpoint", 3000);
+		
+		visionMotorSpeed = prefs.getDouble("Vision Motor Speed", 0.7);
+		visionWaitTime = prefs.getDouble("Vision Wait Time", 0.5);
+		visionTolerance = prefs.getDouble("Vision Tolerance", 10);
+		
+		grabberLowerSoftLimit = prefs.getInt("Grabber Lower Soft Limit", 1300);
+		armUpperSoftLimit = prefs.getInt("Arm Upper Soft Limit", 40000);
 	}
 }
