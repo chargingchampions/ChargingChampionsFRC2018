@@ -112,6 +112,14 @@ public class Drive extends Subsystem {
 		drivetrain.arcadeDrive(speed, angle);
 	}
 	
+	public void spinClockwise(double speed) {
+		tankDriveWithJoysticks(speed, -speed);
+	}
+	
+	public void spinCounterClockwise(double speed) {
+		tankDriveWithJoysticks(-speed, speed);
+	}
+	
 	public double getSpeed() {
 		return (drive_enc_left.getRate() + drive_enc_right.getRate()) / 2;
 		//Divide encoder rates from both sides by 2 
