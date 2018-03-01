@@ -21,12 +21,14 @@ public class Grabber extends PIDSubsystem {
     public Grabber() {
     	super("Grabber", Robot.grabberPVal, Robot.grabberIVal, Robot.grabberDVal);
     	rotationMotor.setSafetyEnabled(false);
-    	rotationMotor.getSensorCollection().setQuadraturePosition(0,  1);
+    	rotationMotor.getSensorCollection().setQuadraturePosition(0,  100);
     	setAbsoluteTolerance(Robot.grabberAbsTol);
     	getPIDController().setContinuous(false);
     	getPIDController().disable();
     	getPIDController().setSetpoint(0);
     	//TODO: add a soft limit encoder value that updates based on arm encoder, probably a trig function
+    	rotationMotor.configForwardSoftLimitThreshold(Robot.grabberLowerSoftLimit, 100);
+    	rotationMotor.configForwardSoftLimitEnable(true, 100);
     	
     }
 

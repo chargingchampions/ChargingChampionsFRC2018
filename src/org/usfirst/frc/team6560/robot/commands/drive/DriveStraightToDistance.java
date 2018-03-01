@@ -23,6 +23,7 @@ public class DriveStraightToDistance extends Command {
     }
 
     protected void initialize() {
+    	Robot.drive.gyro.reset();
     	Robot.drive.drive_enc_left.reset();
     	Robot.drive.drive_enc_right.reset();
     }

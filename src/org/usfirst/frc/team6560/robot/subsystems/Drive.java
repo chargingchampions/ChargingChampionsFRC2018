@@ -93,14 +93,8 @@ public class Drive extends Subsystem {
 	}
 	
 	public void driveStraightWithGyro(double speed) {
-		gyro.reset();
 		double angle = gyro.getAngle();
-		System.out.println("The gryo heading used to correct straight drive is " + angle);
 		drivetrain.arcadeDrive(-speed, -1 * angle);
-	}
-	
-	public void driveStraightWithGyroNoReset(double speed) {
-		
 	}
 	
 	

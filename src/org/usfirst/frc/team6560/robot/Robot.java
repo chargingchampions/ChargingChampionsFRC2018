@@ -38,6 +38,8 @@ public class Robot extends IterativeRobot {
 	grabberSafetySetpoint, grabberIntakeSetpoint, grabberSwitchSetpoint, grabberScaleSetpoint,
 	armIntakeSetpoint, armSwitchSetpoint, armScaleSetpoint,
 	visionMotorSpeed, visionWaitTime, visionTolerance;
+	
+	public static int grabberLowerSoftLimit, armUpperSoftLimit;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -74,6 +76,9 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Vision Wait Time", 0.5);
 		prefs.putDouble("Vision Tolerance", 10);
 		
+		prefs.putInt("Grabber Lower Soft Limit", 1300);
+		prefs.putInt("Arm Upper Soft Limit", 40000);
+		
 		grabberPVal = prefs.getDouble("Grabber P Value", 0.0003);
 		grabberIVal = prefs.getDouble("Grabber I Value", 0.0);
 		grabberDVal = prefs.getDouble("Grabber D Value", 0.0);
@@ -99,7 +104,8 @@ public class Robot extends IterativeRobot {
 		visionWaitTime = prefs.getDouble("Vision Wait Time", 0.5);
 		visionTolerance = prefs.getDouble("Vision Tolerance", 10);
 		
-		
+		grabberLowerSoftLimit = prefs.getInt("Grabber Lower Soft Limit", 1300);
+		armUpperSoftLimit = prefs.getInt("Arm Upper Soft Limit", 40000);
 		
 		drive = new Drive();
 		visionNetworkTables = new VisionNetworkTables();
