@@ -197,7 +197,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
 		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed, 1.0));
 		SmartDashboard.putData("LeftLeftAuto", new LeftLeft());
-		
+		SmartDashboard.putNumber("Gyro angle", drive.gyro.getAngle());
 		//SmartDashboard.putData("Auto LeftLeft", new LeftLeft());
 		//THE ABOVE CAUSED THE MOTOR CONTROLLER ERROR... MAYBE? OR IT WAS THE TURN TO DRIVE METHOD IN DRIVE
 		
