@@ -121,6 +121,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Mid station - right switch", new CenterRight());
 		chooser.addObject("Right station - left switch", new RightLeft());
 		chooser.addObject("Right station - right switch", new RightRight());
+		chooser.addDefault("leftleft", new LeftLeft());
 		SmartDashboard.putData("Auto mode", chooser);
 		
 		LiveWindow.addSensor("Arm", "Quadrature Encoder", Robot.arm);
@@ -195,6 +196,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
 		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
 		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed, 1.0));
+		SmartDashboard.putData("LeftLeftAuto", new LeftLeft());
+		
 		//SmartDashboard.putData("Auto LeftLeft", new LeftLeft());
 		//THE ABOVE CAUSED THE MOTOR CONTROLLER ERROR... MAYBE? OR IT WAS THE TURN TO DRIVE METHOD IN DRIVE
 		

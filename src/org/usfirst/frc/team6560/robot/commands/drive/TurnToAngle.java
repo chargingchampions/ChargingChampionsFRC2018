@@ -17,7 +17,6 @@ public class TurnToAngle extends Command {
         requires(Robot.drive);
         angle = angleToTurn;
         speed = speedToTurn;
-        kP = 1;
     }
 
     protected void initialize() {
@@ -27,13 +26,13 @@ public class TurnToAngle extends Command {
 
     protected void execute() {
     	if(angle > 0) {
-    		Robot.drive.spinClockwise(speed * kP * Math.abs(Robot.drive.getGyroAngle() - angle));
+    		Robot.drive.spinClockwise(speed);
     	}
-    	Robot.drive.spinCounterClockwise(speed * kP * Math.abs(Robot.drive.getGyroAngle() - angle));
+    	Robot.drive.spinCounterClockwise(speed);
     }
 
     protected boolean isFinished() {
-        return speed * kP * Math.abs(Robot.drive.getGyroAngle() - angle) <= 2;
+        return Math.abs(Robot.drive.getGyroAngle()) >= Math.abs(angle);
     }
 
     protected void end() {

@@ -28,7 +28,7 @@ public class Grabber extends PIDSubsystem {
     	getPIDController().setSetpoint(0);
     	//TODO: add a soft limit encoder value that updates based on arm encoder, probably a trig function
     	rotationMotor.configForwardSoftLimitThreshold(Robot.grabberLowerSoftLimit, 100);
-    	rotationMotor.configForwardSoftLimitEnable(true, 100);
+    	rotationMotor.configForwardSoftLimitEnable(false, 100);
     	
     }
 
@@ -58,7 +58,7 @@ public class Grabber extends PIDSubsystem {
 
 	@Override
 	protected void usePIDOutput(double output) {
-		rotationMotor.pidWrite(output*0.6);
+		rotationMotor.pidWrite(output);
 		
 	}
 }

@@ -62,7 +62,7 @@ public class Drive extends Subsystem {
 		imu.reset();
 		
 		drive_enc_left = new Encoder(9, 8, true, Encoder.EncodingType.k2X); //TODO: Determine DIO ports
-		drive_enc_right = new Encoder(6, 7, true, Encoder.EncodingType.k2X);
+		drive_enc_right = new Encoder(6, 5, true, Encoder.EncodingType.k2X);
 		initializeEncoders();
 		//Should have identical initializations
 		//k2x vs. k4x vs. k1x
@@ -107,6 +107,7 @@ public class Drive extends Subsystem {
 	}
 	
 	public void spinClockwise(double speed) {
+		speed = Math.abs(speed);
 		tankDriveWithJoysticks(speed, -speed);
 	}
 	

@@ -14,7 +14,7 @@ public class DriveStraightToDistance extends Command {
 
     public DriveStraightToDistance(double distance, double speed, double proportionalityConstant) {
         requires(Robot.drive);
-        distanceToDriveAdjusted = Math.abs(distance)*proportionalityConstant;
+        distanceToDriveAdjusted = Math.abs(distance);
         if (distance < 0) {
         	speedToDrive = -1*Math.abs(speed);
         } else {
@@ -29,7 +29,7 @@ public class DriveStraightToDistance extends Command {
     }
 
     protected void execute() {
-    	Robot.drive.driveStraightWithGyro(speedToDrive*(Math.abs(distanceToDriveAdjusted - Math.abs(Robot.drive.drive_enc_left.getDistance() + Robot.drive.drive_enc_right.getDistance()))/distanceToDriveAdjusted));
+    	Robot.drive.driveStraightWithGyro(speedToDrive);
     }
 
     protected boolean isFinished() {
@@ -38,6 +38,7 @@ public class DriveStraightToDistance extends Command {
 
     protected void end() {
     	Robot.drive.stopDrive();
+    	System.out.println("The driveStraightToDistance has ended...");
     }
 
     protected void interrupted() {
