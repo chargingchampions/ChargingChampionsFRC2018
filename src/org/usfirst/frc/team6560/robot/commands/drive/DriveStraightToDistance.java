@@ -29,7 +29,7 @@ public class DriveStraightToDistance extends Command {
     }
 
     protected void execute() {
-    	Robot.drive.driveStraightWithGyro(speedToDrive);
+    	Robot.drive.driveStraightWithGyro(speedToDrive*(Math.abs(distanceToDriveAdjusted - Math.abs(Robot.drive.drive_enc_left.getDistance() + Robot.drive.drive_enc_right.getDistance()))/distanceToDriveAdjusted));
     }
 
     protected boolean isFinished() {
