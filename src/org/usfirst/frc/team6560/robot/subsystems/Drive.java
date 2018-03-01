@@ -37,7 +37,7 @@ public class Drive extends Subsystem {
 	public Encoder drive_enc_right;
 	
 	public Drive() {
-		globalDriveSpeed = 0.7;
+		globalDriveSpeed = 0.9;
 		
 		frontLeftDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTLEFT);
 		rearLeftDrive = new WPI_TalonSRX(CAN.DRIVE_REARLEFT);
@@ -97,6 +97,10 @@ public class Drive extends Subsystem {
 		double angle = gyro.getAngle();
 		System.out.println("The gryo heading used to correct straight drive is " + angle);
 		drivetrain.arcadeDrive(-speed, -1 * angle);
+	}
+	
+	public void driveStraightWithGyroNoReset(double speed) {
+		
 	}
 	
 	
