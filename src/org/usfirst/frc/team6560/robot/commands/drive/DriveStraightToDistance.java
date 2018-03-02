@@ -9,16 +9,17 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveStraightToDistance extends Command {
 
-	double distanceToDriveAdjusted;
+	double distance;
 	double speedToDrive;
+	double distanceToSlowDown = 6;
 
-    public DriveStraightToDistance(double distance, double speed, double proportionalityConstant) {
+    public DriveStraightToDistance(double distanceIn, double speedIn) {
         requires(Robot.drive);
-        distanceToDriveAdjusted = Math.abs(distance);
+        distance = Math.abs(distanceIn);
         if (distance < 0) {
-        	speedToDrive = -1*Math.abs(speed);
+        	speedToDrive = -1*Math.abs(speedIn);
         } else {
-        	speedToDrive = Math.abs(speed);
+        	speedToDrive = Math.abs(speedIn);
         	}     
     }
 
@@ -29,12 +30,19 @@ public class DriveStraightToDistance extends Command {
     }
 
     protected void execute() {
-    	Robot.drive.driveStraightWithGyro(speedToDrive);
+    	if (Math.abs(Robot.drive.drive_enc_right.getDistance() - distance) < distanceToSlowDown) {
+    		Robot.drive.driveStraightWithGyro((Math.abs(Robot.drive.drive_enc_right.getDistance() - distance)/distanceToSlowDown)*Robot.drivePVal);
+    	} else {
+    		Robot.drive.driveStraightWithGyro(speedToDrive);
+    	}
     }
 
     protected boolean isFinished() {
         //return (Math.abs(Robot.drive.drive_enc_left.getDistance() + Robot.drive.drive_enc_right.getDistance())) / 2 >= Math.abs(distanceToDriveAdjusted) || Robot.drive.drive_enc_left.getStopped() || Robot.drive.drive_enc_right.getStopped();
-    	return (Math.abs(Robot.drive.drive_enc_right.getDistance())) >= Math.abs(distanceToDriveAdjusted);
+    	//TODO: add the left encoder for this too?
+    	
+    	//TODO: if the encoder is disconnected, you need to stop this command from running forever!!!
+    	return (Math.abs(Robot.drive.drive_enc_right.getDistance()) - distance) <= Robot.driveAbsTol || Math.abs(Robot.drive.drive_enc_right.getDistance()) >= distance;
     }
 
     protected void end() {

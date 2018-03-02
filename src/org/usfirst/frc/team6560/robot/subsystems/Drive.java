@@ -108,11 +108,18 @@ public class Drive extends Subsystem {
 	
 	public void spinClockwise(double speed) {
 		speed = Math.abs(speed);
-		tankDriveWithJoysticks(speed, -speed);
+		frontLeftDrive.set(speed);
+		frontRightDrive.set(speed);
+		rearRightDrive.set(speed);
+		rearLeftDrive.set(speed);
 	}
 	
 	public void spinCounterClockwise(double speed) {
-		tankDriveWithJoysticks(-speed, speed);
+		speed = -1 * Math.abs(speed);
+		frontLeftDrive.set(speed);
+		frontRightDrive.set(speed);
+		rearRightDrive.set(speed);
+		rearLeftDrive.set(speed);
 	}
 	
 	public double getSpeed() {
