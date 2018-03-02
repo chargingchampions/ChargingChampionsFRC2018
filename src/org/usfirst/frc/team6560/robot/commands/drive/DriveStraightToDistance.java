@@ -33,7 +33,8 @@ public class DriveStraightToDistance extends Command {
     }
 
     protected boolean isFinished() {
-        return (Math.abs(Robot.drive.drive_enc_left.getDistance() + Robot.drive.drive_enc_right.getDistance())) / 2 >= Math.abs(distanceToDriveAdjusted);
+        //return (Math.abs(Robot.drive.drive_enc_left.getDistance() + Robot.drive.drive_enc_right.getDistance())) / 2 >= Math.abs(distanceToDriveAdjusted) || Robot.drive.drive_enc_left.getStopped() || Robot.drive.drive_enc_right.getStopped();
+    	return (Math.abs(Robot.drive.drive_enc_right.getDistance())) >= Math.abs(distanceToDriveAdjusted);
     }
 
     protected void end() {

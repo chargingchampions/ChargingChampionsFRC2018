@@ -22,13 +22,15 @@ public class TurnToAngle extends Command {
     protected void initialize() {
     	Robot.drive.gyro.calibrate();
     	Robot.drive.gyro.reset();
+    	if(angle > 0) {
+    		Robot.drive.spinClockwise(speed);
+    	} else {
+    		Robot.drive.spinCounterClockwise(speed);
+    	}
     }
 
     protected void execute() {
-    	if(angle > 0) {
-    		Robot.drive.spinClockwise(speed);
-    	}
-    	Robot.drive.spinCounterClockwise(speed);
+    	
     }
 
     protected boolean isFinished() {
@@ -36,8 +38,10 @@ public class TurnToAngle extends Command {
     }
 
     protected void end() {
+    	Robot.drive.stopDrive();
     }
 
     protected void interrupted() {
+    	end();
     }
 }

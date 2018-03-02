@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 
+import org.usfirst.frc.team6560.robot.commands.PID.PIDTurnToAngle;
 import org.usfirst.frc.team6560.robot.commands.auto.CenterLeft;
 import org.usfirst.frc.team6560.robot.commands.auto.CenterRight;
 import org.usfirst.frc.team6560.robot.commands.auto.LeftLeft;
@@ -17,6 +18,7 @@ import org.usfirst.frc.team6560.robot.commands.auto.LeftRight;
 import org.usfirst.frc.team6560.robot.commands.auto.RightLeft;
 import org.usfirst.frc.team6560.robot.commands.auto.RightRight;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightToDistance;
+import org.usfirst.frc.team6560.robot.commands.drive.TurnToAngle;
 import org.usfirst.frc.team6560.robot.subsystems.*;
 
 public class Robot extends IterativeRobot {
@@ -28,6 +30,7 @@ public class Robot extends IterativeRobot {
 	public static Arm arm;
 	public static CubeIntake cubeIntake;
 	public static UsbCamera topviewCamera; 
+	public static UsbCamera downviewCamera;
 	
 	
 	//remove the following if it causes a NetworkTable exception
@@ -61,6 +64,7 @@ public class Robot extends IterativeRobot {
 		cubeIntake = new CubeIntake();
 		oi = new OI();
 		topviewCamera = CameraServer.getInstance().startAutomaticCapture();
+		downviewCamera = CameraServer.getInstance().startAutomaticCapture(); 
 		
 		//adding auto options
 		chooser.addObject("Left station - left switch", new LeftLeft());
@@ -112,7 +116,6 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public void teleopPeriodic() {
-		
 		double distance = SmartDashboard.getNumber("distance", 0.0);
 		double speed = SmartDashboard.getNumber("speed", 0.0);
 		double angleToTurnTo = SmartDashboard.getNumber("angle to turn to", 0.0);
@@ -121,8 +124,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
 		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
 		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed, 1.0));
+		SmartDashboard.putData("Turn To Angle", new TurnToAngle(angleToTurnTo, speed));
+		//SmartDashboard.putData("Turn To Angle PID", new PIDTurnToAngle(angleToTurnTo, speed, 2));
 		SmartDashboard.putData("LeftLeftAuto", new LeftLeft());
-		SmartDashboard.putNumber("Gyro angle", drive.gyro.getAngle());
+		SmartDashboard.putNumber("Gyro angle", drive.getGyroAngle());
+		SmartDashboard.putNumber("Left Encoder", drive.drive_enc_left.getDistance());
+		SmartDashboard.putNumber("Right Encoder", drive.drive_enc_right.getDistance());
 		//SmartDashboard.putData("Auto LeftLeft", new LeftLeft());
 		//THE ABOVE CAUSED THE MOTOR CONTROLLER ERROR... MAYBE? OR IT WAS THE TURN TO DRIVE METHOD IN DRIVE
 		

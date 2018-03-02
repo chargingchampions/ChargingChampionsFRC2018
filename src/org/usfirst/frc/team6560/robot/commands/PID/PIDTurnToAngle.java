@@ -1,6 +1,5 @@
 package org.usfirst.frc.team6560.robot.commands.PID;
 
-import org.usfirst.frc.team6560.robot.DriveRotatePIDOutput;
 import org.usfirst.frc.team6560.robot.Robot;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -12,17 +11,18 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class PIDTurnToAngle extends Command {
 
-    int angleToTurnTo, speed, tolerance;
+    double angleToTurnTo, speed, tolerance;
     PIDOutput driveRotateOutput;
     PIDController driveRotatePIDControl;
 
-    public PIDTurnToAngle(int angleToTurnTo, int speed, int tolerance) {
+    public PIDTurnToAngle(double angleToTurnTo, double speed, double tolerance) {
         requires(Robot.drive);
         this.angleToTurnTo = angleToTurnTo;
         this.speed = speed;
         this.tolerance = tolerance;
         driveRotateOutput = new DriveRotatePIDOutput();
         driveRotatePIDControl = new PIDController(Robot.driveRotatePVal, Robot.driveRotateIVal, Robot.driveRotateDVal, Robot.drive.gyro, driveRotateOutput);
+        //driveRotatePIDControl.setContinuous();
         //TODO: PID controllers should not have to be tuned after finding correct values, so perhaps hardcode them into the code later on
     }
 
@@ -32,7 +32,7 @@ public class PIDTurnToAngle extends Command {
         driveRotatePIDControl.setSetpoint(angleToTurnTo);
 
         // This is the point at which the error is small enough to be tolerated
-        driveRotatePIDControl.setPercentTolerance(tolerance);
+        driveRotatePIDControl.setAbsoluteTolerance(tolerance);
 
         // The maximum value given to the motor controller
         driveRotatePIDControl.setOutputRange(-speed, speed);
