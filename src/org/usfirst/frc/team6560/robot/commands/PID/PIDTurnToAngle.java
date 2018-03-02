@@ -1,7 +1,10 @@
 package org.usfirst.frc.team6560.robot.commands.PID;
 
+import org.usfirst.frc.team6560.robot.DriveRotatePIDOutput;
 import org.usfirst.frc.team6560.robot.Robot;
 
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -26,7 +29,7 @@ public class PIDTurnToAngle extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.drive.gyro.reset();
-        driveRotatePIDControl.setSetpoint(angle);
+        driveRotatePIDControl.setSetpoint(angleToTurnTo);
 
         // This is the point at which the error is small enough to be tolerated
         driveRotatePIDControl.setPercentTolerance(tolerance);
@@ -44,7 +47,7 @@ public class PIDTurnToAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(driveRotatePIDControl.getSetpoint() - driveRotatePIDControl.getPosition()) < tolerance;
+        return Math.abs(driveRotatePIDControl.getSetpoint() - Robot.drive.gyro.getAngle()) < tolerance;
     }
 
     // Called once after isFinished returns true

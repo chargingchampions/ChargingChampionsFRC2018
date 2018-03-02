@@ -105,8 +105,8 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		arm.resetQuadraturePosition();
-		grabber.resetQuadraturePosition();
+		arm.refreshSubsystem();
+		grabber.refreshSubsystem();
 		initializePrefs();
 		//TODO: update the PID vals and other stuff in initialization of subsystems, which only occurs upon turning on the robot
 	}
@@ -136,41 +136,41 @@ public class Robot extends IterativeRobot {
 	
 	public void putPrefsNumbers() {
 		//insert preference values here
-		prefs.putDouble("Grabber P Value", 0.0003);
-		prefs.putDouble("Grabber I Value", 0.0);
-		prefs.putDouble("Grabber D Value", 0.0);
-		prefs.putDouble("Grabber Absolute Tolerance", 200);
+		prefs.putDouble("Grabber P Value", prefs.getDouble("Grabber P Value", 0.0003));
+		prefs.putDouble("Grabber I Value", prefs.getDouble("Grabber I Value", 0.0));
+		prefs.putDouble("Grabber D Value", prefs.getDouble("Grabber D Value", 0.0));
+		prefs.putDouble("Grabber Absolute Tolerance", prefs.getDouble("Grabber Absolute Tolerance", 1000));
 		
-		prefs.putDouble("Arm P Value", 0.0007);
-		prefs.putDouble("Arm I Value", 0.0);
-		prefs.putDouble("Arm D Value", 0.0);
-		prefs.putDouble("Arm Absolute Tolerance", 500);
+		prefs.putDouble("Arm P Value", prefs.getDouble("Arm P Value", 0.0007));
+		prefs.putDouble("Arm I Value", prefs.getDouble("Arm I Value", 0.0));
+		prefs.putDouble("Arm D Value", prefs.getDouble("Arm D Value", 0.0));
+		prefs.putDouble("Arm Absolute Tolerance", prefs.getDouble("Arm Absolute Tolerance", 1000));
 		
-		prefs.putDouble("Drive P Value", 0.007);
-		prefs.putDouble("Drive I Value", 0.0);
-		prefs.putDouble("Drive D Value", 0.0);
-		prefs.putDouble("Drive Absolute Tolerance", 2);
+		prefs.putDouble("Drive P Value", prefs.getDouble("Drive P Value", 0.007));
+		prefs.putDouble("Drive I Value", prefs.getDouble("Drive I Value", 0.0));
+		prefs.putDouble("Drive D Value", prefs.getDouble("Drive D Value", 0.0));
+		prefs.putDouble("Drive Absolute Tolerance", prefs.getDouble("Drive Absolute Tolerance", 2));
 		
-		prefs.putDouble("Drive Rotate P Value", 0.001);
-		prefs.putDouble("Drive Rotate I Value", 0.0);
-		prefs.putDouble("Drive Rotate D Value", 0.0);
+		prefs.putDouble("Drive Rotate P Value", prefs.getDouble("Drive Rotate P Value", 0.001));
+		prefs.putDouble("Drive Rotate I Value", prefs.getDouble("Drive Rotate I Value", 0.0));
+		prefs.putDouble("Drive Rotate D Value", prefs.getDouble("Drive Rotate D Value", 0.0));
 		
 		
-		prefs.putDouble("Grabber Safety Setpoint", 0);
-		prefs.putDouble("Grabber Intake Setpoint", 3000);
-		prefs.putDouble("Grabber Switch Setpoint", 3000);
-		prefs.putDouble("Grabber Scale Setpoint", 3000);
+		prefs.putDouble("Grabber Safety Setpoint", prefs.getDouble("Grabber Safety Setpoint", 4000));
+		prefs.putDouble("Grabber Intake Setpoint", prefs.getDouble("Grabber Intake Setpoint", 3000));
+		prefs.putDouble("Grabber Switch Setpoint", prefs.getDouble("Grabber Switch Setpoint", 3000));
+		prefs.putDouble("Grabber Scale Setpoint", prefs.getDouble("Grabber Scale Setpoint", 3000));
 		
-		prefs.putDouble("Arm Intake Setpoint", 0);
-		prefs.putDouble("Arm Scale Setpoint", 29805.0);
-		prefs.putDouble("Arm Switch Setpoint", 0.0);
+		prefs.putDouble("Arm Intake Setpoint", prefs.getDouble("Arm Intake Setpoint", 0));
+		prefs.putDouble("Arm Scale Setpoint", prefs.getDouble("Arm Switch Setpoint", 5000));
+		prefs.putDouble("Arm Switch Setpoint", prefs.getDouble("Arm Scale Setpoint", 38305.0));
 		
-		prefs.putDouble("Vision Motor Speed", 0.7);
-		prefs.putDouble("Vision Wait Time", 0.5);
-		prefs.putDouble("Vision Tolerance", 10);
+		prefs.putDouble("Vision Motor Speed", prefs.getDouble("Vision Motor Speed", 0.7));
+		prefs.putDouble("Vision Wait Time", prefs.getDouble("Vision Wait Time", 0.5));
+		prefs.putDouble("Vision Tolerance", prefs.getDouble("Vision Tolerance", 10));
 		
-		prefs.putInt("Grabber Lower Soft Limit", 1300);
-		prefs.putInt("Arm Upper Soft Limit", 40000);
+		prefs.putInt("Grabber Lower Soft Limit", prefs.getInt("Grabber Lower Soft Limit", 1300));
+		prefs.putInt("Arm Upper Soft Limit", prefs.getInt("Arm Upper Soft Limit", 40000));
 		
 	}
 	
