@@ -2,17 +2,26 @@ package org.usfirst.frc.team6560.robot.commands.cubeIntake;
 
 import org.usfirst.frc.team6560.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class OpenIntakeArms extends Command {
+	Timer shutdownTimer = null;
+	double time;
 
     public OpenIntakeArms() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.cubeIntake);
+    }
+    
+    public OpenIntakeArms(double time) {
+    	requires(Robot.cubeIntake);
+    	shutdownTimer = new Timer();
+    	this.time = time;
     }
 
     // Called just before this Command runs the first time
@@ -26,7 +35,11 @@ public class OpenIntakeArms extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        if(shutdownTimer != null) {
+        	return shutdownTimer.get() >= time;
+        }
+        else
+        	return false;
     }
 
     // Called once after isFinished returns true
