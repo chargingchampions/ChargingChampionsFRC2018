@@ -48,7 +48,7 @@ public class DriveStraightToDistance extends Command {
     	
     	//TODO: if the encoder is disconnected, you need to stop this command from running forever!!!
     	return (Math.abs(Robot.drive.drive_enc_right.getDistance()) - distance) <= Robot.driveAbsTol || Math.abs(Robot.drive.drive_enc_right.getDistance()) >= distance
-    			|| shutdownTimer.get() > 5.0;
+    			|| shutdownTimer.get() > 0.05*distance;
     }
 
     protected void end() {
