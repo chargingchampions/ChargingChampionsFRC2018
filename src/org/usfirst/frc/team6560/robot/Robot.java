@@ -127,8 +127,8 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed));
 		SmartDashboard.putData("Turn To Angle", new TurnToAngle(angleToTurnTo, speed));
-		SmartDashboard.putData("Drive Straight to Distance PID", new PIDDriveStraightToDistance(distance, speed));
-		SmartDashboard.putData("Turn To Angle PID", new PIDTurnToAngle(angleToTurnTo, speed));
+		//SmartDashboard.putData("Drive Straight to Distance PID", new PIDDriveStraightToDistance(distance, speed));
+		//SmartDashboard.putData("Turn To Angle PID", new PIDTurnToAngle(angleToTurnTo, speed));
 		SmartDashboard.putData("LeftLeftAuto", new LeftLeft());
 		
 		

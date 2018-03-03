@@ -16,7 +16,7 @@ public class RotateGrabberDown extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.grabber.disable();
-    	Robot.grabber.rotateGrabber(-0.4);
+    	Robot.grabber.rotateGrabber(-1.0);
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -12,7 +12,7 @@ public class TurnToAngle extends Command {
 
 	double angle; 
 	double speed;
-	double angleToSlowDown = 5;
+	double angleToSlowDown = 30;
 	Timer shutdownTimer;
 	
     public TurnToAngle(double angleToTurn, double speedToTurn) {
@@ -36,7 +36,7 @@ public class TurnToAngle extends Command {
     			Robot.drive.spinClockwise(speed);
     		}
     	}
-    	if(angle < 0) {
+    	else if(angle < 0) {
     		if (Math.abs(angle-Robot.drive.getGyroAngle()) <= angleToSlowDown) {
     			Robot.drive.spinCounterClockwise((Math.abs(angle-Robot.drive.getGyroAngle())/angleToSlowDown)*Robot.driveRotatePVal);
     		} else {
@@ -52,7 +52,7 @@ public class TurnToAngle extends Command {
         else if (angle < 0)
         	return Math.abs(Robot.drive.getGyroAngle() - angle) <= Robot.driveRotateAbsTol || Robot.drive.getGyroAngle() <= angle;
         else
-        	return shutdownTimer.get() > 5.0; //Automatically stops this command after 5 seconds
+        	return shutdownTimer.get() > 4.0; //Automatically stops this command after 4 seconds
     }
 
     protected void end() {
