@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 
+import org.usfirst.frc.team6560.robot.commands.PID.PIDDriveStraightToDistance;
+import org.usfirst.frc.team6560.robot.commands.PID.PIDTurnToAngle;
 import org.usfirst.frc.team6560.robot.commands.auto.CenterLeft;
 import org.usfirst.frc.team6560.robot.commands.auto.CenterRight;
 import org.usfirst.frc.team6560.robot.commands.auto.LeftLeft;
@@ -37,8 +39,8 @@ public class Robot extends IterativeRobot {
 	
 	public static double grabberPVal, grabberIVal, grabberDVal, grabberAbsTol,
 	armPVal, armIVal, armDVal, armAbsTol,
-	drivePVal, driveAbsTol,
-	driveRotatePVal, driveRotateAbsTol,
+	drivePVal, driveIVal, driveDVal, driveAbsTol,
+	driveRotatePVal, driveRotateAbsTol, driveRotateIVal, driveRotateDVal,
 	grabberSafetySetpoint, grabberIntakeSetpoint, grabberSwitchSetpoint, grabberScaleSetpoint,
 	armIntakeSetpoint, armSwitchSetpoint, armScaleSetpoint;
 	
@@ -125,6 +127,8 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed));
 		SmartDashboard.putData("Turn To Angle", new TurnToAngle(angleToTurnTo, speed));
+		SmartDashboard.putData("Drive Straight to Distance PID", new PIDDriveStraightToDistance(distance, speed));
+		SmartDashboard.putData("Turn To Angle PID", new PIDTurnToAngle(angleToTurnTo, speed));
 		SmartDashboard.putData("LeftLeftAuto", new LeftLeft());
 		
 		
@@ -147,9 +151,13 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Arm Absolute Tolerance", prefs.getDouble("Arm Absolute Tolerance", 500));
 		
 		prefs.putDouble("Drive P Value", prefs.getDouble("Drive P Value", 0.7));
+		prefs.putDouble("Drive I Value", prefs.getDouble("Drive I Value", 0.0));
+		prefs.putDouble("Drive D Value", prefs.getDouble("Drive D Value", 0.0));
 		prefs.putDouble("Drive Absolute Tolerance", prefs.getDouble("Drive Absolute Tolerance", 2));
 		
 		prefs.putDouble("Drive Rotate P Value", prefs.getDouble("Drive Rotate P Value", 0.7));
+		prefs.putDouble("Drive Rotate I Value", prefs.getDouble("Drive Rotate I Value", 0.0));
+		prefs.putDouble("Drive Rotate D Value", prefs.getDouble("Drive Rotate D Value", 0.0));
 		prefs.putDouble("Drive Rotate Absolute Tolerance", prefs.getDouble("Drive Rotate I Value", 2));
 		
 		
@@ -179,9 +187,13 @@ public class Robot extends IterativeRobot {
 		armAbsTol = prefs.getDouble("Arm Absolute Tolerance", 500);
 		
 		drivePVal = prefs.getDouble("Drive P Value", 0.7);
+		driveIVal = prefs.getDouble("Drive I Value", 0.0);
+		driveDVal = prefs.getDouble("Drive D Value", 0.0);
 		driveAbsTol = prefs.getDouble("Drive Absolute Tolerance", 2);
 		
 		driveRotatePVal = prefs.getDouble("Drive Rotate P Value", 0.7);
+		driveRotateIVal = prefs.getDouble("Drive Rotate I Value", 0.0);
+		driveRotateDVal = prefs.getDouble("Drive Rotate D Value", 0.0);
 		driveRotateAbsTol = prefs.getDouble("Drive Rotate Absolute Tolerance", 2);
 		
 		grabberSafetySetpoint = prefs.getDouble("Grabber Safety Setpoint", 900);

@@ -7,6 +7,7 @@ import org.usfirst.frc.team6560.robot.commands.arm.RotateArmWithJoystick;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
@@ -18,6 +19,7 @@ public class Arm extends PIDSubsystem {
     
     public Arm() {
     	super("Arm", Robot.armPVal, Robot.armIVal, Robot.armDVal);
+    	DigitalInput halleffect = new DigitalInput(1); //match this value with the DIO port
     	jointMotor1.set(ControlMode.Follower, jointMotor2.getDeviceID());
     	jointMotor1.setSafetyEnabled(false);
     	jointMotor2.setSafetyEnabled(false);
