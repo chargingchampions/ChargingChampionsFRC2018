@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class CenterRight extends CommandGroup {
 
-    public CenterRight() {
-    
-    }
+	public CenterRight() {
+
+	}
 }

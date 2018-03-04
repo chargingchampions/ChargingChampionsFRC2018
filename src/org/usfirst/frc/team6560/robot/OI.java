@@ -19,7 +19,6 @@ import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberUp;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -27,11 +26,11 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	public final Joystick gamepad;
 	public final Joystick logitechJoystick;
-	
+
 	public OI() {
 		gamepad = new Joystick(Joysticks.GAMEPAD);
 		logitechJoystick = new Joystick(Joysticks.LOGITECH_JOYSTICK_ID);
-		
+
 		JoystickButton aButton = new JoystickButton(gamepad, Joysticks.A_BUTTON);
 		JoystickButton bButton = new JoystickButton(gamepad, Joysticks.B_BUTTON);
 		JoystickButton xButton = new JoystickButton(gamepad, Joysticks.X_BUTTON);
@@ -42,7 +41,6 @@ public class OI {
 		JoystickButton startButton = new JoystickButton(gamepad, Joysticks.START_BUTTON);
 		JoystickButton leftAxisButton = new JoystickButton(gamepad, Joysticks.LEFT_AXIS_BUTTON);
 		JoystickButton rightAxisButton = new JoystickButton(gamepad, Joysticks.RIGHT_AXIS_BUTTON);
-
 
 		JoystickButton secondTrigger = new JoystickButton(logitechJoystick, Joysticks.SECOND_TRIGGER_BUTTON);
 		JoystickButton secondRightThumb = new JoystickButton(logitechJoystick, Joysticks.SECOND_RIGHT_THUMB_BUTTON);
@@ -56,35 +54,35 @@ public class OI {
 		JoystickButton secondButton10 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_10);
 		JoystickButton secondButton11 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_11);
 		JoystickButton secondButton12 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_12);
-		
-		//secondButton4.whileHeld(new ShootCube());
-		
-		//drive buttons
+
+		// secondButton4.whileHeld(new ShootCube());
+
+		// drive buttons
 		yButton.whileHeld(new TankDriveStraight());
 		aButton.whileHeld(new TankDriveStraightBackwards());
 		bButton.whileHeld(new IncreaseDriveSpeed());
 		xButton.whileHeld(new DecreaseDriveSpeed());
-		
-		//arm rotation buttons
-		
-		//grabber rotation buttons
+
+		// arm rotation buttons
+
+		// grabber rotation buttons
 		secondButton3.whenPressed(new PIDSetIntake());
 		secondButton4.whenPressed(new PIDSetSwitch());
 		secondButton6.whenPressed(new PIDSetScale());
 		secondButton5.whenPressed(new PIDSetDefault());
-		//intake buttons
+		// intake buttons
 		secondRightThumb.whileHeld(new StartIntake());
 		rightIndex.whileHeld(new StartIntake());
 		leftIndex.whileHeld(new ShootCube());
 		secondTrigger.whileHeld(new ShootCube());
-		
-		//secondTrigger.whileHeld(new IntakeCube());
-		//rightThumb.whileHeld(new IntakeCube(1.0));
-		//button4.whileHeld(new ShootCube(0.5));
-		
+
+		// secondTrigger.whileHeld(new IntakeCube());
+		// rightThumb.whileHeld(new IntakeCube(1.0));
+		// button4.whileHeld(new ShootCube(0.5));
+
 	}
-	
-	//Axis
+
+	// Axis
 	public double getLeftXAxis() {
 		return gamepad.getRawAxis(Joysticks.LEFT_X_AXIS);
 	}
@@ -113,7 +111,6 @@ public class OI {
 		return gamepad.getPOV();
 	}
 
-	
 	public double getSecondXAxis() {
 		return logitechJoystick.getRawAxis(Joysticks.SECOND_X_AXIS);
 	}
@@ -129,9 +126,9 @@ public class OI {
 	public double getSecondSlider() {
 		return logitechJoystick.getRawAxis(Joysticks.SECOND_SLIDER);
 	}
-	
+
 	public int getSecondPOV() {
 		return logitechJoystick.getPOV();
 	}
-	
+
 }

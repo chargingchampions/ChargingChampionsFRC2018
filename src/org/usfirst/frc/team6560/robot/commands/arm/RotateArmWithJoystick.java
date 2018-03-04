@@ -9,33 +9,28 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RotateArmWithJoystick extends Command {
 
-    public RotateArmWithJoystick() {
-        requires(Robot.arm);
-    }
+	public RotateArmWithJoystick() {
+		requires(Robot.arm);
+	}
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	Robot.arm.disable();
-    }
+	protected void initialize() {
+		Robot.arm.disable();
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.arm.rotate(Robot.oi.getSecondYAxis());
-    }
+	protected void execute() {
+		if (Robot.oi.getSecondYAxis() > 0 || (Robot.oi.getSecondYAxis() < 0 && !Robot.arm.halleffect.get()))
+			Robot.arm.rotate(Robot.oi.getSecondYAxis());
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+	protected boolean isFinished() {
+		return false;
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	Robot.arm.stopRotate();
-    }
+	protected void end() {
+		Robot.arm.stopRotate();
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	Robot.arm.stopRotate();
-    }
+	protected void interrupted() {
+		Robot.arm.stopRotate();
+	}
 }

@@ -9,28 +9,28 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class GetXOffset extends Command {
 
-    public GetXOffset() {
-        requires(Robot.visionNetworkTables);
-    }
-    
-    protected void initialize() {
-    }
+	public GetXOffset() {
+		requires(Robot.visionNetworkTables);
+	}
 
-    protected void execute() {
-    	Robot.visionNetworkTables.getXOffset();
-    }
+	protected void initialize() {
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+	protected void execute() {
+		Robot.visionNetworkTables.getXOffset();
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return false;
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }

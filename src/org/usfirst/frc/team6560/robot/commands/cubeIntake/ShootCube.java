@@ -8,27 +8,27 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ShootCube extends Command {
-	
-    public ShootCube() {
-    	requires(Robot.cubeIntake);
-    }
 
-    protected void initialize() {
-    }
+	public ShootCube() {
+		requires(Robot.cubeIntake);
+	}
 
-    protected void execute() {
-    	Robot.cubeIntake.shootCube(0.8);
-    }
+	protected void initialize() {
+	}
 
-    protected boolean isFinished() {
-        return false;
-    }
+	protected void execute() {
+		Robot.cubeIntake.shootCube(0.8);
+	}
 
-    protected void end() {
-    	Robot.cubeIntake.stopIntake();
-    }
+	protected boolean isFinished() {
+		return false;
+	}
 
-    protected void interrupted() {
-    	end();
-    }
+	protected void end() {
+		Robot.cubeIntake.stopIntake();
+	}
+
+	protected void interrupted() {
+		end();
+	}
 }

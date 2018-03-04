@@ -46,7 +46,6 @@ public class TurnToAngle extends Command {
     }
 
     protected boolean isFinished() {
-    	//TODO: if the gyro disconnects, you need to be able to stop this command from running forever!!!
         if(angle > 0)
         	return Math.abs(Robot.drive.getGyroAngle() - angle) <= Robot.driveRotateAbsTol || Robot.drive.getGyroAngle() >= angle;
         else if (angle < 0)
