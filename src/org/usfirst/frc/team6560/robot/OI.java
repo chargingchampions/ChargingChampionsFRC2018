@@ -11,6 +11,7 @@ import org.usfirst.frc.team6560.robot.commands.cubeIntake.StartIntake;
 import org.usfirst.frc.team6560.robot.commands.drive.DecreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.drive.IncreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.drive.TankDriveStraight;
+import org.usfirst.frc.team6560.robot.commands.drive.TankDriveStraightBackwards;
 import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberDown;
 import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberStop;
 import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberUp;
@@ -60,25 +61,22 @@ public class OI {
 		
 		//drive buttons
 		yButton.whileHeld(new TankDriveStraight());
+		aButton.whileHeld(new TankDriveStraightBackwards());
 		bButton.whileHeld(new IncreaseDriveSpeed());
 		xButton.whileHeld(new DecreaseDriveSpeed());
 		
 		//arm rotation buttons
 		
 		//grabber rotation buttons
-		secondButton12.whenPressed(new RotateGrabberUp());
-		secondButton12.whenReleased(new RotateGrabberStop());
-		secondButton11.whenPressed(new RotateGrabberDown());
-		secondButton11.whenReleased(new RotateGrabberStop());
-		secondButton9.whenPressed(new PIDSetIntake());
-		secondButton10.whenPressed(new PIDSetSwitch());
-		secondButton7.whenPressed(new PIDSetScale());
-		secondButton8.whenPressed(new PIDSetDefault());
+		secondButton3.whenPressed(new PIDSetIntake());
+		secondButton4.whenPressed(new PIDSetSwitch());
+		secondButton6.whenPressed(new PIDSetScale());
+		secondButton5.whenPressed(new PIDSetDefault());
 		//intake buttons
-		secondRightThumb.whenPressed(new StartIntake());
-		secondRightThumb.whenReleased(new IntakeCubeSlowly());
-		secondTrigger.whenPressed(new ShootCube());
-		secondTrigger.whenReleased(new IntakeCubeSlowly());
+		secondRightThumb.whileHeld(new StartIntake());
+		rightIndex.whileHeld(new StartIntake());
+		leftIndex.whileHeld(new ShootCube());
+		secondTrigger.whileHeld(new ShootCube());
 		
 		//secondTrigger.whileHeld(new IntakeCube());
 		//rightThumb.whileHeld(new IntakeCube(1.0));
@@ -130,6 +128,10 @@ public class OI {
 
 	public double getSecondSlider() {
 		return logitechJoystick.getRawAxis(Joysticks.SECOND_SLIDER);
+	}
+	
+	public int getSecondPOV() {
+		return logitechJoystick.getPOV();
 	}
 	
 }

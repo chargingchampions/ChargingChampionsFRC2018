@@ -130,6 +130,7 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putData("Drive Straight to Distance PID", new PIDDriveStraightToDistance(distance, speed));
 		//SmartDashboard.putData("Turn To Angle PID", new PIDTurnToAngle(angleToTurnTo, speed));
 		SmartDashboard.putData("LeftLeftAuto", new LeftLeft());
+		SmartDashboard.putData("RightRightAuto", new RightRight());
 		
 		
 	}

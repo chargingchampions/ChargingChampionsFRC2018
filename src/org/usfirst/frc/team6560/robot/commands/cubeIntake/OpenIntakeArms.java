@@ -26,6 +26,9 @@ public class OpenIntakeArms extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if(shutdownTimer != null) {
+    	shutdownTimer.start();
+    	}
     	Robot.cubeIntake.openArm();
     }
 
@@ -44,6 +47,9 @@ public class OpenIntakeArms extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	if(shutdownTimer != null) {
+    		shutdownTimer.stop();
+    	}
     	Robot.cubeIntake.closeArm();
     }
 

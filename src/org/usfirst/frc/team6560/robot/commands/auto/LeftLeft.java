@@ -25,11 +25,10 @@ public class LeftLeft extends CommandGroup {
     	addParallel(new PIDSetSwitch());
     	addSequential(new DriveStraightToDistance(120, 0.8));
     	addSequential(new TurnToAngle(-90, 0.7));
-    	addSequential(new DriveStraightToDistance(7, 0.8));
+    	addSequential(new DriveStraightToDistance(16, 0.8));
     	addSequential(new OpenIntakeArms(0.5));
-    	
-    	addParallel(new PIDSetIntake());
     	addSequential(new DriveStraightToDistance(-16, 0.8));
+    	addParallel(new PIDSetIntake());
     	
     }
 }

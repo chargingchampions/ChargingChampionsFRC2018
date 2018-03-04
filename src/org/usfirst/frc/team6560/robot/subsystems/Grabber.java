@@ -3,6 +3,7 @@ package org.usfirst.frc.team6560.robot.subsystems;
 import org.usfirst.frc.team6560.robot.Robot;
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
 import org.usfirst.frc.team6560.robot.commands.cubeIntake.IntakeCubeSlowly;
+import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberSecondPOV;
 import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberStop;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -58,7 +59,7 @@ public class Grabber extends PIDSubsystem {
     }
     
     public void initDefaultCommand() {
-    	setDefaultCommand(new RotateGrabberStop());
+    	setDefaultCommand(new RotateGrabberSecondPOV());
     }
 
 	@Override
