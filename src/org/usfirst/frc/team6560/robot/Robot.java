@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6560.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -10,12 +11,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 
-import org.usfirst.frc.team6560.robot.commands.auto.CenterLeft;
-import org.usfirst.frc.team6560.robot.commands.auto.CenterRight;
-import org.usfirst.frc.team6560.robot.commands.auto.LeftLeft;
-import org.usfirst.frc.team6560.robot.commands.auto.LeftRight;
-import org.usfirst.frc.team6560.robot.commands.auto.RightLeft;
-import org.usfirst.frc.team6560.robot.commands.auto.RightRight;
+import org.usfirst.frc.team6560.robot.commands.auto.CenterScale;
+import org.usfirst.frc.team6560.robot.commands.auto.CenterSwitch;
+import org.usfirst.frc.team6560.robot.commands.auto.CenterSwitchScale;
+import org.usfirst.frc.team6560.robot.commands.auto.LeftScale;
+import org.usfirst.frc.team6560.robot.commands.auto.LeftSwitch;
+import org.usfirst.frc.team6560.robot.commands.auto.LeftSwitchScale;
+import org.usfirst.frc.team6560.robot.commands.auto.RightScale;
+import org.usfirst.frc.team6560.robot.commands.auto.RightSwitch;
+import org.usfirst.frc.team6560.robot.commands.auto.RightSwitchScale;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightToDistance;
 import org.usfirst.frc.team6560.robot.commands.drive.TurnToAngle;
 import org.usfirst.frc.team6560.robot.subsystems.*;
@@ -42,7 +46,7 @@ public class Robot extends IterativeRobot {
 	public static int grabberLowerSoftLimit, armUpperSoftLimit;
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Integer> chooser = new SendableChooser<>();
 
 	public void robotInit() {
 		// remove the following if it causes a NetworkTable exception
@@ -62,14 +66,18 @@ public class Robot extends IterativeRobot {
 		downviewCamera = CameraServer.getInstance().startAutomaticCapture();
 
 		// adding auto options
-		chooser.addObject("Left station - left switch", new LeftLeft());
-		chooser.addObject("Left station - right switch", new LeftRight());
-		chooser.addObject("Mid station - left switch", new CenterLeft());
-		chooser.addObject("Mid station - right switch", new CenterRight());
-		chooser.addObject("Right station - left switch", new RightLeft());
-		chooser.addObject("Right station - right switch", new RightRight());
-		chooser.addDefault("leftleft", new LeftLeft());
-		SmartDashboard.putData("Auto mode", chooser);
+		chooser.addObject("left station switch", new Integer(1));
+		chooser.addObject("left station scale", new Integer(2));
+		chooser.addObject("left station switch + scale", new Integer(3));
+		chooser.addObject("center station switch", new Integer(4));
+		chooser.addObject("center station scale", new Integer(5));
+		chooser.addObject("center station switch + scale", new Integer(6));
+		chooser.addObject("right station switch", new Integer(7));
+		chooser.addObject("right station scale", new Integer(8));
+		chooser.addObject("right station switch + scale", new Integer(9));
+		chooser.addObject("do nothing", new Integer(10));
+		chooser.addObject("drive straight", new Integer(11));
+		SmartDashboard.putData("Auto station chooser", chooser);
 
 		SmartDashboard.putNumber("distance", 0.0);
 		SmartDashboard.putNumber("speed", 0.0);
@@ -87,7 +95,42 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		int automode = chooser.getSelected().intValue();
+		switch (automode) {
+		case 1:
+			// left station switch only
+			autonomousCommand = new LeftSwitch(gameData);
+		case 2:
+			// left station scale only
+			autonomousCommand = new LeftScale(gameData);
+		case 3:
+			// left station switch and scale
+			autonomousCommand = new LeftSwitchScale(gameData);
+		case 4:
+			// center station switch only
+			autonomousCommand = new CenterSwitch(gameData);
+		case 5:
+			// center station scale only
+			autonomousCommand = new CenterScale(gameData);
+		case 6:
+			// center station switch and scale
+			autonomousCommand = new CenterSwitchScale(gameData);
+		case 7:
+			// right station switch only
+			autonomousCommand = new RightSwitch(gameData);
+		case 8:
+			// right station scale only
+			autonomousCommand = new RightScale(gameData);
+		case 9:
+			// right station switch and scale
+			autonomousCommand = new RightSwitchScale(gameData);
+		case 10:
+			// do nothing
+		case 11:
+			// drive straight
+		}
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -127,9 +170,6 @@ public class Robot extends IterativeRobot {
 		// PIDDriveStraightToDistance(distance, speed));
 		// SmartDashboard.putData("Turn To Angle PID", new PIDTurnToAngle(angleToTurnTo,
 		// speed));
-		SmartDashboard.putData("LeftLeftAuto", new LeftLeft());
-		SmartDashboard.putData("RightRightAuto", new RightRight());
-
 	}
 
 	public void testPeriodic() {
