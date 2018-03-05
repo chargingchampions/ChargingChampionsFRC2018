@@ -29,12 +29,12 @@ public class LeftSwitch extends CommandGroup {
         	*/
     		System.out.println("Going to left switch...");
         	addParallel(new PIDSetSwitch());
-        	addSequential(new DriveStraightToDistance(120, 0.8));
-        	addSequential(new TurnToAngle(-90, 0.7));
-        	addSequential(new DriveStraightToDistance(16, 0.8));
+        	addSequential(new DriveStraightToDistance(1400, 0.8));
+        	addSequential(new TurnToAngle(-85, 0.4));
+        	//addSequential(new DriveStraightToDistance(5, 0.25));
         	addSequential(new OpenIntakeArms(0.5));
-        	addParallel(new PIDSetIntake());
-        	addSequential(new DriveStraightToDistance(-16, 0.8));
+        	//addParallel(new PIDSetIntake());
+        	addSequential(new DriveStraightToDistance(-10, 0.8));
     	}
     	else {
     		System.out.println("Going to right switch...");

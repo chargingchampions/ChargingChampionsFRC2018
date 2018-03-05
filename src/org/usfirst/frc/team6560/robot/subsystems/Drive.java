@@ -49,7 +49,7 @@ public class Drive extends Subsystem {
 		frontLeftDrive.setInverted(true);
 		rearLeftDrive.setInverted(true);
 		frontRightDrive.setInverted(true);
-		rearRightDrive.setInverted(true);
+		rearRightDrive.setInverted(false);
 
 		drivetrain = new DifferentialDrive(left, right);
 
@@ -84,11 +84,11 @@ public class Drive extends Subsystem {
 		// drive_enc_left.setMinRate(0);
 		drive_enc_left.setDistancePerPulse((3 * Math.PI) / 128);
 		// 1 revolution / 256 pulses * 6pi inches diameter / 1 revolution
-		drive_enc_left.setReverseDirection(false);
+		drive_enc_left.setReverseDirection(true);
 		// drive_enc_left.setSamplesToAverage(0);
 		// drive_enc_right.setMinRate(0);
 		drive_enc_right.setDistancePerPulse((3 * Math.PI) / 128);
-		drive_enc_right.setReverseDirection(true);
+		drive_enc_right.setReverseDirection(false);
 		// drive_enc_right.setSamplesToAverage(0);
 	}
 

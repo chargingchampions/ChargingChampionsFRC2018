@@ -19,7 +19,7 @@ public class DriveStraightToDistance extends Command {
         requires(Robot.drive);
         shutdownTimer = new Timer();
         distance = Math.abs(distanceIn);
-        if (distance < 0) {
+        if (distanceIn < 0) {
         	speedToDrive = -1*Math.abs(speedIn);
         } else {
         	speedToDrive = Math.abs(speedIn);

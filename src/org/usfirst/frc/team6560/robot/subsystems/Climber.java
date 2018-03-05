@@ -5,7 +5,7 @@ import org.usfirst.frc.team6560.robot.commands.climber.Climb;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
+/**d
  *
  */
 public class Climber extends Subsystem {
@@ -15,7 +15,7 @@ public class Climber extends Subsystem {
 		if(speedUp > speedDown)
 			climbMotor.set(speedUp);
 		else
-			climbMotor.set(speedDown);
+			climbMotor.set(-1 * speedDown);
 	}
 	
 	public void stopClimber() {

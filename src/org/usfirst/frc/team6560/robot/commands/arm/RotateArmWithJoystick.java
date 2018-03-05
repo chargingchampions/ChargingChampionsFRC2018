@@ -18,8 +18,10 @@ public class RotateArmWithJoystick extends Command {
 	}
 
 	protected void execute() {
-		if (Robot.oi.getSecondYAxis() > 0 || (Robot.oi.getSecondYAxis() < 0 && !Robot.arm.halleffect.get()))
+		if (Robot.oi.getSecondYAxis() > 0 || (Robot.oi.getSecondYAxis() < 0)) {
+			// && !Robot.arm.halleffect.get()))
 			Robot.arm.rotate(Robot.oi.getSecondYAxis());
+		}
 	}
 
 	protected boolean isFinished() {

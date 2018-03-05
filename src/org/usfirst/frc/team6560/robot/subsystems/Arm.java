@@ -24,7 +24,7 @@ public class Arm extends PIDSubsystem {
 		jointMotor1.set(ControlMode.Follower, jointMotor2.getDeviceID());
 		jointMotor1.setSafetyEnabled(false);
 		jointMotor2.setSafetyEnabled(false);
-		jointMotor2.setInverted(true);
+		//jointMotor2.setInverted(true);
 		jointMotor2.getSensorCollection().setQuadraturePosition(0, 100);
 		setAbsoluteTolerance(Robot.armAbsTol);
 		getPIDController().setContinuous(false);
@@ -56,7 +56,7 @@ public class Arm extends PIDSubsystem {
 		getPIDController().setPID(Robot.armPVal, Robot.armIVal, Robot.armDVal);
 		jointMotor1.setSafetyEnabled(false);
 		jointMotor2.setSafetyEnabled(false);
-		jointMotor2.setInverted(true);
+		//jointMotor2.setInverted(true);
 		jointMotor2.getSensorCollection().setQuadraturePosition(0, 100);
 		setAbsoluteTolerance(Robot.armAbsTol);
 		getPIDController().setContinuous(false);

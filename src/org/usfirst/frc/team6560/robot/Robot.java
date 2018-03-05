@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
 	public static int grabberLowerSoftLimit, armUpperSoftLimit;
 
 	Command autonomousCommand;
-	SendableChooser<Integer> chooser = new SendableChooser<>();
+	SendableChooser<Integer> chooser;
 
 	public void robotInit() {
 		// remove the following if it causes a NetworkTable exception
@@ -56,7 +56,7 @@ public class Robot extends IterativeRobot {
 		prefs = Preferences.getInstance();
 		putPrefsNumbers();
 		initializePrefs();
-
+		chooser = new SendableChooser<>();
 		// initializing subsystems
 		drive = new Drive();
 		visionNetworkTables = new VisionNetworkTables();
@@ -155,6 +155,8 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void teleopPeriodic() {
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		double distance = SmartDashboard.getNumber("distance", 0.0);
 		double speed = SmartDashboard.getNumber("speed", 0.0);
 		double angleToTurnTo = SmartDashboard.getNumber("angle to turn to", 0.0);
@@ -169,6 +171,10 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed));
 		SmartDashboard.putData("Turn To Angle", new TurnToAngle(angleToTurnTo, speed));
+		
+		SmartDashboard.putData("Left Switch", new LeftSwitch(gameData));
+		SmartDashboard.putData("Right Switch", new RightSwitch(gameData));
+		SmartDashboard.putData("Center Switch", new CenterSwitch(gameData));
 		// SmartDashboard.putData("Drive Straight to Distance PID", new
 		// PIDDriveStraightToDistance(distance, speed));
 		// SmartDashboard.putData("Turn To Angle PID", new PIDTurnToAngle(angleToTurnTo,
