@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Climber extends Subsystem {
-	WPI_TalonSRX climbMotor = new WPI_TalonSRX(0);
+	WPI_TalonSRX climbMotor = new WPI_TalonSRX(7);
 
 	public void climb(double speedUp, double speedDown) {
 		if(speedUp > speedDown)
