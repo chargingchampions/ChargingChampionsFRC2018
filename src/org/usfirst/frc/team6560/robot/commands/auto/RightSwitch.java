@@ -18,9 +18,19 @@ public class RightSwitch extends CommandGroup {
     	gameData = givenData;
     	char switchPos = gameData.charAt(0);
     	if(switchPos == 'L') {
-    		
+    		System.out.println("Going to left switch...");
+    		addParallel(new PIDSetSwitch());
+    		addSequential(new DriveStraightToDistance(60, 0.8));
+    		addSequential(new TurnToAngle(90, 0.7));
+    		addSequential(new DriveStraightToDistance(200, 0.8));
+    		addSequential(new TurnToAngle(-90, 0.7));
+    		addSequential(new DriveStraightToDistance(60, 0.8));
+    		addSequential(new OpenIntakeArms(0.5));
+    		addParallel(new PIDSetIntake());
+    		addSequential(new DriveStraightToDistance(-16, 0.8));
     	}
     	else {
+    		System.out.println("Going to right switch");
     		addParallel(new PIDSetSwitch());
     		addSequential(new DriveStraightToDistance(120, 0.8));
     		addSequential(new TurnToAngle(90, 0.7));
