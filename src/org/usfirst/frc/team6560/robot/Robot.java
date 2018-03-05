@@ -32,6 +32,8 @@ public class Robot extends IterativeRobot {
 	public static Grabber grabber;
 	public static Arm arm;
 	public static CubeIntake cubeIntake;
+	public static Climber climber;
+	
 	public static UsbCamera topviewCamera;
 	public static UsbCamera downviewCamera;
 
@@ -62,6 +64,7 @@ public class Robot extends IterativeRobot {
 		arm = new Arm();
 		cubeIntake = new CubeIntake();
 		oi = new OI();
+		climber = new Climber();
 		topviewCamera = CameraServer.getInstance().startAutomaticCapture();
 		downviewCamera = CameraServer.getInstance().startAutomaticCapture();
 
