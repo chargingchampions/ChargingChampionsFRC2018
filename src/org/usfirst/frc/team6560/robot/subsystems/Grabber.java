@@ -28,8 +28,6 @@ public class Grabber extends PIDSubsystem {
 		getPIDController().setSetpoint(0);
 		// TODO: add a soft limit encoder value that updates based on arm encoder,
 		// probably a trig function
-		rotationMotor.configForwardSoftLimitThreshold(Robot.grabberLowerSoftLimit, 100);
-		rotationMotor.configForwardSoftLimitEnable(false, 100);
 	}
 
 	public void rotateGrabber(double speed) {
@@ -51,8 +49,6 @@ public class Grabber extends PIDSubsystem {
 		getPIDController().setSetpoint(0);
 		// TODO: add a soft limit encoder value that updates based on arm encoder,
 		// probably a trig function
-		rotationMotor.configForwardSoftLimitThreshold(Robot.grabberLowerSoftLimit, 100);
-		rotationMotor.configForwardSoftLimitEnable(false, 100);
 	}
 
 	public void initDefaultCommand() {

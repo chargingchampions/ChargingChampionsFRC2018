@@ -31,8 +31,6 @@ public class Arm extends PIDSubsystem {
 		getPIDController().disable();
 		getPIDController().setSetpoint(0);
 
-		jointMotor2.configForwardSoftLimitThreshold(Robot.armUpperSoftLimit, 100);
-		jointMotor2.configForwardSoftLimitEnable(true, 100);
 
 	}
 
@@ -63,8 +61,6 @@ public class Arm extends PIDSubsystem {
 		getPIDController().disable();
 		getPIDController().setSetpoint(0);
 
-		jointMotor2.configForwardSoftLimitThreshold(Robot.armUpperSoftLimit, 100);
-		jointMotor2.configForwardSoftLimitEnable(true, 100);
 	}
 
 	protected void usePIDOutput(double output) {

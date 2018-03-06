@@ -17,7 +17,9 @@ public class LeftSwitch extends CommandGroup {
 	
     public LeftSwitch(String givenData) {
     	gameData = givenData;
-    	char switchPos = gameData.charAt(0);
+    	char switchPos = 'L';
+    	if (gameData.length()>0)
+    	switchPos = gameData.charAt(0);
     	if(switchPos == 'L') {
     		/*addParallel(new PIDSetSwitch()); //TODO: fix safety value
         	addSequential(new DriveStraightToDistance(128, 0.8));

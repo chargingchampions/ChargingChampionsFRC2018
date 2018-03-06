@@ -7,10 +7,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class LeftScale extends CommandGroup {
 	
-	String gamedata;
+	String gameData;
 
     public LeftScale(String givenData) {
-    	gamedata = givenData;
+    	gameData = givenData;
+    	char switchPos = 'L';
+    	if (gameData.length()>0) {
+    		
+    	}
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

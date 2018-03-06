@@ -45,7 +45,6 @@ public class Robot extends IterativeRobot {
 			driveRotateDVal, grabberSafetySetpoint, grabberIntakeSetpoint, grabberSwitchSetpoint, grabberScaleSetpoint,
 			armIntakeSetpoint, armSwitchSetpoint, armScaleSetpoint;
 
-	public static int grabberLowerSoftLimit, armUpperSoftLimit;
 
 	Command autonomousCommand;
 	SendableChooser<Integer> chooser;
@@ -216,8 +215,6 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Arm Scale Setpoint", prefs.getDouble("Arm Switch Setpoint", 0));
 		prefs.putDouble("Arm Switch Setpoint", prefs.getDouble("Arm Scale Setpoint", 27025.0));
 
-		prefs.putInt("Grabber Lower Soft Limit", prefs.getInt("Grabber Lower Soft Limit", 1300));
-		prefs.putInt("Arm Upper Soft Limit", prefs.getInt("Arm Upper Soft Limit", 40000));
 
 	}
 
@@ -251,7 +248,5 @@ public class Robot extends IterativeRobot {
 		armSwitchSetpoint = prefs.getDouble("Arm Switch Setpoint", 0);
 		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 27025.0);
 
-		grabberLowerSoftLimit = prefs.getInt("Grabber Lower Soft Limit", 1300);
-		armUpperSoftLimit = prefs.getInt("Arm Upper Soft Limit", 40000);
 	}
 }

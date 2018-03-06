@@ -16,8 +16,9 @@ public class CenterSwitch extends CommandGroup {
 
     public CenterSwitch(String givenData) {
     	gameData = givenData;
-    	gameData = givenData;
-    	char switchPos = gameData.charAt(0);
+    	char switchPos = 'L';
+    	if (gameData.length()>0)
+    	switchPos = gameData.charAt(0);
     	if(switchPos == 'L') {
     		System.out.println("Going to left switch...");
     		addParallel(new PIDSetSwitch());

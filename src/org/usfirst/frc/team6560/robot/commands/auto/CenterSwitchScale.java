@@ -10,6 +10,10 @@ public class CenterSwitchScale extends CommandGroup {
 
     public CenterSwitchScale(String givenData) {
     	gameData = givenData;
+    	char switchPos = 'L';
+    	if (gameData.length()>0) {
+    		
+    	}
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
