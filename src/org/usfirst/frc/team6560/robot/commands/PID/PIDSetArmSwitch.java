@@ -22,7 +22,7 @@ public class PIDSetArmSwitch extends Command {
 	}
 
 	protected boolean isFinished() {
-		return Math.abs(Robot.arm.getPosition() - Robot.arm.getSetpoint()) < Robot.armAbsTol;
+		return Math.abs(Robot.arm.getPosition() - Robot.arm.getSetpoint()) < Robot.armAbsTol || Math.abs(Robot.oi.getSecondYAxis()) > 0.20 || Robot.oi.getSecondPOV() != -1;
 	}
 
 	protected void end() {

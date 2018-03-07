@@ -22,7 +22,7 @@ public class PIDSetGrabberSwitch extends Command {
 	}
 
 	protected boolean isFinished() {
-		return Math.abs(Robot.grabber.getPosition() - Robot.grabber.getSetpoint()) < Robot.grabberAbsTol;
+		return Math.abs(Robot.grabber.getPosition() - Robot.grabber.getSetpoint()) < Robot.grabberAbsTol || Math.abs(Robot.oi.getSecondYAxis()) > 0.20 || Robot.oi.getSecondPOV() != -1;
 	}
 
 	protected void end() {
