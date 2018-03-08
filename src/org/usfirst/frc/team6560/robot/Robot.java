@@ -28,7 +28,6 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static Drive drive;
-	public static VisionNetworkTables visionNetworkTables;
 	public static Grabber grabber;
 	public static Arm arm;
 	public static CubeIntake cubeIntake;
@@ -58,7 +57,6 @@ public class Robot extends IterativeRobot {
 		chooser = new SendableChooser<>();
 		// initializing subsystems
 		drive = new Drive();
-		visionNetworkTables = new VisionNetworkTables();
 		grabber = new Grabber();
 		arm = new Arm();
 		cubeIntake = new CubeIntake();
