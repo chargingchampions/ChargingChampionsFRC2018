@@ -11,6 +11,15 @@ public class LeftSwitchScale extends CommandGroup {
 	
     public LeftSwitchScale(String givenData) {
     	gameData = givenData;
+    	char switchPos = 0;
+    	char scalePos = 0;
+    	try {
+    		switchPos = gameData.charAt(0);
+    		scalePos = gameData.charAt(1);
+    	}
+    	catch(NullPointerException npe) {
+    		System.out.println("Game data Nonexistent!");
+    	}
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

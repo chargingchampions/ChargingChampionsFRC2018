@@ -10,6 +10,14 @@ public class RightScale extends CommandGroup {
 
     public RightScale(String givenData) {
     	gameData = givenData;
+    	char scalePos = 0;
+    	try {
+    		scalePos = gameData.charAt(1); 
+    	}
+    	catch(NullPointerException npe) {
+    		System.out.println("Game data Nonexistent!");
+    	}
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

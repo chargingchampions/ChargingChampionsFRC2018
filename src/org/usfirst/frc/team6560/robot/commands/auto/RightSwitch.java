@@ -16,9 +16,13 @@ public class RightSwitch extends CommandGroup {
 	String gameData;
     public RightSwitch(String givenData) {
     	gameData = givenData;
-    	char switchPos = 'L';
-    	if (gameData.length()>0)
-    	switchPos = gameData.charAt(0);
+    	char switchPos = 0;
+    	try {
+    		switchPos = gameData.charAt(0);
+    	}
+    	catch(NullPointerException npe) {
+    		System.out.println("Game data Nonexistent!");
+    	}
     	if(switchPos == 'L') {
     		System.out.println("Going to left switch...");
     		addParallel(new PIDSetSwitch());
