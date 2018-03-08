@@ -129,7 +129,7 @@ public class Robot extends IterativeRobot {
 		case 10:
 			// do nothing
 		case 11:
-			// drive straight
+			autonomousCommand = new DriveStraightToDistance(80, 0.6);
 		}
 		if (autonomousCommand != null)
 			autonomousCommand.start();
