@@ -78,10 +78,6 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("do nothing", new Integer(10));
 		chooser.addObject("drive straight", new Integer(11));
 		SmartDashboard.putData("Auto station chooser", chooser);
-
-		SmartDashboard.putNumber("distance", 0.0);
-		SmartDashboard.putNumber("speed", 0.0);
-		SmartDashboard.putNumber("angle to turn to", 0.0);
 	}
 
 	@Override
@@ -95,6 +91,10 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
+		arm.refreshSubsystem();
+		grabber.refreshSubsystem();
+		initializePrefs();
+		
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		int automode = chooser.getSelected().intValue();
@@ -144,38 +144,20 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		arm.refreshSubsystem();
-		grabber.refreshSubsystem();
-		initializePrefs();
+		
+		//TODO: delete the below when ready
+		putTuningToolsValues();
 		// TODO: update the PID vals and other stuff in initialization of subsystems,
 		// which only occurs upon turning on the robot
 	}
 
 	public void teleopPeriodic() {
-		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		double distance = SmartDashboard.getNumber("distance", 0.0);
-		double speed = SmartDashboard.getNumber("speed", 0.0);
-		double angleToTurnTo = SmartDashboard.getNumber("angle to turn to", 0.0);
-		Scheduler.getInstance().run();
-
-		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Drive.globalDriveSpeed);
-		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
-		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
-		SmartDashboard.putNumber("Gyro angle", drive.getGyroAngle());
-		SmartDashboard.putNumber("Left Encoder", drive.drive_enc_left.getDistance());
-		SmartDashboard.putNumber("Right Encoder", drive.drive_enc_right.getDistance());
-
-		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed));
-		SmartDashboard.putData("Turn To Angle", new TurnToAngle(angleToTurnTo, speed));
+		//TODO: delete the below method once ready
+		tuningTools();
 		
-		SmartDashboard.putData("Left Switch", new LeftSwitch(gameData));
-		SmartDashboard.putData("Right Switch", new RightSwitch(gameData));
-		SmartDashboard.putData("Center Switch", new CenterSwitch(gameData));
-		// SmartDashboard.putData("Drive Straight to Distance PID", new
-		// PIDDriveStraightToDistance(distance, speed));
-		// SmartDashboard.putData("Turn To Angle PID", new PIDTurnToAngle(angleToTurnTo,
-		// speed));
+		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Drive.globalDriveSpeed);
+		
 	}
 
 	public void testPeriodic() {
@@ -246,5 +228,38 @@ public class Robot extends IterativeRobot {
 		armSwitchSetpoint = prefs.getDouble("Arm Switch Setpoint", 0);
 		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 27025.0);
 
+	}
+	
+	public void tuningTools() {
+		double distance = SmartDashboard.getNumber("distance", 0.0);
+		double speed = SmartDashboard.getNumber("speed", 0.0);
+		double angleToTurnTo = SmartDashboard.getNumber("angle to turn to", 0.0);
+		String gameDataInput = SmartDashboard.getString("Game Data", "LRL");
+		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
+		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
+		SmartDashboard.putNumber("Gyro angle", drive.getGyroAngle());
+		SmartDashboard.putNumber("Left Encoder", drive.drive_enc_left.getDistance());
+		SmartDashboard.putNumber("Right Encoder", drive.drive_enc_right.getDistance());
+
+		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed));
+		SmartDashboard.putData("Turn To Angle", new TurnToAngle(angleToTurnTo, speed));
+		
+		SmartDashboard.putData("CenterScale", new CenterScale(gameDataInput));
+		SmartDashboard.putData("CenterSwitch", new CenterSwitch(gameDataInput));
+		SmartDashboard.putData("CenterSwitchScale", new CenterSwitchScale(gameDataInput));
+		SmartDashboard.putData("LeftScale", new LeftScale(gameDataInput));
+		SmartDashboard.putData("LeftSwitch", new LeftSwitch(gameDataInput));
+		SmartDashboard.putData("LeftSwitchScale", new LeftSwitchScale(gameDataInput));
+		SmartDashboard.putData("RightScale", new RightScale(gameDataInput));
+		SmartDashboard.putData("RightSwitch", new RightSwitch(gameDataInput));
+		SmartDashboard.putData("RightSwitchScale", new RightSwitchScale(gameDataInput));
+		
+		
+	}
+	
+	public void putTuningToolsValues() {
+		SmartDashboard.putNumber("distance", 0.0);
+		SmartDashboard.putNumber("speed", 0.0);
+		SmartDashboard.putNumber("angle to turn to", 0.0);
 	}
 }
