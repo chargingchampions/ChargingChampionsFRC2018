@@ -19,7 +19,6 @@ public class StartIntake extends Command {
 
 	protected void execute() {
 		Robot.cubeIntake.openArm();
-		Timer.delay(0.2);
 		Robot.cubeIntake.intakeCube(0.4);
 	}
 
@@ -28,13 +27,10 @@ public class StartIntake extends Command {
 	}
 
 	protected void end() {
+		Robot.cubeIntake.closeArm();
 	}
 
 	protected void interrupted() {
-		Robot.cubeIntake.closeArm();
-		for (int i = 10; i > 0; i--) {
-			Timer.delay(0.1);
-			Robot.cubeIntake.intakeCube(0.2 + ((i / 10) * 0.2));
-		}
+		end();
 	}
 }

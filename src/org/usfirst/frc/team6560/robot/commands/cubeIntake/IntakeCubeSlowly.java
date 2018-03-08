@@ -18,7 +18,7 @@ public class IntakeCubeSlowly extends Command {
     }
 
     protected void execute() {
-    	Robot.cubeIntake.intakeCube((0.1) * (-1 * (Robot.oi.getSecondSlider() - 1)));
+    	Robot.cubeIntake.intakeCube((0.3) * ((-1 * (Robot.oi.getSecondSlider() - 1))/2));
     }
 
     protected boolean isFinished() {
