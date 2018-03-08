@@ -27,7 +27,7 @@ public class PIDDriveStraightToDistance extends Command {
 	}
 
 	protected void initialize() {
-		Robot.drive.gyro.reset();
+		Robot.drive.imu.reset();
 		driveDistancePIDControl.setSetpoint(distance);
 
 		// This is the point at which the error is small enough to be tolerated

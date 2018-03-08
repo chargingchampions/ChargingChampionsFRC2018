@@ -6,8 +6,8 @@ import org.usfirst.frc.team6560.util.ADIS16448_IMU;
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
 import org.usfirst.frc.team6560.robot.commands.drive.TankDriveWithJoysticks;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.AnalogInput;
+//import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+//import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -29,15 +29,15 @@ public class Drive extends Subsystem {
 	DifferentialDrive drivetrain;
 
 	// Sensors
-	public AnalogInput ultra;
-	public ADXRS450_Gyro gyro;
+	//public AnalogInput ultra;
+	//public ADXRS450_Gyro gyro;
 	public ADIS16448_IMU imu;
 
 	public Encoder drive_enc_left;
 	public Encoder drive_enc_right;
 
 	public Drive() {
-		globalDriveSpeed = 0.9;
+		globalDriveSpeed = 0.8;
 
 		frontLeftDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTLEFT);
 		rearLeftDrive = new WPI_TalonSRX(CAN.DRIVE_REARLEFT);
@@ -53,11 +53,11 @@ public class Drive extends Subsystem {
 
 		drivetrain = new DifferentialDrive(left, right);
 
-		ultra = new AnalogInput(0);
-		gyro = new ADXRS450_Gyro();
+		//ultra = new AnalogInput(0);
+		//gyro = new ADXRS450_Gyro();
 		imu = new ADIS16448_IMU();
-		gyro.calibrate();
-		gyro.reset();
+		//gyro.calibrate();
+		//gyro.reset();
 		imu.calibrate();
 		imu.reset();
 
@@ -93,12 +93,13 @@ public class Drive extends Subsystem {
 	}
 
 	public void driveStraightWithGyro(double speed) {
-		double angle = gyro.getAngle();
+		//double angle = gyro.getAngle();
+		double angle = getGyroAngle();
 		drivetrain.arcadeDrive(-speed, -0.3 * angle);
 	}
 
 	public double getGyroAngle() {
-		return gyro.getAngle();
+		return imu.getAngleX();
 	}
 
 	public void arcadeDrive(double speed, double angle) {
