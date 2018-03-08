@@ -23,7 +23,7 @@ public class TurnToAngle extends Command {
     }
 
     protected void initialize() {
-    	Robot.drive.gyro.reset();
+    	Robot.drive.imu.reset();
     	shutdownTimer.reset();
     	shutdownTimer.start();
     }
