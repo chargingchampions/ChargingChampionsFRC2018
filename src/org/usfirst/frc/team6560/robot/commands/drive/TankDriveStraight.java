@@ -9,8 +9,16 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TankDriveStraight extends Command {
 
+	boolean useConstructor = false;
+	double speed = 0;
 	public TankDriveStraight() {
 		requires(Robot.drive);
+	}
+	
+	public TankDriveStraight(double speedIn) {
+		requires(Robot.drive);
+		speed = speedIn;
+		useConstructor = true;
 	}
 
 	protected void initialize() {
@@ -18,7 +26,11 @@ public class TankDriveStraight extends Command {
 	}
 
 	protected void execute() {
-		Robot.drive.driveStraightWithGyro(Drive.globalDriveSpeed);
+		if (useConstructor) {
+			Robot.drive.driveStraightWithGyro(speed);
+		} else {
+			Robot.drive.driveStraightWithGyro(Drive.globalDriveSpeed);
+		}
 	}
 
 	protected boolean isFinished() {
