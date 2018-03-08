@@ -20,7 +20,7 @@ public class DriveStraightToDistance extends Command {
         shutdownTimer = new Timer();
         distance = Math.abs(distanceIn);
         if (distanceIn < 0) {
-        	speedToDrive = -1*Math.abs(speedIn);
+        	speedToDrive = -1 * Math.abs(speedIn);
         } else {
         	speedToDrive = Math.abs(speedIn);
         	}     

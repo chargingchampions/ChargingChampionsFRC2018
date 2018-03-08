@@ -14,38 +14,36 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CenterSwitch extends CommandGroup {
 	String gameData;
 
-    public CenterSwitch(String givenData) {
-    	gameData = givenData;
-    	char switchPos = 0;
-    	try {
-    		switchPos = gameData.charAt(0);
-    	}
-    	catch(NullPointerException npe) {
-    		System.out.println("Game data Nonexistent!");
-    	}
-    	if(switchPos == 'L') {
-    		System.out.println("Going to left switch...");
-    		addParallel(new PIDSetSwitch());
-        	addSequential(new DriveStraightToDistance(60, 0.8));
-        	addSequential(new TurnToAngle(90, 0.7));
-        	addSequential(new DriveStraightToDistance(90, 0.8));
-        	addSequential(new TurnToAngle(-90, 0.7));
-        	addSequential(new DriveStraightToDistance(60, 0.8));
-        	addSequential(new OpenIntakeArms(0.5));
-        	addParallel(new PIDSetIntake());
-        	addSequential(new DriveStraightToDistance(-16, 0.8));
-    	}
-    	else {
-    		System.out.println("Going to right switch...");
-    		addParallel(new PIDSetSwitch());
-        	addSequential(new DriveStraightToDistance(60, 0.8));
-        	addSequential(new TurnToAngle(-90, 0.7));
-        	addSequential(new DriveStraightToDistance(90, 0.8));
-        	addSequential(new TurnToAngle(90, 0.7));
-        	addSequential(new DriveStraightToDistance(60, 0.8));
-        	addSequential(new OpenIntakeArms(0.5));
-        	addParallel(new PIDSetIntake());
-        	addSequential(new DriveStraightToDistance(-16, 0.8));
-    	}
-    }
+	public CenterSwitch(String givenData) {
+		gameData = givenData;
+		char switchPos = 0;
+		try {
+			switchPos = gameData.charAt(0);
+		} catch (NullPointerException npe) {
+			System.out.println("Game data Nonexistent!");
+		}
+		if (switchPos == 'L') {
+			System.out.println("Going to left switch...");
+			addParallel(new PIDSetSwitch());
+			addSequential(new DriveStraightToDistance(60, 0.8));
+			addSequential(new TurnToAngle(90, 0.7));
+			addSequential(new DriveStraightToDistance(90, 0.8));
+			addSequential(new TurnToAngle(-90, 0.7));
+			addSequential(new DriveStraightToDistance(60, 0.8));
+			addSequential(new OpenIntakeArms(0.5));
+			addParallel(new PIDSetIntake());
+			addSequential(new DriveStraightToDistance(-16, 0.8));
+		} else {
+			System.out.println("Going to right switch...");
+			addParallel(new PIDSetSwitch());
+			addSequential(new DriveStraightToDistance(60, 0.8));
+			addSequential(new TurnToAngle(-90, 0.7));
+			addSequential(new DriveStraightToDistance(90, 0.8));
+			addSequential(new TurnToAngle(90, 0.7));
+			addSequential(new DriveStraightToDistance(60, 0.8));
+			addSequential(new OpenIntakeArms(0.5));
+			addParallel(new PIDSetIntake());
+			addSequential(new DriveStraightToDistance(-16, 0.8));
+		}
+	}
 }

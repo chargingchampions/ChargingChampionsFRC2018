@@ -6,33 +6,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class LeftScale extends CommandGroup {
-	
+
 	String gameData;
 
-    public LeftScale(String givenData) {
-    	gameData = givenData;
-    	char scalePos = 0;
-    	try {
-    		scalePos = gameData.charAt(1); 
-    	}
-    	catch(NullPointerException npe) {
-    		System.out.println("Game data Nonexistent!");
-    	}
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
+	public LeftScale(String givenData) {
+		gameData = givenData;
+		char scalePos = 0;
+		try {
+			scalePos = gameData.charAt(1);
+		} catch (NullPointerException npe) {
+			System.out.println("Game data Nonexistent!");
+		}
+		if (scalePos == 'L') {
 
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
+		} else {
 
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
-    }
+		}
+	}
 }
