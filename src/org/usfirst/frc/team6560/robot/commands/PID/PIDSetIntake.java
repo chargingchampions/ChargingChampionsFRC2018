@@ -10,7 +10,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class PIDSetIntake extends CommandGroup {
 
 	public PIDSetIntake() {
-		addSequential(new PIDSetGrabberSafety());
+		if (Math.abs(Robot.arm.getPosition() - Robot.armIntakeSetpoint) > Robot.armAbsTol) {
+			addSequential(new PIDSetGrabberSafety());
+		}
+		
 		addSequential(new PIDSetArmIntake());
 		addSequential(new PIDSetGrabberIntake());
 	}

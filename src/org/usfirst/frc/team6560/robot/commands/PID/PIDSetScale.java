@@ -10,8 +10,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class PIDSetScale extends CommandGroup {
 
 	public PIDSetScale() {
-		addSequential(new PIDSetGrabberSafety());
-		addSequential(new PIDSetArmScale());
+		if (Math.abs(Robot.arm.getPosition() - Robot.armScaleSetpoint) > Robot.armAbsTol) {
+			addSequential(new PIDSetGrabberSafety());
+		}
+		
+		if (Robot.arm.getPosition() < Robot.armHighSafetySetpoint) {
+			addSequential(new PIDSetArmHighSafety());
+		}
+		
+		addParallel(new PIDSetArmScale());
 		addSequential(new PIDSetGrabberScale());
 	}
 	

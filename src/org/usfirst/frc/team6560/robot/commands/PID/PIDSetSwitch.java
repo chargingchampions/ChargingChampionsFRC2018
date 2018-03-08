@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class PIDSetSwitch extends CommandGroup {
 
 	public PIDSetSwitch() {
-		addSequential(new PIDSetGrabberSafety());
+		if (Math.abs(Robot.arm.getPosition() - Robot.armSwitchSetpoint) > Robot.armAbsTol) {
+			addSequential(new PIDSetGrabberSafety());
+		}
 		addSequential(new PIDSetArmSwitch());
 		addSequential(new PIDSetGrabberSwitch());
 	}

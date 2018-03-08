@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
 	public static double grabberPVal, grabberIVal, grabberDVal, grabberAbsTol, armPVal, armIVal, armDVal, armAbsTol,
 			drivePVal, driveIVal, driveDVal, driveAbsTol, driveRotatePVal, driveRotateAbsTol, driveRotateIVal,
 			driveRotateDVal, grabberSafetySetpoint, grabberIntakeSetpoint, grabberSwitchSetpoint, grabberScaleSetpoint,
-			armIntakeSetpoint, armSwitchSetpoint, armScaleSetpoint;
+			armIntakeSetpoint, armHighSafetySetpoint, armSwitchSetpoint, armScaleSetpoint;
 
 
 	Command autonomousCommand;
@@ -192,6 +192,7 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Grabber Scale Setpoint", prefs.getDouble("Grabber Scale Setpoint", 4238));
 
 		prefs.putDouble("Arm Intake Setpoint", prefs.getDouble("Arm Intake Setpoint", 0));
+		prefs.putDouble("Arm High Safety Setpoint", prefs.getDouble("Arm High Safety Setpoint", 20000));
 		prefs.putDouble("Arm Scale Setpoint", prefs.getDouble("Arm Switch Setpoint", 0));
 		prefs.putDouble("Arm Switch Setpoint", prefs.getDouble("Arm Scale Setpoint", 27025.0));
 
@@ -225,6 +226,7 @@ public class Robot extends IterativeRobot {
 		grabberScaleSetpoint = prefs.getDouble("Grabber Scale Setpoint", 4238);
 
 		armIntakeSetpoint = prefs.getDouble("Arm Intake Setpoint", 0);
+		armHighSafetySetpoint = prefs.getDouble("Arm High Safety Setpoint", 20000);
 		armSwitchSetpoint = prefs.getDouble("Arm Switch Setpoint", 0);
 		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 27025.0);
 
