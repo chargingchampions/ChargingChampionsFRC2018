@@ -20,7 +20,7 @@ public class Climber extends Subsystem {
 		else
 			climbMotor.set(-1 * speedDown);
 	}
-	
+
 	public void stopClimber() {
 		climbMotor.stopMotor();
 	}
