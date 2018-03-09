@@ -20,6 +20,7 @@ public class Grabber extends PIDSubsystem {
 
 	public Grabber() {
 		super("Grabber", Robot.grabberPVal, Robot.grabberIVal, Robot.grabberDVal);
+		rotationMotor.setInverted(true);
 		rotationMotor.setSafetyEnabled(false);
 		rotationMotor.getSensorCollection().setQuadraturePosition(0, 100);
 		setAbsoluteTolerance(Robot.grabberAbsTol);

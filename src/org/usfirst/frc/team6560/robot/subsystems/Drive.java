@@ -49,7 +49,12 @@ public class Drive extends Subsystem {
 		frontLeftDrive.setInverted(true);
 		rearLeftDrive.setInverted(true);
 		frontRightDrive.setInverted(true);
-		rearRightDrive.setInverted(false);
+		rearRightDrive.setInverted(true);
+		
+		frontLeftDrive.setSafetyEnabled(false);
+		rearLeftDrive.setSafetyEnabled(false);
+		frontRightDrive.setSafetyEnabled(false);
+		rearRightDrive.setSafetyEnabled(false);
 
 		drivetrain = new DifferentialDrive(left, right);
 

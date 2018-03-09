@@ -20,6 +20,7 @@ public class Arm extends PIDSubsystem {
 
 	public Arm() {
 		super("Arm", Robot.armPVal, Robot.armIVal, Robot.armDVal);
+		jointMotor1.setInverted(true);
 		halleffect = new DigitalInput(1); // match this value with the DIO port
 		jointMotor1.set(ControlMode.Follower, jointMotor2.getDeviceID());
 		jointMotor1.setSafetyEnabled(false);

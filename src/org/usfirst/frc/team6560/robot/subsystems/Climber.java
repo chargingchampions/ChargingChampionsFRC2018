@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Climber extends Subsystem {
 	WPI_TalonSRX climbMotor = new WPI_TalonSRX(7);
 
+	public Climber() {
+		climbMotor.setSafetyEnabled(false);
+	}
 	public void climb(double speedUp, double speedDown) {
 		if(speedUp > speedDown)
 			climbMotor.set(speedUp);
