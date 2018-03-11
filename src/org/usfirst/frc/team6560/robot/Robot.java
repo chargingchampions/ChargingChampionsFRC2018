@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 
+import org.usfirst.frc.team6560.robot.commands.ResetArmAndGrabberEncoders;
+import org.usfirst.frc.team6560.robot.commands.PID.PIDSetSwitch;
 import org.usfirst.frc.team6560.robot.commands.auto.CenterScale;
 import org.usfirst.frc.team6560.robot.commands.auto.CenterSwitch;
 import org.usfirst.frc.team6560.robot.commands.auto.CenterSwitchScale;
@@ -93,11 +95,14 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		arm.refreshSubsystem();
 		grabber.refreshSubsystem();
+		drive.initializeEncoders();
 		initializePrefs();
 		
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		int automode = chooser.getSelected().intValue();
+		System.out.println(gameData);
+		//int automode = chooser.getSelected().intValue();
+		int automode = 7;
 		switch (automode) {
 		case 1:
 			// left station switch only
@@ -129,10 +134,11 @@ public class Robot extends IterativeRobot {
 		case 10:
 			// do nothing
 		case 11:
-			autonomousCommand = new DriveStraightToDistance(80, 0.6);
+			autonomousCommand = new DriveStraightToDistance(200, 0.7);
 		}
-		if (autonomousCommand != null)
+		if (autonomousCommand != null) {
 			autonomousCommand.start();
+		}
 	}
 
 	@Override
@@ -154,7 +160,6 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		//TODO: delete the below method once ready
 		tuningTools();
-		
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Drive.globalDriveSpeed);
 		
@@ -236,7 +241,7 @@ public class Robot extends IterativeRobot {
 		double distance = SmartDashboard.getNumber("distance", 0.0);
 		double speed = SmartDashboard.getNumber("speed", 0.0);
 		double angleToTurnTo = SmartDashboard.getNumber("angle to turn to", 0.0);
-		String gameDataInput = SmartDashboard.getString("Game Data", "LRL");
+		//String gameDataInput = SmartDashboard.getString("Game Data", "RRR");
 		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
 		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
 		SmartDashboard.putNumber("Gyro angle", drive.getGyroAngle());
@@ -245,7 +250,7 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed));
 		SmartDashboard.putData("Turn To Angle", new TurnToAngle(angleToTurnTo, speed));
-		
+	/*	
 		SmartDashboard.putData("CenterScale", new CenterScale(gameDataInput));
 		SmartDashboard.putData("CenterSwitch", new CenterSwitch(gameDataInput));
 		SmartDashboard.putData("CenterSwitchScale", new CenterSwitchScale(gameDataInput));
@@ -255,7 +260,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("RightScale", new RightScale(gameDataInput));
 		SmartDashboard.putData("RightSwitch", new RightSwitch(gameDataInput));
 		SmartDashboard.putData("RightSwitchScale", new RightSwitchScale(gameDataInput));
-		
+		*/
+		SmartDashboard.putData("Refresh Subsystems", new ResetArmAndGrabberEncoders());
 		
 	}
 	

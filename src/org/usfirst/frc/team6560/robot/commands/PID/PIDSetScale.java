@@ -13,12 +13,7 @@ public class PIDSetScale extends CommandGroup {
 		if (Math.abs(Robot.arm.getPosition() - Robot.armScaleSetpoint) > Robot.armAbsTol) {
 			addSequential(new PIDSetGrabberSafety());
 		}
-		
-		if (Robot.arm.getPosition() < Robot.armHighSafetySetpoint) {
-			addSequential(new PIDSetArmHighSafety());
-		}
-		
-		addParallel(new PIDSetArmScale());
+		addSequential(new PIDSetArmScale());
 		addSequential(new PIDSetGrabberScale());
 	}
 	

@@ -19,8 +19,10 @@ public class LeftSwitch extends CommandGroup {
 	public LeftSwitch(String givenData) {
 		gameData = givenData;
 		char switchPos = 0;
+		char scalePos = 0;
 		try {
 			switchPos = gameData.charAt(0);
+			scalePos = gameData.charAt(1);
 		} catch (NullPointerException npe) {
 			System.out.println("Game data Nonexistent!");
 		}
@@ -32,19 +34,24 @@ public class LeftSwitch extends CommandGroup {
 			 * ShootCube()); addParallel(new PIDSetIntake()); addSequential(new
 			 * DriveStraightToDistance(-16, 0.8));
 			 */
-			System.out.println("Going to left switch...");
+			System.out.println("Going to left switch from left station");
 			addParallel(new PIDSetSwitch());
-			addSequential(new DriveStraightToDistance(0, 0));
-			addSequential(new TurnToAngle(-90, 0));
-			addSequential(new DriveStraightToDistance(0, 0));
+			addSequential(new DriveStraightToDistance(20, 0.7));
+			addSequential(new WaitCommand(2));
+			addSequential(new TurnToAngle(-25, 0.7));
+			addSequential(new DriveStraightToDistance(12, 0.7));
 			addSequential(new OpenIntakeArms());
 			addSequential(new WaitCommand(1));
 			addParallel(new PIDSetIntake());
-			addSequential(new DriveStraightToDistance(0, 0)); //backwards
+			addSequential(new DriveStraightToDistance(-12, 0.7)); //backwards
 		} else {
 			System.out.println("Going to right switch...");
-			addParallel(new PIDSetSwitch());
-			addSequential(new DriveStraightToDistance(0, 0));
+			//addParallel(new PIDSetSwitch());
+			if(scalePos == 'L') {
+				//scale code
+			}
+			else
+				addSequential(new DriveStraightToDistance(200, 0.8));
 		}
 	}
 }

@@ -35,11 +35,7 @@ public class DriveStraightToDistance extends Command {
     }
 
     protected void execute() {
-    	if (Math.abs(Robot.drive.drive_enc_right.getDistance() - distance) < distanceToSlowDown) {
-    		Robot.drive.driveStraightWithGyro((Math.abs(Robot.drive.drive_enc_right.getDistance() - distance)/distanceToSlowDown)*Robot.drivePVal);
-    	} else {
     		Robot.drive.driveStraightWithGyro(speedToDrive);
-    	}
     }
 
     protected boolean isFinished() {

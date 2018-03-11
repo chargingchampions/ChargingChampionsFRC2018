@@ -17,7 +17,8 @@ public class RightSwitch extends CommandGroup {
 	String gameData;
 
 	public RightSwitch(String givenData) {
-		gameData = givenData;
+		
+		/*		gameData = givenData;
 		char switchPos = 0;
 		try {
 			switchPos = gameData.charAt(0);
@@ -26,6 +27,7 @@ public class RightSwitch extends CommandGroup {
 		}
 		if (switchPos == 'L') {
 			System.out.println("Going to left switch...");
+			/*
 			addParallel(new PIDSetSwitch());
 			addSequential(new DriveStraightToDistance(0, 0));
 			addSequential(new TurnToAngle(-90, 0));
@@ -38,16 +40,23 @@ public class RightSwitch extends CommandGroup {
 			addSequential(new WaitCommand(1));
 			addParallel(new PIDSetIntake());
 			addSequential(new DriveStraightToDistance(0, 0)); //backwards
-		} else {
-			System.out.println("Going to right switch");
-			addParallel(new PIDSetSwitch());
-			addSequential(new DriveStraightToDistance(0, 0));
-			addSequential(new TurnToAngle(-90, 0));
-			addSequential(new DriveStraightToDistance(0, 0));
+			*/
+			//addSequential(new DriveStraightToDistance(200, 0.8));
+	//	} else {
+			/*
+			System.out.println("Going to right switch from right station");
+			//addParallel(new PIDSetSwitch());
+			addSequential(new DriveStraightToDistance(20, 0.7));
+			addSequential(new WaitCommand(2));
+			addSequential(new TurnToAngle(25, 0.7));
+			addSequential(new DriveStraightToDistance(12, 0.7));
 			addSequential(new OpenIntakeArms());
 			addSequential(new WaitCommand(1));
-			addParallel(new PIDSetIntake());
-			addSequential(new DriveStraightToDistance(0, 0)); //backwards
+			//addParallel(new PIDSetIntake());
+			addSequential(new DriveStraightToDistance(-12, 0.7)); //backwards
+			*/
+		addSequential(new WaitCommand(10));
+		addSequential(new DriveStraightToDistance(200, 0.8));
 		}
 	}
-}
+

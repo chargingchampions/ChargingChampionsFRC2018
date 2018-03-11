@@ -30,18 +30,10 @@ public class TurnToAngle extends Command {
 
     protected void execute() {
     	if(angle > 0) {
-    		if (Math.abs(angle-Robot.drive.getGyroAngle()) <= angleToSlowDown) {
-    			Robot.drive.spinClockwise((Math.abs(angle-Robot.drive.getGyroAngle())/angleToSlowDown)*Robot.driveRotatePVal);
-    		} else {
     			Robot.drive.spinClockwise(speed);
-    		}
     	}
     	else if(angle < 0) {
-    		if (Math.abs(angle-Robot.drive.getGyroAngle()) <= angleToSlowDown) {
-    			Robot.drive.spinCounterClockwise((Math.abs(angle-Robot.drive.getGyroAngle())/angleToSlowDown)*Robot.driveRotatePVal);
-    		} else {
         		Robot.drive.spinCounterClockwise(speed);
-    		}
     	}
     }
 
