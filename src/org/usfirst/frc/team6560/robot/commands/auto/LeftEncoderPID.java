@@ -12,17 +12,15 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 /**
  *
  */
-public class LeftSwitch extends CommandGroup {
+public class LeftEncoderPID extends CommandGroup {
 
-	String gameData;
-
-	public LeftSwitch(String givenData) {
-		gameData = givenData;
+	public LeftEncoderPID(String givenData) {
+		
 		char switchPos = 0;
 		char scalePos = 0;
 		try {
-			switchPos = gameData.charAt(0);
-			scalePos = gameData.charAt(1);
+			switchPos = givenData.charAt(0);
+			scalePos = givenData.charAt(1);
 		} catch (NullPointerException npe) {
 			System.out.println("Game data Nonexistent!");
 		}
@@ -44,14 +42,11 @@ public class LeftSwitch extends CommandGroup {
 			addSequential(new WaitCommand(1));
 			addParallel(new PIDSetIntake());
 			addSequential(new DriveStraightToDistance(-12, 0.7)); //backwards
+		} else if (scalePos == 'L'){
+			addSequential(new DriveStraightToDistance(200, 0.8));
 		} else {
-			System.out.println("Going to right switch...");
-			//addParallel(new PIDSetSwitch());
-			if(scalePos == 'L') {
-				//scale code
-			}
-			else
-				addSequential(new DriveStraightToDistance(200, 0.8));
+			addSequential(new DriveStraightToDistance(200, 0.8));
+			System.out.println("I guess the game just hates us...");
 		}
 	}
 }

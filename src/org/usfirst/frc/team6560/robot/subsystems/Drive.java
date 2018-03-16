@@ -6,6 +6,7 @@ import org.usfirst.frc.team6560.util.ADIS16448_IMU;
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
 import org.usfirst.frc.team6560.robot.commands.drive.TankDriveWithJoysticks;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 //import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 //import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -30,14 +31,24 @@ public class Drive extends Subsystem {
 
 	// Sensors
 	//public AnalogInput ultra;
-	//public ADXRS450_Gyro gyro;
-	public ADIS16448_IMU imu;
+	public ADXRS450_Gyro gyro;
+	//public ADIS16448_IMU imu;
 
 	public Encoder drive_enc_left;
 	public Encoder drive_enc_right;
 
 	public Drive() {
 		globalDriveSpeed = 0.8;
+
+		frontLeftDrive.setInverted(false);
+		rearLeftDrive.setInverted(false);
+		frontRightDrive.setInverted(false);
+		rearRightDrive.setInverted(true);
+
+		frontLeftDrive.setSafetyEnabled(false);
+		rearLeftDrive.setSafetyEnabled(false);
+		frontRightDrive.setSafetyEnabled(false);
+		rearRightDrive.setSafetyEnabled(false);
 
 		frontLeftDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTLEFT);
 		rearLeftDrive = new WPI_TalonSRX(CAN.DRIVE_REARLEFT);
@@ -46,25 +57,15 @@ public class Drive extends Subsystem {
 		left = new SpeedControllerGroup(frontLeftDrive, rearLeftDrive);
 		right = new SpeedControllerGroup(frontRightDrive, rearRightDrive);
 
-		frontLeftDrive.setInverted(true);
-		rearLeftDrive.setInverted(true);
-		frontRightDrive.setInverted(true);
-		rearRightDrive.setInverted(true);
-		
-		frontLeftDrive.setSafetyEnabled(false);
-		rearLeftDrive.setSafetyEnabled(false);
-		frontRightDrive.setSafetyEnabled(false);
-		rearRightDrive.setSafetyEnabled(false);
-
 		drivetrain = new DifferentialDrive(left, right);
 
 		//ultra = new AnalogInput(0);
-		//gyro = new ADXRS450_Gyro();
-		imu = new ADIS16448_IMU();
-		//gyro.calibrate();
-		//gyro.reset();
-		imu.calibrate();
-		imu.reset();
+		gyro = new ADXRS450_Gyro();
+		//imu = new ADIS16448_IMU();
+		gyro.calibrate();
+		gyro.reset();
+		//imu.calibrate();
+		//imu.reset();
 
 		drive_enc_left = new Encoder(8, 9, true, Encoder.EncodingType.k2X); // TODO: Determine DIO ports
 		drive_enc_right = new Encoder(6, 7, true, Encoder.EncodingType.k2X);
@@ -100,31 +101,16 @@ public class Drive extends Subsystem {
 	public void driveStraightWithGyro(double speed) {
 		//double angle = gyro.getAngle();
 		double angle = getGyroAngle();
-		drivetrain.arcadeDrive(-speed, -0.3 * angle);
+		drivetrain.arcadeDrive(speed, -0.3 * angle);
 	}
 
 	public double getGyroAngle() {
-		return imu.getAngleX();
+		return -gyro.getAngle();
+		//return imu.getAngleX();
 	}
 
 	public void arcadeDrive(double speed, double angle) {
 		drivetrain.arcadeDrive(speed, angle);
-	}
-
-	public void spinClockwise(double speed) {
-		speed = Math.abs(speed);
-		frontLeftDrive.set(speed);
-		frontRightDrive.set(speed);
-		rearRightDrive.set(speed);
-		rearLeftDrive.set(speed);
-	}
-
-	public void spinCounterClockwise(double speed) {
-		speed = -1 * Math.abs(speed);
-		frontLeftDrive.set(speed);
-		frontRightDrive.set(speed);
-		rearRightDrive.set(speed);
-		rearLeftDrive.set(speed);
 	}
 
 	public double getSpeed() {

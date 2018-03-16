@@ -10,48 +10,44 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TurnToAngle extends Command {
 
-	double angle; 
+	double angle;
 	double speed;
-	double angleToSlowDown = 30;
 	Timer shutdownTimer;
-	
-    public TurnToAngle(double angleToTurn, double speedToTurn) {
-        requires(Robot.drive);
-        angle = angleToTurn;
-        speed = speedToTurn;
-        shutdownTimer = new Timer();
-    }
 
-    protected void initialize() {
-    	Robot.drive.imu.reset();
-    	shutdownTimer.reset();
-    	shutdownTimer.start();
-    }
+	public TurnToAngle(double angleToTurn, double speedToTurn) {
+		requires(Robot.drive);
+		angle = angleToTurn;
+		speed = speedToTurn;
+		shutdownTimer = new Timer();
+	}
 
-    protected void execute() {
-    	if(angle > 0) {
-    			Robot.drive.spinClockwise(speed);
-    	}
-    	else if(angle < 0) {
-        		Robot.drive.spinCounterClockwise(speed);
-    	}
-    }
+	protected void initialize() {
+		// Robot.drive.imu.reset();
+		Robot.drive.gyro.reset();
+		shutdownTimer.reset();
+		shutdownTimer.start();
 
-    protected boolean isFinished() {
-        if(angle > 0)
-        	return Math.abs(Robot.drive.getGyroAngle() - angle) <= Robot.driveRotateAbsTol || Robot.drive.getGyroAngle() >= angle;
-        else if (angle < 0)
-        	return Math.abs(Robot.drive.getGyroAngle() - angle) <= Robot.driveRotateAbsTol || Robot.drive.getGyroAngle() <= angle;
-        else
-        	return shutdownTimer.get() > 4.0; //Automatically stops this command after 4 seconds
-    }
+	}
 
-    protected void end() {
-    	Robot.drive.stopDrive();
-    	shutdownTimer.stop();
-    }
+	protected void execute() {
+		if (angle > 0) {
+			Robot.drive.tankDriveWithJoysticks(speed, -speed);
+		} else if (angle < 0) {
+			Robot.drive.tankDriveWithJoysticks(-speed, speed);
+		}
+	}
 
-    protected void interrupted() {
-    	end();
-    }
+	protected boolean isFinished() {
+		return Math.abs(Robot.drive.getGyroAngle()) >= Math.abs(angle) || shutdownTimer.get() > 3.0;
+		// Automatically stops this command after 3 seconds
+	}
+
+	protected void end() {
+		Robot.drive.stopDrive();
+		shutdownTimer.stop();
+	}
+
+	protected void interrupted() {
+		end();
+	}
 }

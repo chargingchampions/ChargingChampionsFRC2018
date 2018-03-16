@@ -1,4 +1,4 @@
-package org.usfirst.frc.team6560.robot.commands.arm;
+package org.usfirst.frc.team6560.robot.commands.grabber;
 
 import org.usfirst.frc.team6560.robot.Robot;
 
@@ -8,16 +8,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RotateArmTime extends Command {
+public class RotateGrabberTime extends Command {
 
 	Timer shutdownTimer = new Timer();
 	double time;
 	double speed;
 	
-    public RotateArmTime(double timeIn, double speedIn) {
+    public RotateGrabberTime(double speedIn, double timeIn) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.arm);
+    	requires(Robot.grabber);
     	time = timeIn;
     	speed = speedIn;
     }
@@ -30,7 +30,7 @@ public class RotateArmTime extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.arm.rotate(speed);
+    	Robot.grabber.rotateGrabber(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -40,7 +40,7 @@ public class RotateArmTime extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.arm.stopRotate();
+    	Robot.grabber.stopRotateGrabber();
     	shutdownTimer.stop();
     }
 

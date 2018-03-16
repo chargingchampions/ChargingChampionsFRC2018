@@ -17,7 +17,7 @@ public class TankDriveWithJoysticks extends Command {
     }
 
     protected void execute() {
-    	Robot.drive.tankDriveWithJoysticks(Robot.oi.getLeftYAxis(), Robot.oi.getRightYAxis());
+    	Robot.drive.tankDriveWithJoysticks(-Robot.oi.getLeftYAxis(), -Robot.oi.getRightYAxis());
     }
 
     protected boolean isFinished() {
