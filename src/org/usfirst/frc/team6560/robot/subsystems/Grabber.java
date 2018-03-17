@@ -2,10 +2,8 @@ package org.usfirst.frc.team6560.robot.subsystems;
 
 import org.usfirst.frc.team6560.robot.Robot;
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
-import org.usfirst.frc.team6560.robot.commands.cubeIntake.IntakeCubeSlowly;
 import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberSecondPOV;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -19,7 +17,8 @@ public class Grabber extends PIDSubsystem {
 
 	public Grabber() {
 		super("Grabber", Robot.grabberPVal, Robot.grabberIVal, Robot.grabberDVal);
-		rotationMotor.setInverted(true);
+		rotationMotor.setInverted(false);
+		//rotationMotor.setInverted(true);
 		rotationMotor.setSafetyEnabled(false);
 		rotationMotor.getSensorCollection().setQuadraturePosition(0, 100);
 		setAbsoluteTolerance(Robot.grabberAbsTol);
