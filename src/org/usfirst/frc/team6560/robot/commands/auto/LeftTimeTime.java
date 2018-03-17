@@ -25,14 +25,14 @@ public class LeftTimeTime extends CommandGroup {
 			//addParallel(new RotateArmTime(1.5, 0.7));
 			//addParallel(new RotateGrabberTime(0.2, 0.7));
 			addSequential(new DriveStraightTime(2, 0.7));
-			addSequential(new WaitCommand(0.5));
+			//addSequential(new WaitCommand(0.5));
 			//addParallel(new RotateGrabberTime(0.5, 0.7));
-			addSequential(new TurnToAngle(20, 0.2));
-			addSequential(new WaitCommand(0.5));
-			addSequential(new DriveStraightTime(0.5, 0.7));
+			//addSequential(new TurnToAngle(20, 0.2));
+			//addSequential(new WaitCommand(0.5));
+			//addSequential(new DriveStraightTime(0.5, 0.7));
 			//addSequential(new OpenIntakeArms(0.2));
-			addSequential(new DriveStraightTime(0.5, -0.7));
-			addSequential(new TurnToAngle(-20, 0.2));
+			//addSequential(new DriveStraightTime(0.5, -0.7));
+			//addSequential(new TurnToAngle(-20, 0.2));
 		} else if (scalePos == 'L'){
 			System.out.println("I guess the game just hates us...");
 		} else {
