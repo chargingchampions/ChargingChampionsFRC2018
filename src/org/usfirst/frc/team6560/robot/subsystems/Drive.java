@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import org.usfirst.frc.team6560.util.ADIS16448_IMU;
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
+import org.usfirst.frc.team6560.robot.commands.drive.ArcadeDriveWithJoysticks;
 import org.usfirst.frc.team6560.robot.commands.drive.TankDriveWithJoysticks;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -131,7 +132,7 @@ public class Drive extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new TankDriveWithJoysticks());
+		setDefaultCommand(new ArcadeDriveWithJoysticks());
 	}
 
 }
