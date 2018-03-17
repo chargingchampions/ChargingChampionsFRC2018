@@ -14,6 +14,12 @@ public class Climber extends Subsystem {
 	public Climber() {
 		climbMotor.setSafetyEnabled(false);
 	}
+	
+	/**
+	 * sets the climbMotor to which ever parameter is greater in magnitude
+	 * @param speedUp
+	 * @param speedDown
+	 */
 	public void climb(double speedUp, double speedDown) {
 		if(speedUp > speedDown)
 			climbMotor.set(speedUp);

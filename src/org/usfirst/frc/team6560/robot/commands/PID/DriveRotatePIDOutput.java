@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveRotatePIDOutput implements PIDOutput {
 	public void pidWrite(double d) {
-		SmartDashboard.putNumber("Motors Rotate PID", d);
-		Robot.drive.tankDriveWithJoysticks(d, -1 * d);
+		Robot.drive.arcadeDrive(0, d);;
 	}
 }

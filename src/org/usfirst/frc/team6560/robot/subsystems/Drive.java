@@ -2,14 +2,10 @@ package org.usfirst.frc.team6560.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import org.usfirst.frc.team6560.util.ADIS16448_IMU;
+import org.usfirst.frc.team6560.robot.Robot;
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
 import org.usfirst.frc.team6560.robot.commands.drive.ArcadeDriveWithJoysticks;
-import org.usfirst.frc.team6560.robot.commands.drive.TankDriveWithJoysticks;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-//import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-//import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -31,9 +27,9 @@ public class Drive extends Subsystem {
 	DifferentialDrive drivetrain;
 
 	// Sensors
-	//public AnalogInput ultra;
+	// public AnalogInput ultra;
 	public ADXRS450_Gyro gyro;
-	//public ADIS16448_IMU imu;
+	// public ADIS16448_IMU imu;
 
 	public Encoder drive_enc_left;
 	public Encoder drive_enc_right;
@@ -41,7 +37,6 @@ public class Drive extends Subsystem {
 	public Drive() {
 		globalDriveSpeed = 0.8;
 
-		
 		frontLeftDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTLEFT);
 		rearLeftDrive = new WPI_TalonSRX(CAN.DRIVE_REARLEFT);
 		frontRightDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTRIGHT);
@@ -61,13 +56,13 @@ public class Drive extends Subsystem {
 		frontRightDrive.setSafetyEnabled(false);
 		rearRightDrive.setSafetyEnabled(false);
 
-		//ultra = new AnalogInput(0);
+		// ultra = new AnalogInput(0);
 		gyro = new ADXRS450_Gyro();
-		//imu = new ADIS16448_IMU();
+		// imu = new ADIS16448_IMU();
 		gyro.calibrate();
 		gyro.reset();
-		//imu.calibrate();
-		//imu.reset();
+		// imu.calibrate();
+		// imu.reset();
 
 		drive_enc_left = new Encoder(8, 9, true, Encoder.EncodingType.k2X); // TODO: Determine DIO ports
 		drive_enc_right = new Encoder(6, 7, true, Encoder.EncodingType.k2X);
@@ -76,6 +71,12 @@ public class Drive extends Subsystem {
 		// k2x vs. k4x vs. k1x
 	}
 
+	/**
+	 * sets the speeds of the drive train motors, positive is forward
+	 * 
+	 * @param left
+	 * @param right
+	 */
 	public void tankDriveWithJoysticks(double left, double right) {
 		drivetrain.tankDrive(left * globalDriveSpeed, right * globalDriveSpeed);
 	}
@@ -98,26 +99,88 @@ public class Drive extends Subsystem {
 		drive_enc_right.setDistancePerPulse((3 * Math.PI) / 128);
 		drive_enc_right.setReverseDirection(false);
 		// drive_enc_right.setSamplesToAverage(0);
+
+		drive_enc_right.setMaxPeriod(1);
+		drive_enc_left.setMaxPeriod(1);
 	}
 
+	/**
+	 * 
+	 * @return -1 if both encoders are stopped, the average distance of two working
+	 *         encoders, or just the distance of the one working encoder
+	 */
+	public double getAbsDistance() {
+		double distance = 0;
+		double numWorkingEnc = 0;
+		if (!drive_enc_right.getStopped()) {
+			distance += Math.abs(Robot.drive.drive_enc_right.getDistance());
+			numWorkingEnc++;
+		}
+		if (!drive_enc_left.getStopped()) {
+			distance += Math.abs(Robot.drive.drive_enc_left.getDistance());
+			numWorkingEnc++;
+		}
+		if (numWorkingEnc == 0) {
+			return distance / numWorkingEnc;
+		} else {
+			return -1;
+		}
+	}
+
+	/**
+	 * 
+	 * @return -9999 if both are stopped, or the distance of one working encoder, or
+	 *         the average displacement of the two encoders, will return a positive
+	 *         displacement average if the two encoders are conflicting in direction
+	 */
+	public double getDisplacement() {
+		double distanceLeft = 0;
+		double distanceRight = 0;
+		if (drive_enc_right.getStopped() && drive_enc_left.getStopped()) {
+			return -9999;
+		} else {
+			if (!drive_enc_right.getStopped()) {
+				distanceRight += Math.abs(Robot.drive.drive_enc_right.getDistance());
+			}
+			if (!drive_enc_left.getStopped()) {
+				distanceLeft += Math.abs(Robot.drive.drive_enc_left.getDistance());
+			}
+			if ((distanceLeft > 0 && distanceRight > 0) || (distanceLeft < 0 && distanceRight < 0)) {
+				return (distanceLeft + distanceRight) / 2;
+			} else if (distanceLeft == 0 && distanceRight != 0) {
+				return distanceRight;
+			} else if (distanceRight == 0 && distanceLeft != 0) {
+				return distanceLeft;
+			} else {
+				return (Math.abs(distanceLeft) + Math.abs(distanceRight)) / 2;
+			}
+		}
+	}
+
+	/**
+	 * drives forward at the given speed with use of gyro, positive is forward
+	 * 
+	 * @param speed
+	 */
 	public void driveStraightWithGyro(double speed) {
-		//double angle = gyro.getAngle();
+		// double angle = gyro.getAngle();
 		double angle = getGyroAngle();
 		drivetrain.arcadeDrive(speed, -0.3 * angle);
 	}
 
 	public double getGyroAngle() {
 		return -gyro.getAngle();
-		//return imu.getAngleX();
+		// return imu.getAngleX();
 	}
 
+	/**
+	 * positive is forward
+	 * 
+	 * @param speed
+	 * @param angle
+	 */
 	public void arcadeDrive(double speed, double angle) {
 		drivetrain.arcadeDrive(speed, angle);
-	}
-
-	public double getSpeed() {
-		return (drive_enc_left.getRate() + drive_enc_right.getRate()) / 2;
-		// Divide encoder rates from both sides by 2
 	}
 
 	public void increaseDriveSpeed() {

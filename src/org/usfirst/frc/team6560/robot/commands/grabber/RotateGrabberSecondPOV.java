@@ -24,17 +24,17 @@ public class RotateGrabberSecondPOV extends Command {
 	protected void execute() {
 		if (Robot.oi.getSecondPOV() == 0 || Robot.oi.getSecondPOV() == 45 || Robot.oi.getSecondPOV() == 315) {
 			Robot.grabber.disable();
-			Robot.grabber.rotateGrabber(0.5);
+			Robot.grabber.rotateGrabber(0.7);
 			hasChangedPos = true;
 		} else if (Robot.oi.getSecondPOV() == 180 || Robot.oi.getSecondPOV() == 135 || Robot.oi.getSecondPOV() == 225) {
 			Robot.grabber.disable();
-			Robot.grabber.rotateGrabber(-0.5);
+			Robot.grabber.rotateGrabber(-0.7);
 			hasChangedPos = true;
 		} else {
 			if (hasChangedPos) {
 				Robot.grabber.setSetpointRelative(0);
 			}
-			Robot.grabber.stopRotateGrabber();
+			Robot.grabber.rotateGrabber(0);
 			Robot.grabber.setSetpointRelative(0);
 			Robot.grabber.enable();
 			hasChangedPos = false;
@@ -47,7 +47,7 @@ public class RotateGrabberSecondPOV extends Command {
 
 	protected void end() {
 		Robot.grabber.disable();
-		Robot.grabber.stopRotateGrabber();
+		Robot.grabber.rotateGrabber(0);
 	}
 
 	protected void interrupted() {

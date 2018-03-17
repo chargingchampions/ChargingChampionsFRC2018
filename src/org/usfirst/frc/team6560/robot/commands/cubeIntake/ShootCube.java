@@ -25,7 +25,7 @@ public class ShootCube extends Command {
 	}
 
 	protected void end() {
-		Robot.cubeIntake.stopIntake();
+		Robot.cubeIntake.shootCube(0);
 	}
 
 	protected void interrupted() {

@@ -40,7 +40,7 @@ public class RotateGrabberTime extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.grabber.stopRotateGrabber();
+    	Robot.grabber.rotateGrabber(0);
     	shutdownTimer.stop();
     }
 
