@@ -41,6 +41,16 @@ public class Drive extends Subsystem {
 	public Drive() {
 		globalDriveSpeed = 0.8;
 
+		
+		frontLeftDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTLEFT);
+		rearLeftDrive = new WPI_TalonSRX(CAN.DRIVE_REARLEFT);
+		frontRightDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTRIGHT);
+		rearRightDrive = new WPI_TalonSRX(CAN.DRIVE_REARRIGHT);
+		left = new SpeedControllerGroup(frontLeftDrive, rearLeftDrive);
+		right = new SpeedControllerGroup(frontRightDrive, rearRightDrive);
+
+		drivetrain = new DifferentialDrive(left, right);
+
 		frontLeftDrive.setInverted(false);
 		rearLeftDrive.setInverted(false);
 		frontRightDrive.setInverted(false);
@@ -50,15 +60,6 @@ public class Drive extends Subsystem {
 		rearLeftDrive.setSafetyEnabled(false);
 		frontRightDrive.setSafetyEnabled(false);
 		rearRightDrive.setSafetyEnabled(false);
-
-		frontLeftDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTLEFT);
-		rearLeftDrive = new WPI_TalonSRX(CAN.DRIVE_REARLEFT);
-		frontRightDrive = new WPI_TalonSRX(CAN.DRIVE_FRONTRIGHT);
-		rearRightDrive = new WPI_TalonSRX(CAN.DRIVE_REARRIGHT);
-		left = new SpeedControllerGroup(frontLeftDrive, rearLeftDrive);
-		right = new SpeedControllerGroup(frontRightDrive, rearRightDrive);
-
-		drivetrain = new DifferentialDrive(left, right);
 
 		//ultra = new AnalogInput(0);
 		gyro = new ADXRS450_Gyro();
