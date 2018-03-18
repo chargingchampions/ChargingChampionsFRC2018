@@ -211,13 +211,15 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Displacement", drive.getDisplacement());
 
 		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed));
-		SmartDashboard.putData("PID Drive Straight to Distance", new PIDDriveStraightToDistance(distance, speed));
 		SmartDashboard.putData("Drive Straight Time", new DriveStraightTime(time, speed));
 		SmartDashboard.putData("Turn To Angle", new TurnToAngle(angleToTurnTo, speed));
-		SmartDashboard.putData("PID Turn To Angle", new PIDTurnToAngle(angleToTurnTo, speed));
 		SmartDashboard.putData("Turn To Angle Time", new TurnToAngleTime(time, speed));
 		SmartDashboard.putData("Drive Straight Timed", new DriveStraightTime(time, speed));
 		SmartDashboard.putData("Refresh Subsystems", new ResetArmAndGrabberEncoders());
+		
+		//These PID commands are causing crashes because of outOfMemory threads...
+		//SmartDashboard.putData("PID Drive Straight to Distance", new PIDDriveStraightToDistance(distance, speed));
+		//SmartDashboard.putData("PID Turn To Angle", new PIDTurnToAngle(angleToTurnTo, speed));
 		
 	}
 	
