@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class LeftTimeTime extends CommandGroup {
 
-	public LeftTimeTime(String givenData) {
+	public LeftTimeTime(String givenData, double driveScalar, double rotateScalar) {
 		
 		char switchPos = 0;
 		char scalePos = 0;
@@ -26,15 +26,15 @@ public class LeftTimeTime extends CommandGroup {
 			System.out.println("Going to left switch from left station");
 			//addParallel(new RotateArmTime(1.5, 0.7));
 			//addParallel(new RotateGrabberTime(0.2, 0.7));
-			addSequential(new DriveStraightTime(2.3, 0.7));
+			addSequential(new DriveStraightTime(2.3*driveScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
 			//addParallel(new RotateGrabberTime(0.5, 0.7));
-			addSequential(new TurnToAngleTime(1.5, 0.7));
+			addSequential(new TurnToAngleTime(1.5*rotateScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new DriveStraightTime(0.8, 0.7));
+			addSequential(new DriveStraightTime(0.8*driveScalar, 0.7));
 			//addSequential(new OpenIntakeArms(0.2));
-			//addSequential(new DriveStraightTime(0.5, -0.7));
-			//addSequential(new TurnToAngle(-20, 0.2));
+			//addSequential(new DriveStraightTime(0.5*driveScalar, -0.7));
+			//addSequential(new TurnToAngle(-20*rotateScalar, 0.2));
 		} else if (scalePos == 'L'){
 			System.out.println("I guess the game just hates us...");
 		} else {

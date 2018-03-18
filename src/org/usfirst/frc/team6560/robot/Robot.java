@@ -90,7 +90,7 @@ public class Robot extends IterativeRobot {
 		System.out.println(gameData);
 		switch (chooser.getSelected().intValue()) {
 		case 0: autonomousCommand = new DriveStraightTime(1.5, 0.7);
-		case 1: autonomousCommand = new LeftTimeTime(gameData);
+		case 1: autonomousCommand = new LeftTimeTime(gameData, 1.0, 1.0);
 		case 2: //add Center
 		case 3: //add Right
 		}
