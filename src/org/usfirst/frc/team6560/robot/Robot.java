@@ -18,6 +18,7 @@ import org.usfirst.frc.team6560.robot.commands.auto.LeftTimeTime;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightTime;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightToDistance;
 import org.usfirst.frc.team6560.robot.commands.drive.TurnToAngle;
+import org.usfirst.frc.team6560.robot.commands.drive.TurnToAngleTime;
 import org.usfirst.frc.team6560.robot.subsystems.*;
 
 public class Robot extends IterativeRobot {
@@ -211,8 +212,10 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed));
 		SmartDashboard.putData("PID Drive Straight to Distance", new PIDDriveStraightToDistance(distance, speed));
+		SmartDashboard.putData("Drive Straight Time", new DriveStraightTime(time, speed));
 		SmartDashboard.putData("Turn To Angle", new TurnToAngle(angleToTurnTo, speed));
 		SmartDashboard.putData("PID Turn To Angle", new PIDTurnToAngle(angleToTurnTo, speed));
+		SmartDashboard.putData("Turn To Angle Time", new TurnToAngleTime(time, speed));
 		SmartDashboard.putData("Drive Straight Timed", new DriveStraightTime(time, speed));
 		SmartDashboard.putData("Refresh Subsystems", new ResetArmAndGrabberEncoders());
 		
