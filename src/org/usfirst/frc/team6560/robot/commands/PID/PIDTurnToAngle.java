@@ -45,7 +45,7 @@ public class PIDTurnToAngle extends Command {
 	}
 
 	protected boolean isFinished() {
-		return Math.abs(driveRotatePIDControl.getSetpoint() - Robot.drive.getGyroAngle()) < Robot.driveRotateAbsTol;
+		return Math.abs(driveRotatePIDControl.getSetpoint() - Robot.drive.getGyroAngle()) <= Robot.driveRotateAbsTol;
 	}
 
 	protected void end() {

@@ -4,6 +4,7 @@ import org.usfirst.frc.team6560.robot.Robot;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -13,6 +14,7 @@ public class PIDDriveStraightToDistance extends Command {
 
 	double distance, speed;
 	PIDOutput driveDistancePIDOutput;
+	PIDSource driveDistancePIDSource;
 	PIDController driveDistancePIDControl;
 
 	public PIDDriveStraightToDistance(double distance, double speed) {
@@ -20,8 +22,9 @@ public class PIDDriveStraightToDistance extends Command {
 		this.speed = speed;
 		this.distance = distance;
 		driveDistancePIDOutput = new DriveDistancePIDOutput();
+		driveDistancePIDSource = new DriveDistancePIDSource();
 		driveDistancePIDControl = new PIDController(Robot.drivePVal, Robot.driveIVal, Robot.driveDVal,
-				Robot.drive.drive_enc_right, driveDistancePIDOutput);
+				driveDistancePIDSource, driveDistancePIDOutput);
 		// TODO: PID controllers should not have to be tuned after finding correct
 		// values, so perhaps hardcode them into the code later on
 	}
@@ -45,8 +48,7 @@ public class PIDDriveStraightToDistance extends Command {
 	}
 
 	protected boolean isFinished() {
-		return Math.abs(
-				driveDistancePIDControl.getSetpoint() - Robot.drive.drive_enc_right.getDistance()) < Robot.driveAbsTol;
+		return (driveDistancePIDSource.pidGet() == -9999) || Math.abs(driveDistancePIDControl.getSetpoint() - driveDistancePIDSource.pidGet()) <= Robot.driveAbsTol;
 	}
 
 	protected void end() {

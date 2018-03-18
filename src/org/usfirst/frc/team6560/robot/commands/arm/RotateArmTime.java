@@ -40,7 +40,7 @@ public class RotateArmTime extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.arm.stopRotate();
+    	Robot.arm.rotate(0);
     	shutdownTimer.stop();
     }
 

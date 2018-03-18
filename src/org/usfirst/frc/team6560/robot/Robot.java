@@ -12,9 +12,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 
 import org.usfirst.frc.team6560.robot.commands.ResetArmAndGrabberEncoders;
+import org.usfirst.frc.team6560.robot.commands.PID.PIDDriveStraightToDistance;
+import org.usfirst.frc.team6560.robot.commands.PID.PIDTurnToAngle;
 import org.usfirst.frc.team6560.robot.commands.auto.LeftTimeTime;
+import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightTime;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightToDistance;
 import org.usfirst.frc.team6560.robot.commands.drive.TurnToAngle;
+import org.usfirst.frc.team6560.robot.commands.drive.TurnToAngleTime;
 import org.usfirst.frc.team6560.robot.subsystems.*;
 
 public class Robot extends IterativeRobot {
@@ -57,6 +61,12 @@ public class Robot extends IterativeRobot {
 		climber = new Climber();
 		topviewCamera = CameraServer.getInstance().startAutomaticCapture();
 		downviewCamera = CameraServer.getInstance().startAutomaticCapture();
+		
+		chooser.addDefault("Drive Straight", 0);
+		chooser.addObject("Left", 1);
+		chooser.addObject("Center", 2);
+		chooser.addObject("Right", 3);
+		SmartDashboard.putData(chooser);
 	}
 
 	@Override
@@ -78,7 +88,12 @@ public class Robot extends IterativeRobot {
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		System.out.println(gameData);
-		autonomousCommand = new LeftTimeTime(gameData);
+		switch (chooser.getSelected().intValue()) {
+		case 0: autonomousCommand = new DriveStraightTime(1.5, 0.7);
+		case 1: autonomousCommand = new LeftTimeTime(gameData);
+		case 2: //add Center
+		case 3: //add Right
+		}
 		
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
@@ -185,26 +200,23 @@ public class Robot extends IterativeRobot {
 		double distance = SmartDashboard.getNumber("distance", 0.0);
 		double speed = SmartDashboard.getNumber("speed", 0.0);
 		double angleToTurnTo = SmartDashboard.getNumber("angle to turn to", 0.0);
-		//String gameDataInput = SmartDashboard.getString("Game Data", "RRR");
+		double time = SmartDashboard.getNumber("time to run", 0.0);
+		
 		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
 		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
 		SmartDashboard.putNumber("Gyro angle", drive.getGyroAngle());
 		SmartDashboard.putNumber("Left Encoder", drive.drive_enc_left.getDistance());
 		SmartDashboard.putNumber("Right Encoder", drive.drive_enc_right.getDistance());
+		SmartDashboard.putNumber("Abs Distance", drive.getAbsDistance());
+		SmartDashboard.putNumber("Displacement", drive.getDisplacement());
 
 		SmartDashboard.putData("Drive Straight to Distance", new DriveStraightToDistance(distance, speed));
+		SmartDashboard.putData("PID Drive Straight to Distance", new PIDDriveStraightToDistance(distance, speed));
+		SmartDashboard.putData("Drive Straight Time", new DriveStraightTime(time, speed));
 		SmartDashboard.putData("Turn To Angle", new TurnToAngle(angleToTurnTo, speed));
-	/*	
-		SmartDashboard.putData("CenterScale", new CenterScale(gameDataInput));
-		SmartDashboard.putData("CenterSwitch", new CenterSwitch(gameDataInput));
-		SmartDashboard.putData("CenterSwitchScale", new CenterSwitchScale(gameDataInput));
-		SmartDashboard.putData("LeftScale", new LeftScale(gameDataInput));
-		SmartDashboard.putData("LeftSwitch", new LeftSwitch(gameDataInput));
-		SmartDashboard.putData("LeftSwitchScale", new LeftSwitchScale(gameDataInput));
-		SmartDashboard.putData("RightScale", new RightScale(gameDataInput));
-		SmartDashboard.putData("RightSwitch", new RightSwitch(gameDataInput));
-		SmartDashboard.putData("RightSwitchScale", new RightSwitchScale(gameDataInput));
-		*/
+		SmartDashboard.putData("PID Turn To Angle", new PIDTurnToAngle(angleToTurnTo, speed));
+		SmartDashboard.putData("Turn To Angle Time", new TurnToAngleTime(time, speed));
+		SmartDashboard.putData("Drive Straight Timed", new DriveStraightTime(time, speed));
 		SmartDashboard.putData("Refresh Subsystems", new ResetArmAndGrabberEncoders());
 		
 	}
@@ -213,5 +225,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("distance", 0.0);
 		SmartDashboard.putNumber("speed", 0.0);
 		SmartDashboard.putNumber("angle to turn to", 0.0);
+		SmartDashboard.putNumber("time to run", 0.0);
 	}
 }

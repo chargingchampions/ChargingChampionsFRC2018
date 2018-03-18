@@ -29,10 +29,10 @@ public class RotateArmWithJoystick extends Command {
 	}
 
 	protected void end() {
-		Robot.arm.stopRotate();
+		Robot.arm.rotate(0);
 	}
 
 	protected void interrupted() {
-		Robot.arm.stopRotate();
+		end();
 	}
 }

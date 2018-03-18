@@ -12,18 +12,16 @@ public class DriveStraightToDistance extends Command {
 
 	double distance;
 	double speedToDrive;
-	double distanceToSlowDown = 6;
 	Timer shutdownTimer;
 
     public DriveStraightToDistance(double distanceIn, double speedIn) {
         requires(Robot.drive);
         shutdownTimer = new Timer();
         distance = Math.abs(distanceIn);
-        if (distanceIn < 0) {
-        	speedToDrive = -1 * Math.abs(speedIn);
-        } else {
-        	speedToDrive = Math.abs(speedIn);
-        	}     
+        if (distanceIn < 0)
+        speedToDrive = -Math.abs(speedIn);
+        else 
+        speedToDrive = Math.abs(speedIn);
     }
 
     protected void initialize() {
@@ -40,10 +38,8 @@ public class DriveStraightToDistance extends Command {
     }
 
     protected boolean isFinished() {
-        //return (Math.abs(Robot.drive.drive_enc_left.getDistance() + Robot.drive.drive_enc_right.getDistance())) / 2 >= Math.abs(distanceToDriveAdjusted) || Robot.drive.drive_enc_left.getStopped() || Robot.drive.drive_enc_right.getStopped();
-    	//TODO: add the left encoder for this too?
 
-    	return Math.abs(Robot.drive.drive_enc_right.getDistance()) >= distance
+    	return Robot.drive.getAbsDistance() == -1 || Robot.drive.getAbsDistance()>= distance
     			|| shutdownTimer.get() > distance*0.032/Math.abs(speedToDrive);
     }
 
