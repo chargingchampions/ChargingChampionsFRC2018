@@ -55,6 +55,7 @@ public class Drive extends Subsystem {
 		rearLeftDrive.setSafetyEnabled(false);
 		frontRightDrive.setSafetyEnabled(false);
 		rearRightDrive.setSafetyEnabled(false);
+		drivetrain.setSafetyEnabled(false);
 
 		// ultra = new AnalogInput(0);
 		gyro = new ADXRS450_Gyro();
@@ -79,6 +80,10 @@ public class Drive extends Subsystem {
 	 */
 	public void tankDriveWithJoysticks(double left, double right) {
 		drivetrain.tankDrive(left * globalDriveSpeed, right * globalDriveSpeed);
+	}
+	
+	public void arcadeDriveWithJoysticks(double left, double right) {
+		drivetrain.arcadeDrive(left * globalDriveSpeed, right * globalDriveSpeed);
 	}
 
 	public void stopDrive() {
