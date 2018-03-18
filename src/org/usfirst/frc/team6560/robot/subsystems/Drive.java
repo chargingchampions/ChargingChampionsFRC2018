@@ -125,7 +125,7 @@ public class Drive extends Subsystem {
 			distance += Math.abs(Robot.drive.drive_enc_left.getDistance());
 			numWorkingEnc++;
 		}
-		if (numWorkingEnc == 0) {
+		if (numWorkingEnc != 0) {
 			return distance / numWorkingEnc;
 		} else {
 			return -1;
