@@ -21,8 +21,8 @@ public class CubeIntake extends Subsystem {
 	WPI_TalonSRX intakeMotor2 = new WPI_TalonSRX(CAN.GRABBER_RIGHT);
 
 	/**
-	 * creates new cubeIntake subsystem, initializes motors
-	 * Important: sets one of the motors to slave mode
+	 * creates new cubeIntake subsystem, initializes motors Important: sets one of
+	 * the motors to slave mode
 	 */
 	public CubeIntake() {
 		compressor_0.setClosedLoopControl(true);
@@ -30,13 +30,16 @@ public class CubeIntake extends Subsystem {
 
 		intakeMotor1.setSafetyEnabled(false);
 		intakeMotor2.setSafetyEnabled(false);
-		intakeMotor1.setInverted(false);
-		intakeMotor2.setInverted(true);
+		// intakeMotor1.setInverted(false);
+		// intakeMotor2.setInverted(true);
+		intakeMotor1.setInverted(true);
+		intakeMotor2.setInverted(false);
 		intakeMotor2.set(ControlMode.Follower, intakeMotor1.getDeviceID());
 	}
 
 	/**
 	 * sets the intakeMotors speeds, positive is intaking
+	 * 
 	 * @param speed
 	 */
 	public void intakeCube(double speed) {
@@ -45,6 +48,7 @@ public class CubeIntake extends Subsystem {
 
 	/**
 	 * sets the intakeMotors speeds, positive is shooting
+	 * 
 	 * @param speed
 	 */
 	public void shootCube(double speed) {
