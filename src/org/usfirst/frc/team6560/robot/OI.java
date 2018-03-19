@@ -74,7 +74,7 @@ public class OI {
 		secondTrigger.whileHeld(new ShootCube());
 		
 		secondButton11.whileHeld(new RotateSecondClimberIn());
-		secondButton11.whileHeld(new RotateSecondClimberOut());
+		secondButton12.whileHeld(new RotateSecondClimberOut());
 
 		// secondTrigger.whileHeld(new IntakeCube());
 		// rightThumb.whileHeld(new IntakeCube(1.0));
