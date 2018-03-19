@@ -58,9 +58,10 @@ public class Robot extends IterativeRobot {
 		grabber = new Grabber();
 		arm = new Arm();
 		cubeIntake = new CubeIntake();
-		oi = new OI();
 		climber = new Climber();
 		secondClimber = new SecondClimber();
+		oi = new OI();
+		
 		topviewCamera = CameraServer.getInstance().startAutomaticCapture();
 		downviewCamera = CameraServer.getInstance().startAutomaticCapture();
 		
