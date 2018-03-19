@@ -5,6 +5,7 @@ import org.usfirst.frc.team6560.robot.Robot;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -41,6 +42,7 @@ public class PIDDriveStraightToDistance extends Command {
 		driveDistancePIDControl.setOutputRange(-speed, speed);
 
 		driveDistancePIDControl.enable();
+		Timer.delay(0.2);
 
 	}
 

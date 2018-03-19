@@ -31,6 +31,8 @@ public class DriveStraightToDistance extends Command {
     	Robot.drive.drive_enc_right.reset();
     	shutdownTimer.reset();
     	shutdownTimer.start();
+    	Robot.drive.driveStraightWithGyro(speedToDrive);
+    	Timer.delay(0.2);
     }
 
     protected void execute() {

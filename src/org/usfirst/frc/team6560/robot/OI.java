@@ -10,6 +10,9 @@ import org.usfirst.frc.team6560.robot.commands.cubeIntake.StartIntake;
 import org.usfirst.frc.team6560.robot.commands.drive.DecreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.drive.IncreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.drive.TankDriveStraight;
+import org.usfirst.frc.team6560.robot.commands.secondClimber.RotateSecondClimberIn;
+import org.usfirst.frc.team6560.robot.commands.secondClimber.RotateSecondClimberOut;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -69,6 +72,9 @@ public class OI {
 		rightIndex.whileHeld(new StartIntake());
 		leftIndex.whileHeld(new ShootCube());
 		secondTrigger.whileHeld(new ShootCube());
+		
+		secondButton11.whileHeld(new RotateSecondClimberIn());
+		secondButton11.whileHeld(new RotateSecondClimberOut());
 
 		// secondTrigger.whileHeld(new IntakeCube());
 		// rightThumb.whileHeld(new IntakeCube(1.0));

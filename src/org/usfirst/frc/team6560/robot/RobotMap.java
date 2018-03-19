@@ -18,6 +18,8 @@ public class RobotMap {
 		public static final int GRABBER_LEFT = 6;
 		public static final int ARM1 = 8;
 		public static final int ARM2 = 3;
+		public static final int CLIMBER = 7;
+		public static final int SECONDCLIMBER = 11;
 
 		public static final int SOLENOID_0 = 0;
 		public static final int SOLENOID_1 = 1;
