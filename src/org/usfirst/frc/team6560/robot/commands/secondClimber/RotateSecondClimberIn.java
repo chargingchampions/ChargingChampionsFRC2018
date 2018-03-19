@@ -20,7 +20,7 @@ public class RotateSecondClimberIn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.secondClimber.rotateSecondClimber(-0.6);
+    	Robot.secondClimber.rotateSecondClimber(-0.3);
     }
 
     // Make this return true when this Command no longer needs to run execute()
