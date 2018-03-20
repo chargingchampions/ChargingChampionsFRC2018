@@ -14,6 +14,7 @@ import edu.wpi.cscore.UsbCamera;
 import org.usfirst.frc.team6560.robot.commands.ResetArmAndGrabberEncoders;
 import org.usfirst.frc.team6560.robot.commands.PID.PIDDriveStraightToDistance;
 import org.usfirst.frc.team6560.robot.commands.PID.PIDTurnToAngle;
+import org.usfirst.frc.team6560.robot.commands.auto.CenterTimeTime;
 import org.usfirst.frc.team6560.robot.commands.auto.LeftTimeTime;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightTime;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightToDistance;
@@ -94,7 +95,7 @@ public class Robot extends IterativeRobot {
 		switch (chooser.getSelected().intValue()) {
 		case 0: autonomousCommand = new DriveStraightTime(1.5, 0.7);
 		case 1: autonomousCommand = new LeftTimeTime(gameData, 1.0, 1.0);
-		case 2: //add Center
+		case 2: autonomousCommand = new CenterTimeTime(gameData, 1.0, 1.0);
 		case 3: //add Right
 		}
 		

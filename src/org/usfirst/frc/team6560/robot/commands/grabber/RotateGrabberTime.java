@@ -14,6 +14,11 @@ public class RotateGrabberTime extends Command {
 	double time;
 	double speed;
 	
+	/**
+	 * 
+	 * @param speedIn positive is out, negative is in (from safety position)
+	 * @param timeIn
+	 */
     public RotateGrabberTime(double speedIn, double timeIn) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

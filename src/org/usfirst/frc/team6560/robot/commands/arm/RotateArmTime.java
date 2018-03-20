@@ -14,6 +14,11 @@ public class RotateArmTime extends Command {
 	double time;
 	double speed;
 	
+	/**
+	 * 
+	 * @param timeIn
+	 * @param speedIn positive is up, negative is down
+	 */
     public RotateArmTime(double timeIn, double speedIn) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
