@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot {
 
 
 	Command autonomousCommand;
+	SendableChooser<Integer> chooser;
 
 	public void robotInit() {
 		// remove the following if it causes a NetworkTable exception
@@ -53,6 +54,7 @@ public class Robot extends IterativeRobot {
 		prefs = Preferences.getInstance();
 		putPrefsNumbers();
 		initializePrefs();
+		chooser = new SendableChooser<Integer>();
 		// initializing subsystems
 		drive = new Drive();
 		grabber = new Grabber();
@@ -64,7 +66,12 @@ public class Robot extends IterativeRobot {
 		
 		topviewCamera = CameraServer.getInstance().startAutomaticCapture();
 		downviewCamera = CameraServer.getInstance().startAutomaticCapture();
-		SmartDashboard.putNumber("Drive Straight: 1\nLeft: 2\n Center: 3\n Right: 4", 1);
+		
+		chooser.addDefault("Drive Straight", 0);
+		chooser.addObject("LeftTimeTime", 1);
+		chooser.addObject("CenterTimeTime", 2);
+		chooser.addObject("RightTimeTime", 3);
+		SmartDashboard.putData(chooser);
 	}
 
 	@Override
@@ -86,11 +93,17 @@ public class Robot extends IterativeRobot {
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		System.out.println(gameData);
-		switch ((int)SmartDashboard.getNumber("Drive Straight: 1\nLeft: 2\n Center: 3\n Right: 4", 1)) {
-		case 1: autonomousCommand = new DriveStraightTime(1.5, 0.7);
-		case 2: autonomousCommand = new LeftTimeTime(gameData, 1.0, 1.0);
-		case 3: autonomousCommand = new CenterTimeTime(gameData, 1.0, 1.0);
-		case 4: autonomousCommand = new RightTimeTime(gameData, 1.0, 1.0);
+		switch (chooser.getSelected().intValue()) {
+		case 0: autonomousCommand = new DriveStraightTime(1.5, 0.7);
+		break;
+		case 1: autonomousCommand = new LeftTimeTime(gameData, 1.0, 1.0);
+		break;
+		case 2: autonomousCommand = new CenterTimeTime(gameData, 1.0, 1.0);
+		break;
+		case 3: autonomousCommand = new RightTimeTime(gameData, 1.0, 1.0);
+		break;
+		default: autonomousCommand = new DriveStraightTime(1.5, 0.7);
+		break;
 		}
 		
 		if (autonomousCommand != null) {
