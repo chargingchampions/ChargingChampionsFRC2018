@@ -16,6 +16,7 @@ import org.usfirst.frc.team6560.robot.commands.PID.PIDDriveStraightToDistance;
 import org.usfirst.frc.team6560.robot.commands.PID.PIDTurnToAngle;
 import org.usfirst.frc.team6560.robot.commands.auto.CenterTimeTime;
 import org.usfirst.frc.team6560.robot.commands.auto.LeftTimeTime;
+import org.usfirst.frc.team6560.robot.commands.auto.RightTimeTime;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightTime;
 import org.usfirst.frc.team6560.robot.commands.drive.DriveStraightToDistance;
 import org.usfirst.frc.team6560.robot.commands.drive.TurnToAngle;
@@ -45,7 +46,6 @@ public class Robot extends IterativeRobot {
 
 
 	Command autonomousCommand;
-	SendableChooser<Integer> chooser;
 
 	public void robotInit() {
 		// remove the following if it causes a NetworkTable exception
@@ -53,7 +53,6 @@ public class Robot extends IterativeRobot {
 		prefs = Preferences.getInstance();
 		putPrefsNumbers();
 		initializePrefs();
-		chooser = new SendableChooser<>();
 		// initializing subsystems
 		drive = new Drive();
 		grabber = new Grabber();
@@ -65,12 +64,7 @@ public class Robot extends IterativeRobot {
 		
 		topviewCamera = CameraServer.getInstance().startAutomaticCapture();
 		downviewCamera = CameraServer.getInstance().startAutomaticCapture();
-		
-		chooser.addDefault("Drive Straight", 0);
-		chooser.addObject("Left", 1);
-		chooser.addObject("Center", 2);
-		chooser.addObject("Right", 3);
-		SmartDashboard.putData(chooser);
+		SmartDashboard.putNumber("Drive Straight: 1\nLeft: 2\n Center: 3\n Right: 4", 1);
 	}
 
 	@Override
@@ -92,11 +86,11 @@ public class Robot extends IterativeRobot {
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		System.out.println(gameData);
-		switch (chooser.getSelected().intValue()) {
-		case 0: autonomousCommand = new DriveStraightTime(1.5, 0.7);
-		case 1: autonomousCommand = new LeftTimeTime(gameData, 1.0, 1.0);
-		case 2: autonomousCommand = new CenterTimeTime(gameData, 1.0, 1.0);
-		case 3: //add Right
+		switch ((int)SmartDashboard.getNumber("Drive Straight: 1\nLeft: 2\n Center: 3\n Right: 4", 1)) {
+		case 1: autonomousCommand = new DriveStraightTime(1.5, 0.7);
+		case 2: autonomousCommand = new LeftTimeTime(gameData, 1.0, 1.0);
+		case 3: autonomousCommand = new CenterTimeTime(gameData, 1.0, 1.0);
+		case 4: autonomousCommand = new RightTimeTime(gameData, 1.0, 1.0);
 		}
 		
 		if (autonomousCommand != null) {
@@ -115,14 +109,14 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		
 		//TODO: delete the below when ready
-		putTuningToolsValues();
+		//putTuningToolsValues();
 		// TODO: update the PID vals and other stuff in initialization of subsystems,
 		// which only occurs upon turning on the robot
 	}
 
 	public void teleopPeriodic() {
 		//TODO: delete the below method once ready
-		tuningTools();
+		//tuningTools();
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Drive.globalDriveSpeed);
 		

@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 /**
  *
  */
-public class LeftTimeTime extends CommandGroup {
+public class RightTimeTime extends CommandGroup {
 
-	public LeftTimeTime(String givenData, double driveScalar, double rotateScalar) {
+	public RightTimeTime(String givenData, double driveScalar, double rotateScalar) {
 		
 		char switchPos = 0;
 		char scalePos = 0;
@@ -24,19 +24,19 @@ public class LeftTimeTime extends CommandGroup {
 		} catch (NullPointerException npe) {
 			System.out.println("Game data Nonexistent!");
 		}
-		if (switchPos == 'L') {
+		if (switchPos == 'R') {
 			System.out.println("Going to left switch from left station");
 			addParallel(new RotateArmTime(0.8, 0.7));
 			addParallel(new RotateGrabberTime(0.4, 0.7));
 			addSequential(new DriveStraightTime(2.5*driveScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.74*rotateScalar, 0.85));
+			addSequential(new TurnToAngleTime(0.74*rotateScalar, -0.85));
 			addSequential(new WaitCommand(0.5));
 			addSequential(new DriveStraightTime(0.8*driveScalar, 0.7));
 			addSequential(new OpenIntakeArms());
 			addSequential(new DriveStraightTime(0.5*driveScalar, -0.7));
-			addSequential(new TurnToAngleTime(0.74*rotateScalar, -0.85));
-		} else if (scalePos == 'L'){
+			addSequential(new TurnToAngleTime(0.74*rotateScalar, 0.85));
+		} else if (scalePos == 'R'){
 			System.out.println("I guess the game just hates us...");
 		} else {
 			System.out.println("I guess the game just hates us...");
