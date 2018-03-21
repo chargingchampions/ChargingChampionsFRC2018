@@ -32,7 +32,7 @@ public class Robot extends IterativeRobot {
 	public static CubeIntake cubeIntake;
 	public static Climber climber;
 	public static SecondClimber secondClimber;
-	
+
 	public static UsbCamera topviewCamera;
 	public static UsbCamera downviewCamera;
 
@@ -43,7 +43,6 @@ public class Robot extends IterativeRobot {
 			drivePVal, driveIVal, driveDVal, driveAbsTol, driveRotatePVal, driveRotateAbsTol, driveRotateIVal,
 			driveRotateDVal, grabberSafetySetpoint, grabberIntakeSetpoint, grabberSwitchSetpoint, grabberScaleSetpoint,
 			armIntakeSetpoint, armHighSafetySetpoint, armSwitchSetpoint, armScaleSetpoint;
-
 
 	Command autonomousCommand;
 	SendableChooser<Integer> chooser;
@@ -63,10 +62,10 @@ public class Robot extends IterativeRobot {
 		climber = new Climber();
 		secondClimber = new SecondClimber();
 		oi = new OI();
-		
+
 		topviewCamera = CameraServer.getInstance().startAutomaticCapture();
 		downviewCamera = CameraServer.getInstance().startAutomaticCapture();
-		
+
 		chooser.addDefault("Drive Straight", 0);
 		chooser.addObject("LeftTimeTime", 1);
 		chooser.addObject("CenterTimeTime", 2);
@@ -89,23 +88,50 @@ public class Robot extends IterativeRobot {
 		grabber.refreshSubsystem();
 		drive.initializeEncoders();
 		initializePrefs();
-		
+
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		System.out.println(gameData);
-		switch (chooser.getSelected().intValue()) {
-		case 0: autonomousCommand = new DriveStraightTime(1.5, 0.7);
-		break;
-		case 1: autonomousCommand = new LeftTimeTime(gameData, 1.0, 1.0);
-		break;
-		case 2: autonomousCommand = new CenterTimeTime(gameData, 1.0, 1.0);
-		break;
-		case 3: autonomousCommand = new RightTimeTime(gameData, 1.0, 1.0);
-		break;
-		default: autonomousCommand = new DriveStraightTime(1.5, 0.7);
-		break;
-		}
 		
+		int chooserNum = chooser.getSelected().intValue();
+		System.out.println("The chooser is set to: " + chooserNum);
+		
+		double driveScalar = 1.0;
+		double rotateScalar = 1.0;
+		
+		switch (chooserNum) {
+		case 0: {
+			System.out.println("Setting autonomous command to DriveStraightTime");
+			autonomousCommand = new DriveStraightTime(1.5*driveScalar, 0.7);
+			break;
+		}
+
+		case 1: {
+			System.out.println("Setting autonomous command to LeftTimeTime");
+			autonomousCommand = new LeftTimeTime(gameData, driveScalar, rotateScalar);
+			break;
+		}
+
+		case 2: {
+			System.out.println("Setting autonomous command to CenterTimeTime");
+			autonomousCommand = new CenterTimeTime(gameData, driveScalar, rotateScalar);
+			break;
+		}
+
+		case 3: {
+			System.out.println("Setting autonomous command to RightTimeTime");
+			autonomousCommand = new RightTimeTime(gameData, driveScalar, rotateScalar);
+			break;
+		}
+
+		default: {
+			System.out.println("Setting autonomous command to DriveStraightTime");
+			autonomousCommand = new DriveStraightTime(1.5*driveScalar, 0.7);
+			break;
+		}
+
+		}
+
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
@@ -120,19 +146,19 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		
-		//TODO: delete the below when ready
-		//putTuningToolsValues();
+
+		// TODO: delete the below when ready
+		// putTuningToolsValues();
 		// TODO: update the PID vals and other stuff in initialization of subsystems,
 		// which only occurs upon turning on the robot
 	}
 
 	public void teleopPeriodic() {
-		//TODO: delete the below method once ready
-		//tuningTools();
+		// TODO: delete the below method once ready
+		// tuningTools();
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Drive.globalDriveSpeed);
-		
+
 	}
 
 	public void testPeriodic() {
@@ -171,7 +197,6 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Arm Scale Setpoint", prefs.getDouble("Arm Switch Setpoint", 0));
 		prefs.putDouble("Arm Switch Setpoint", prefs.getDouble("Arm Scale Setpoint", 27025.0));
 
-
 	}
 
 	public void initializePrefs() {
@@ -206,13 +231,13 @@ public class Robot extends IterativeRobot {
 		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 27025.0);
 
 	}
-	
+
 	public void tuningTools() {
 		double distance = SmartDashboard.getNumber("distance", 0.0);
 		double speed = SmartDashboard.getNumber("speed", 0.0);
 		double angleToTurnTo = SmartDashboard.getNumber("angle to turn to", 0.0);
 		double time = SmartDashboard.getNumber("time to run", 0.0);
-		
+
 		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
 		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
 		SmartDashboard.putNumber("Gyro angle", drive.getGyroAngle());
@@ -227,13 +252,15 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Turn To Angle Time", new TurnToAngleTime(time, speed));
 		SmartDashboard.putData("Drive Straight Timed", new DriveStraightTime(time, speed));
 		SmartDashboard.putData("Refresh Subsystems", new ResetArmAndGrabberEncoders());
-		
-		//These PID commands are causing crashes because of outOfMemory threads...
-		//SmartDashboard.putData("PID Drive Straight to Distance", new PIDDriveStraightToDistance(distance, speed));
-		//SmartDashboard.putData("PID Turn To Angle", new PIDTurnToAngle(angleToTurnTo, speed));
-		
+
+		// These PID commands are causing crashes because of outOfMemory threads...
+		// SmartDashboard.putData("PID Drive Straight to Distance", new
+		// PIDDriveStraightToDistance(distance, speed));
+		// SmartDashboard.putData("PID Turn To Angle", new PIDTurnToAngle(angleToTurnTo,
+		// speed));
+
 	}
-	
+
 	public void putTuningToolsValues() {
 		SmartDashboard.putNumber("distance", 0.0);
 		SmartDashboard.putNumber("speed", 0.0);
