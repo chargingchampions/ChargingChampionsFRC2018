@@ -29,9 +29,9 @@ public class CenterTimeTime extends CommandGroup {
 			System.out.println("Going to left switch from center station");
 			addParallel(new RotateArmTime(0.8, 0.7));
 			addParallel(new RotateGrabberTime(0.4, 0.7));
-			addSequential(new DriveStraightTime(0.3 * driveScalar, 0.8));
+			addSequential(new DriveStraightTime(0.5 * driveScalar, 0.8));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.09 * rotateScalar, -0.85));
+			addSequential(new TurnToAngleTime(0.60 * rotateScalar, -0.85));
 			addSequential(new WaitCommand(0.5));
 			addSequential(new DriveStraightTime(2.0 * driveScalar, 0.7));
 			addSequential(new OpenIntakeArms());
@@ -39,9 +39,9 @@ public class CenterTimeTime extends CommandGroup {
 			System.out.println("Going to right switch from center station");
 			addParallel(new RotateArmTime(0.8, 0.7));
 			addParallel(new RotateGrabberTime(0.4, 0.7));
-			addSequential(new DriveStraightTime(0.3 * driveScalar, 0.8));
+			addSequential(new DriveStraightTime(0.5 * driveScalar, 0.8));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.09 * rotateScalar, 0.85));
+			addSequential(new TurnToAngleTime(0.60 * rotateScalar, 0.85));
 			addSequential(new WaitCommand(0.5));
 			addSequential(new DriveStraightTime(2.0 * driveScalar, 0.7));
 			addSequential(new OpenIntakeArms());

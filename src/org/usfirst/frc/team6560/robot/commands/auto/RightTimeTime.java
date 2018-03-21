@@ -30,12 +30,12 @@ public class RightTimeTime extends CommandGroup {
 			addParallel(new RotateGrabberTime(0.4, 0.7));
 			addSequential(new DriveStraightTime(2.5*driveScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.74*rotateScalar, -0.85));
+			addSequential(new TurnToAngleTime(0.80*rotateScalar, -0.85));
 			addSequential(new WaitCommand(0.5));
 			addSequential(new DriveStraightTime(0.8*driveScalar, 0.7));
 			addSequential(new OpenIntakeArms());
 			addSequential(new DriveStraightTime(0.5*driveScalar, -0.7));
-			addSequential(new TurnToAngleTime(0.74*rotateScalar, 0.85));
+			addSequential(new TurnToAngleTime(0.80*rotateScalar, 0.85));
 		} else if (scalePos == 'R'){
 			System.out.println("I guess the game just hates us...");
 		} else {
