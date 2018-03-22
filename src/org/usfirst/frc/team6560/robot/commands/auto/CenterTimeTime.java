@@ -26,24 +26,32 @@ public class CenterTimeTime extends CommandGroup {
 			System.out.println("Game data Nonexistent!");
 		}
 		if (switchPos == 'L') {
-			System.out.println("Going to left switch from center station");
+			System.out.println("Going to right switch from center station");
 			addParallel(new RotateArmTime(0.8, 0.7));
-			addParallel(new RotateGrabberTime(0.4, 0.7));
-			addSequential(new DriveStraightTime(0.5 * driveScalar, 0.8));
+			addParallel(new RotateGrabberTime(0.4, 0.8));
+			addSequential(new DriveStraightTime(0.35 * driveScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.60 * rotateScalar, -0.85));
+			addSequential(new TurnToAngleTime(0.45 * rotateScalar, -0.7));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new DriveStraightTime(2.0 * driveScalar, 0.7));
+			addSequential(new DriveStraightTime(1.8 * driveScalar, 0.7));
+			addSequential(new WaitCommand(0.5));
+			addSequential(new TurnToAngleTime(0.35 * rotateScalar, 0.7));
+			addSequential(new WaitCommand(0.5));
+			addSequential(new DriveStraightTime(0.5 * driveScalar, 0.7));
 			addSequential(new OpenIntakeArms());
 		} else if (switchPos == 'R') {
 			System.out.println("Going to right switch from center station");
 			addParallel(new RotateArmTime(0.8, 0.7));
-			addParallel(new RotateGrabberTime(0.4, 0.7));
-			addSequential(new DriveStraightTime(0.5 * driveScalar, 0.8));
+			addParallel(new RotateGrabberTime(0.4, 0.8));
+			addSequential(new DriveStraightTime(0.35 * driveScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.60 * rotateScalar, 0.85));
+			addSequential(new TurnToAngleTime(0.40 * rotateScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new DriveStraightTime(2.0 * driveScalar, 0.7));
+			addSequential(new DriveStraightTime(1.2 * driveScalar, 0.7));
+			addSequential(new WaitCommand(0.5));
+			addSequential(new TurnToAngleTime(0.45 * rotateScalar, -0.7));
+			addSequential(new WaitCommand(0.5));
+			addSequential(new DriveStraightTime(1.05 * driveScalar, 0.7));
 			addSequential(new OpenIntakeArms());
 
 		} else if (scalePos == 'L') {
