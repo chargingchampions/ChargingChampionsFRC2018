@@ -61,7 +61,7 @@ public class LeftTimeTime extends CommandGroup {
 			addSequential(new DriveStraightTime(0.4*driveScalar, 0.6));
 			addSequential(new WaitCommand(0.5));
 			//addSequential(new OpenIntakeArms());
-			addSequential(new ShootCube(1.0))
+			addSequential(new ShootCube(1.0));
 			addSequential(new DriveStraightTime(0.4*driveScalar, -0.6));
 		}
 	}
