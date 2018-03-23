@@ -45,17 +45,17 @@ public class LeftTimeTime extends CommandGroup {
 			System.out.println("Going to right scale from left station");
 			addParallel(new RotateArmTime(0.8, 0.7));
 			addParallel(new RotateGrabberTime(0.4, 0.7));
-			addSequential(new DriveStraightTime(1.6*driveScalar, 0.7));
+			addSequential(new DriveStraightTime(0.8*driveScalar, 0.7)); //1.6 // drive to platform zone on the left
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.60*rotateScalar, 0.7));
+			addSequential(new TurnToAngleTime(0.60*rotateScalar, 0.7)); // turn into platform zone
 			addSequential(new WaitCommand(0.5));
-			addSequential(new DriveStraightTime(3.5*driveScalar, 0.7)); // from left to right
+			addSequential(new DriveStraightTime(0.4*driveScalar, 0.7)); // from left side to right side
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.60*rotateScalar, -0.7));
+			addSequential(new TurnToAngleTime(0.60*rotateScalar, -0.7)); // turn left towards the opposite side
 			addSequential(new WaitCommand(0.5));
 			addSequential(new DriveStraightTime(0.4*driveScalar, 0.7)); // from platform zone to scale
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.60*rotateScalar, -0.7)); // turn to face scales
+			addSequential(new TurnToAngleTime(0.60*rotateScalar, -0.7)); // turn to face scale
 			addSequential(new RotateArmTime(0.8, 0.7));
 			addSequential(new RotateGrabberTime(0.55, 0.7));
 			addSequential(new DriveStraightTime(0.4*driveScalar, 0.6));
