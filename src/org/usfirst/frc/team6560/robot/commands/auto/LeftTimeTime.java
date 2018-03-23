@@ -55,7 +55,7 @@ public class LeftTimeTime extends CommandGroup {
 			addSequential(new WaitCommand(0.5));
 			addSequential(new DriveStraightTime(0.4*driveScalar, 0.7)); // from platform zone to scale
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.60*rotateScalar, -0.7)); // turn to face scal
+			addSequential(new TurnToAngleTime(0.60*rotateScalar, -0.7)); // turn to face scales
 			addSequential(new RotateArmTime(0.8, 0.7));
 			addSequential(new RotateGrabberTime(0.55, 0.7));
 			addSequential(new DriveStraightTime(0.4*driveScalar, 0.6));
