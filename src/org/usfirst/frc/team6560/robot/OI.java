@@ -10,6 +10,7 @@ import org.usfirst.frc.team6560.robot.commands.cubeIntake.StartIntake;
 import org.usfirst.frc.team6560.robot.commands.drive.DecreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.drive.IncreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.drive.TankDriveStraight;
+import org.usfirst.frc.team6560.robot.commands.encoderAssistance.StopEncoderAssistance;
 import org.usfirst.frc.team6560.robot.commands.secondClimber.RotateSecondClimberIn;
 import org.usfirst.frc.team6560.robot.commands.secondClimber.RotateSecondClimberOut;
 
@@ -75,6 +76,9 @@ public class OI {
 		
 		secondButton11.whileHeld(new RotateSecondClimberIn());
 		secondButton12.whileHeld(new RotateSecondClimberOut());
+		
+		//encoder assistance
+		secondButton7.toggleWhenPressed(new StopEncoderAssistance());
 
 		// secondTrigger.whileHeld(new IntakeCube());
 		// rightThumb.whileHeld(new IntakeCube(1.0));

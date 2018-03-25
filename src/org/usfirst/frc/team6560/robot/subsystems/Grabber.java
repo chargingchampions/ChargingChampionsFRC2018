@@ -36,7 +36,7 @@ public class Grabber extends PIDSubsystem {
 	 * @param speed
 	 */
 	public void rotateGrabber(double speed) {
-		rotationMotor.set(speed);
+		rotationMotor.set(speed*Robot.encoderAssistance.grabberScalar);
 	}
 
 	/**

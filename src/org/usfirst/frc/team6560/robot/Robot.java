@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.cscore.UsbCamera;
 
 import org.usfirst.frc.team6560.robot.commands.ResetArmAndGrabberEncoders;
-import org.usfirst.frc.team6560.robot.commands.PID.PIDDriveStraightToDistance;
-import org.usfirst.frc.team6560.robot.commands.PID.PIDTurnToAngle;
 import org.usfirst.frc.team6560.robot.commands.auto.CenterTimeTime;
 import org.usfirst.frc.team6560.robot.commands.auto.LeftTimeTime;
 import org.usfirst.frc.team6560.robot.commands.auto.RightTimeTime;
@@ -32,6 +30,7 @@ public class Robot extends IterativeRobot {
 	public static CubeIntake cubeIntake;
 	public static Climber climber;
 	public static SecondClimber secondClimber;
+	public static EncoderAssistance encoderAssistance;
 
 	public static UsbCamera topviewCamera;
 	public static UsbCamera downviewCamera;
@@ -61,6 +60,7 @@ public class Robot extends IterativeRobot {
 		cubeIntake = new CubeIntake();
 		climber = new Climber();
 		secondClimber = new SecondClimber();
+		encoderAssistance = new EncoderAssistance();
 		oi = new OI();
 
 		topviewCamera = CameraServer.getInstance().startAutomaticCapture();

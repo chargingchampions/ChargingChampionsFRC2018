@@ -2,7 +2,6 @@ package org.usfirst.frc.team6560.robot.commands.cubeIntake;
 
 import org.usfirst.frc.team6560.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

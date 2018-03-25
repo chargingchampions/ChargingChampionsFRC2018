@@ -1,7 +1,6 @@
 package org.usfirst.frc.team6560.robot.subsystems;
 
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
-import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberSecondPOV;
 import org.usfirst.frc.team6560.robot.commands.secondClimber.RotateSecondClimberStop;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
