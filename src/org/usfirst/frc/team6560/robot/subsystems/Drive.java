@@ -79,11 +79,11 @@ public class Drive extends Subsystem {
 	 * @param right
 	 */
 	public void tankDriveWithJoysticks(double left, double right) {
-		drivetrain.tankDrive(left * globalDriveSpeed*Robot.encoderAssistance.driveScalar, right * globalDriveSpeed*Robot.encoderAssistance.driveScalar);
+		drivetrain.tankDrive(left * globalDriveSpeed, right * globalDriveSpeed);
 	}
 	
 	public void arcadeDriveWithJoysticks(double left, double right) {
-		drivetrain.arcadeDrive(left * globalDriveSpeed*Robot.encoderAssistance.driveScalar, right * globalDriveSpeed*Robot.encoderAssistance.driveScalar);
+		drivetrain.arcadeDrive(left * globalDriveSpeed, right * globalDriveSpeed);
 	}
 
 	public void stopDrive() {

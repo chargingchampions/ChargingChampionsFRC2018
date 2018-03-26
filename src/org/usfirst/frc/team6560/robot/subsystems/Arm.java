@@ -44,7 +44,7 @@ public class Arm extends PIDSubsystem {
 	 * @param speed for rotation of the arm, positive is up, negative is down
 	 */
 	public void rotate(double speed) {
-		jointMotor2.set(speed*Robot.encoderAssistance.armScalar);
+		jointMotor2.set(speed);
 	}
 
 	public void initDefaultCommand() {

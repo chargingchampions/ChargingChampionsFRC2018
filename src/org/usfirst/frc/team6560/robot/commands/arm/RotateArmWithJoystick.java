@@ -20,9 +20,9 @@ public class RotateArmWithJoystick extends Command {
 	protected void execute() {
 		if (Robot.oi.getSecondYAxis() > 0) {
 			// && !Robot.arm.halleffect.get()))
-			Robot.arm.rotate(Robot.oi.getSecondYAxis());
+			Robot.arm.rotate(Robot.oi.getSecondYAxis()*Robot.encoderAssistance.armScalar);
 		} else if ((Robot.oi.getSecondYAxis() < 0)) {
-			Robot.arm.rotate(0.6*Robot.oi.getSecondYAxis());
+			Robot.arm.rotate(0.6*Robot.oi.getSecondYAxis()*Robot.encoderAssistance.armScalar);
 		}
 	}
 
