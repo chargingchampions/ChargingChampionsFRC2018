@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class EncoderAssistance extends Subsystem {
 
 	public double armScalar, driveScalar, grabberScalar;
-	public double armScalarNormal, driveScalarNormal, grabberScalarNormal;
-	public double armScalarSlow, driveScalarSlow, grabberScalarSlow;
+	private double armScalarNormal, driveScalarNormal, grabberScalarNormal;
+	private double armScalarSlow, driveScalarSlow, grabberScalarSlow;
 
 	public EncoderAssistance() {
 		armScalarNormal = 1.0;
