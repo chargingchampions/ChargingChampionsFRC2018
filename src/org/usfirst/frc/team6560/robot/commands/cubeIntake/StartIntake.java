@@ -18,7 +18,7 @@ public class StartIntake extends Command {
 
 	protected void execute() {
 		Robot.cubeIntake.openArm();
-		Robot.cubeIntake.intakeCube(0.50);
+		Robot.cubeIntake.intakeCube(0.7); 
 	}
 
 	protected boolean isFinished() {

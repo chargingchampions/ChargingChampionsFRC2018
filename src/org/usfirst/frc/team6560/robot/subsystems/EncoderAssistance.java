@@ -20,8 +20,8 @@ public class EncoderAssistance extends Subsystem {
 		
 		setNormal();
 		
-		armScalarSlow = 0.6;
-		driveScalarSlow = 0.4;
+		armScalarSlow = 0.4;
+		driveScalarSlow = 0.6;
 		grabberScalarSlow = 0.8;
 	}
 	

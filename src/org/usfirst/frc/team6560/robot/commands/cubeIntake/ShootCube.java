@@ -27,7 +27,7 @@ public class ShootCube extends Command {
 		if (shutdownTimer != null) {
 			shutdownTimer.start();
 		}
-		Robot.cubeIntake.shootCube(0.6);
+		Robot.cubeIntake.shootCube(0.6); 
 	}
 
 	protected void execute() {
