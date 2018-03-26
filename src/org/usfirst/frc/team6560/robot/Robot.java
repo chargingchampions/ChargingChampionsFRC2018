@@ -148,16 +148,20 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 
 		// TODO: delete the below when ready
-		putTuningToolsValues();
+		//putTuningToolsValues();
 		// TODO: update the PID vals and other stuff in initialization of subsystems,
 		// which only occurs upon turning on the robot
 	}
 
 	public void teleopPeriodic() {
 		// TODO: delete the below method once ready
-		tuningTools();
+		//tuningTools();
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Drive.globalDriveSpeed);
+		
+		SmartDashboard.putNumber("Arm Scalar", encoderAssistance.armScalar);
+		SmartDashboard.putNumber("Drive Scalar", encoderAssistance.driveScalar);
+		SmartDashboard.putNumber("Grabber Scalar", encoderAssistance.grabberScalar);
 
 	}
 
