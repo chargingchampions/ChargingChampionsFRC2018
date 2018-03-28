@@ -12,6 +12,7 @@ public class ShootCube extends Command {
 	
 	Timer shutdownTimer = null;
 	double time;
+	double speed = 0;
 
 	public ShootCube() {
 		requires(Robot.cubeIntake);
@@ -22,12 +23,24 @@ public class ShootCube extends Command {
 		shutdownTimer = new Timer();
 		this.time = time;
 	}
+	
+	public ShootCube(double time, double speed) {
+		requires(Robot.cubeIntake);
+		shutdownTimer = new Timer();
+		this.time = time;
+		this.speed = speed;
+	}
 
 	protected void initialize() {
 		if (shutdownTimer != null) {
 			shutdownTimer.start();
 		}
-		Robot.cubeIntake.shootCube(0.6); 
+		
+		if (speed != 0) {
+			Robot.cubeIntake.shootCube(speed);
+		} else {
+			Robot.cubeIntake.shootCube(0.6); 
+		}
 	}
 
 	protected void execute() {

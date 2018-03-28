@@ -64,18 +64,22 @@ public class OI {
 		// arm rotation buttons
 
 		// grabber rotation buttons
+		/**
 		secondButton3.whenPressed(new PIDSetIntake());
 		secondButton4.whenPressed(new PIDSetSwitch());
 		secondButton6.whenPressed(new PIDSetScale());
 		secondButton5.whenPressed(new PIDSetDefault());
+		**/
 		// intake buttons
 		secondRightThumb.whileHeld(new StartIntake());
 		rightIndex.whileHeld(new StartIntake());
 		leftIndex.whileHeld(new ShootCube());
 		secondTrigger.whileHeld(new ShootCube());
 		
+		/**
 		secondButton11.whileHeld(new RotateSecondClimberIn());
 		secondButton12.whileHeld(new RotateSecondClimberOut());
+		**/
 		
 		//encoder assistance
 		secondButton7.toggleWhenPressed(new StopEncoderAssistance());
