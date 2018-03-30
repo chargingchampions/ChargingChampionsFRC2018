@@ -31,12 +31,12 @@ public class LeftTimeTime extends CommandGroup {
 			addParallel(new RotateGrabberTime(0.4, 0.7));
 			addSequential(new DriveStraightTime(3.25*driveScalar, 0.8));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.30*rotateScalar, 0.7));
+			addSequential(new TurnToAngleTime(0.40*rotateScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new RotateArmTime(1.0, 0.7));
+			addSequential(new RotateArmTime(1.4, 0.7));
 			addSequential(new RotateArmTime(0.6, 0.5));
 			addSequential(new RotateGrabberTime(0.65, 0.7));
-			addSequential(new DriveStraightTime(0.8*driveScalar, 0.6));
+			addSequential(new DriveStraightTime(0.95*driveScalar, 0.6));
 			addSequential(new WaitCommand(0.5));
 			addSequential(new ShootCube(1.0, 0.6));
 			//addSequential(new RotateGrabberTime(0.30, 0.7));

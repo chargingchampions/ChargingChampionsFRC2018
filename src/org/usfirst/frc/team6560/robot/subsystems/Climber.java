@@ -14,7 +14,6 @@ public class Climber extends Subsystem {
 
 	public Climber() {
 		climbMotor.setSafetyEnabled(false);
-		climbMotor.setInverted(true);
 	}
 	
 	/**
@@ -22,11 +21,11 @@ public class Climber extends Subsystem {
 	 * @param speedUp
 	 * @param speedDown
 	 */
-	public void climb(double speedUp, double speedDown) {
-		if(speedUp > speedDown)
-			climbMotor.set(speedUp);
+	public void climb(double speedOne, double speedTwo) {
+		if(speedOne > speedTwo)
+			climbMotor.set(speedOne);
 		else
-			climbMotor.set(-1 * speedDown);
+			climbMotor.set(-1 * speedTwo);
 	}
 
 	public void stopClimber() {
