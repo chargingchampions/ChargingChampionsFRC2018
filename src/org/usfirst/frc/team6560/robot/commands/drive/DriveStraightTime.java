@@ -23,8 +23,8 @@ public class DriveStraightTime extends Command {
 	protected void initialize() {
 		timer.reset();
 		timer.start();
-		Robot.drive.gyro.reset();
-		//Robot.drive.imu.reset();
+		//Robot.drive.gyro.reset();
+		Robot.drive.imu.reset();
 	}
 
 	protected void execute() {

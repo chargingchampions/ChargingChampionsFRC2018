@@ -20,15 +20,15 @@ public class PIDTurnToAngle extends Command {
 		this.angle = angleToTurnTo;
 		this.speed = speed;
 		driveRotateOutput = new DriveRotatePIDOutput();
-		//driveRotatePIDControl = new PIDController(Robot.driveRotatePVal, Robot.driveRotateIVal, Robot.driveRotateDVal, Robot.drive.imu, driveRotateOutput);
-		driveRotatePIDControl = new PIDController(Robot.driveRotatePVal, Robot.driveRotateIVal, Robot.driveRotateDVal, Robot.drive.gyro, driveRotateOutput);
+		driveRotatePIDControl = new PIDController(Robot.driveRotatePVal, Robot.driveRotateIVal, Robot.driveRotateDVal, Robot.drive.imu, driveRotateOutput);
+		//driveRotatePIDControl = new PIDController(Robot.driveRotatePVal, Robot.driveRotateIVal, Robot.driveRotateDVal, Robot.drive.gyro, driveRotateOutput);
 		// TODO: PID controllers should not have to be tuned after finding correct
 		// values, so perhaps hardcode them into the code later on
 	}
 
 	protected void initialize() {
-		Robot.drive.gyro.reset();
-		//Robot.drive.imu.reset();
+		//Robot.drive.gyro.reset();
+		Robot.drive.imu.reset();
 		driveRotatePIDControl.setSetpoint(angle);
 
 		// This is the point at which the error is small enough to be tolerated

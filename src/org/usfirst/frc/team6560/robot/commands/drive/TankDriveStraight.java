@@ -22,8 +22,8 @@ public class TankDriveStraight extends Command {
 	}
 
 	protected void initialize() {
-		Robot.drive.gyro.reset();
-		//Robot.drive.imu.reset();
+		//Robot.drive.gyro.reset();
+		Robot.drive.imu.reset();
 	}
 
 	protected void execute() {

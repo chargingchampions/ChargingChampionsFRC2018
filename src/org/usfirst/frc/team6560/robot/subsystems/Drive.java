@@ -5,6 +5,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import org.usfirst.frc.team6560.robot.Robot;
 import org.usfirst.frc.team6560.robot.RobotMap.CAN;
 import org.usfirst.frc.team6560.robot.commands.drive.ArcadeDriveWithJoysticks;
+import org.usfirst.frc.team6560.util.ADIS16448_IMU;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -28,8 +30,8 @@ public class Drive extends Subsystem {
 
 	// Sensors
 	// public AnalogInput ultra;
-	public ADXRS450_Gyro gyro;
-	// public ADIS16448_IMU imu;
+	//public ADXRS450_Gyro gyro;
+	public ADIS16448_IMU imu;
 
 	public Encoder drive_enc_left;
 	public Encoder drive_enc_right;
@@ -49,7 +51,7 @@ public class Drive extends Subsystem {
 		frontLeftDrive.setInverted(false);
 		rearLeftDrive.setInverted(false);
 		frontRightDrive.setInverted(false);
-		rearRightDrive.setInverted(true);
+		rearRightDrive.setInverted(false);
 
 		frontLeftDrive.setSafetyEnabled(false);
 		rearLeftDrive.setSafetyEnabled(false);
@@ -57,13 +59,13 @@ public class Drive extends Subsystem {
 		rearRightDrive.setSafetyEnabled(false);
 		drivetrain.setSafetyEnabled(false);
 
-		// ultra = new AnalogInput(0);
-		gyro = new ADXRS450_Gyro();
-		// imu = new ADIS16448_IMU();
-		gyro.calibrate();
-		gyro.reset();
-		// imu.calibrate();
-		// imu.reset();
+		//ultra = new AnalogInput(0);
+		//gyro = new ADXRS450_Gyro();
+		imu = new ADIS16448_IMU();
+		//gyro.calibrate();
+		//gyro.reset();
+		imu.calibrate();
+		imu.reset();
 
 		drive_enc_left = new Encoder(8, 9, true, Encoder.EncodingType.k2X); // TODO: Determine DIO ports
 		drive_enc_right = new Encoder(6, 7, true, Encoder.EncodingType.k2X);
@@ -168,14 +170,13 @@ public class Drive extends Subsystem {
 	 * @param speed
 	 */
 	public void driveStraightWithGyro(double speed) {
-		// double angle = gyro.getAngle();
 		double angle = getGyroAngle();
 		drivetrain.arcadeDrive(speed, -0.3 * angle);
 	}
 
 	public double getGyroAngle() {
-		return -gyro.getAngle();
-		// return imu.getAngleX();
+		//return -gyro.getAngle();
+		return -imu.getAngleX();
 	}
 
 	/**

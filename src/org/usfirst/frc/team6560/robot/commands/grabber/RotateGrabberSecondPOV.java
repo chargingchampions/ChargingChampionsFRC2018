@@ -19,9 +19,9 @@ public class RotateGrabberSecondPOV extends Command {
 
 	protected void execute() {
 		if (Robot.oi.getSecondPOV() == 0 || Robot.oi.getSecondPOV() == 45 || Robot.oi.getSecondPOV() == 315) {
-			Robot.grabber.rotateGrabber(0.5*Robot.encoderAssistance.grabberScalar);
+			Robot.grabber.rotateGrabber(0.7*Robot.encoderAssistance.grabberScalar);
 		} else if (Robot.oi.getSecondPOV() == 180 || Robot.oi.getSecondPOV() == 135 || Robot.oi.getSecondPOV() == 225) {
-			Robot.grabber.rotateGrabber(-0.5*Robot.encoderAssistance.grabberScalar);
+			Robot.grabber.rotateGrabber(-0.7*Robot.encoderAssistance.grabberScalar);
 		} else {
 			Robot.grabber.rotateGrabber(0);
 		}
