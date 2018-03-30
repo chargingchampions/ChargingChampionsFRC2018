@@ -14,6 +14,7 @@ public class Climber extends Subsystem {
 
 	public Climber() {
 		climbMotor.setSafetyEnabled(false);
+		climbMotor.setInverted(true);
 	}
 	
 	/**
