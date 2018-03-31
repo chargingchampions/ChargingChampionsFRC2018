@@ -120,7 +120,7 @@ public class Robot extends IterativeRobot {
 			System.out.println("Setting autonomous command to CenterTimeTime");
 			autonomousCommand = new CenterTimeTime(gameData, driveScalar, rotateScalar);
 			break;
-		}
+		} 
 
 		case 3: {
 			System.out.println("Setting autonomous command to RightTimeTime");
