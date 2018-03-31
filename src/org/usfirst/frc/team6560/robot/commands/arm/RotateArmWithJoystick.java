@@ -10,19 +10,18 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RotateArmWithJoystick extends Command {
 
 	public RotateArmWithJoystick() {
-		requires(Robot.arm);
+		requires(Robot.armBasic);
 	}
 
 	protected void initialize() {
-		Robot.arm.disable();
 	}
 
 	protected void execute() {
 		if (Robot.oi.getSecondYAxis() > 0) {
 			// && !Robot.arm.halleffect.get()))
-			Robot.arm.rotate(Robot.oi.getSecondYAxis()*Robot.encoderAssistance.armScalar);
+			Robot.armBasic.rotate(Robot.oi.getSecondYAxis()*Robot.encoderAssistance.armScalar);
 		} else if ((Robot.oi.getSecondYAxis() < 0)) {
-			Robot.arm.rotate(0.8*Robot.oi.getSecondYAxis()/(Robot.encoderAssistance.armScalar+0.25));
+			Robot.armBasic.rotate(0.6*Robot.oi.getSecondYAxis());
 		}
 	}
 
@@ -31,7 +30,7 @@ public class RotateArmWithJoystick extends Command {
 	}
 
 	protected void end() {
-		Robot.arm.rotate(0);
+		Robot.armBasic.rotate(0);
 	}
 
 	protected void interrupted() {
