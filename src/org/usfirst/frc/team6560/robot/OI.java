@@ -1,18 +1,14 @@
 package org.usfirst.frc.team6560.robot;
 
 import org.usfirst.frc.team6560.robot.RobotMap.Joysticks;
-import org.usfirst.frc.team6560.robot.commands.PID.PIDSetDefault;
-import org.usfirst.frc.team6560.robot.commands.PID.PIDSetIntake;
-import org.usfirst.frc.team6560.robot.commands.PID.PIDSetScale;
-import org.usfirst.frc.team6560.robot.commands.PID.PIDSetSwitch;
+import org.usfirst.frc.team6560.robot.commands.climber.ClimbReverse;
 import org.usfirst.frc.team6560.robot.commands.cubeIntake.ShootCube;
 import org.usfirst.frc.team6560.robot.commands.cubeIntake.StartIntake;
 import org.usfirst.frc.team6560.robot.commands.drive.DecreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.drive.IncreaseDriveSpeed;
 import org.usfirst.frc.team6560.robot.commands.drive.TankDriveStraight;
 import org.usfirst.frc.team6560.robot.commands.encoderAssistance.StopEncoderAssistance;
-import org.usfirst.frc.team6560.robot.commands.secondClimber.RotateSecondClimberIn;
-import org.usfirst.frc.team6560.robot.commands.secondClimber.RotateSecondClimberOut;
+import org.usfirst.frc.team6560.robot.commands.grabber.RotateGrabberInSafety;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -53,23 +49,20 @@ public class OI {
 		JoystickButton secondButton11 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_11);
 		JoystickButton secondButton12 = new JoystickButton(logitechJoystick, Joysticks.SECOND_BUTTON_12);
 
-		// secondButton4.whileHeld(new ShootCube());
-
 		// drive buttons
 		yButton.whileHeld(new TankDriveStraight(0.5));
 		aButton.whileHeld(new TankDriveStraight(-0.5));
 		bButton.whileHeld(new IncreaseDriveSpeed());
 		xButton.whileHeld(new DecreaseDriveSpeed());
 
-		// arm rotation buttons
-
-		// grabber rotation buttons
+		// PID buttons
 		/**
 		secondButton3.whenPressed(new PIDSetIntake());
 		secondButton4.whenPressed(new PIDSetSwitch());
 		secondButton6.whenPressed(new PIDSetScale());
 		secondButton5.whenPressed(new PIDSetDefault());
 		**/
+		
 		// intake buttons
 		secondRightThumb.whileHeld(new StartIntake());
 		rightIndex.whileHeld(new StartIntake());
@@ -81,12 +74,14 @@ public class OI {
 		secondButton12.whileHeld(new RotateSecondClimberOut());
 		**/
 		
-		//encoder assistance
+		//disable encoder assistance
 		secondButton7.toggleWhenPressed(new StopEncoderAssistance());
-
-		// secondTrigger.whileHeld(new IntakeCube());
-		// rightThumb.whileHeld(new IntakeCube(1.0));
-		// button4.whileHeld(new ShootCube(0.5));
+		
+		//reverse climber
+		secondButton8.whileHeld(new ClimbReverse());
+		
+		//hold to go to safety
+		//secondButton3.whenPressed(new RotateGrabberInSafety());
 
 	}
 

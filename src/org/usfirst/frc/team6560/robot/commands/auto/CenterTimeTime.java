@@ -27,7 +27,7 @@ public class CenterTimeTime extends CommandGroup {
 		}
 		if (switchPos == 'L') {
 			System.out.println("Going to right switch from center station");
-			addParallel(new RotateArmTime(0.8, 0.7));
+			addParallel(new RotateArmTime(0.75, 0.7));
 			addParallel(new RotateGrabberTime(0.4, 0.8));
 			addSequential(new DriveStraightTime(0.35 * driveScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
@@ -39,24 +39,26 @@ public class CenterTimeTime extends CommandGroup {
 			addSequential(new WaitCommand(0.5));
 			addSequential(new DriveStraightTime(0.5 * driveScalar, 0.7));
 			addSequential(new DriveStraightTime(0.3 * driveScalar, 0.5));
-			addSequential(new RotateGrabberTime(0.2, 0.6));
-			addSequential(new ShootCube(3.0, 0.4));
+			addSequential(new RotateGrabberTime(0.42, 0.6));
+			addSequential(new ShootCube(1.0, 0.4));
+			addSequential(new RotateGrabberTime(0.42, -0.6));
 		} else if (switchPos == 'R') {
 			System.out.println("Going to right switch from center station");
-			addParallel(new RotateArmTime(0.8, 0.7));
+			addParallel(new RotateArmTime(0.75, 0.7));
 			addParallel(new RotateGrabberTime(0.4, 0.8));
 			addSequential(new DriveStraightTime(0.35 * driveScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.45 * rotateScalar, 0.7));
+			addSequential(new TurnToAngleTime(0.4 * rotateScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new DriveStraightTime(1.7 * driveScalar, 0.7));
+			addSequential(new DriveStraightTime(1.4 * driveScalar, 0.7));
 			addSequential(new WaitCommand(0.5));
-			addSequential(new TurnToAngleTime(0.45 * rotateScalar, -0.7));
+			addSequential(new TurnToAngleTime(0.4 * rotateScalar, -0.7));
 			addSequential(new WaitCommand(0.5));
 			addSequential(new DriveStraightTime(1.05 * driveScalar, 0.7));
 			addSequential(new DriveStraightTime(0.2 * driveScalar, 0.5));
-			addSequential(new RotateGrabberTime(0.2, 0.6));
-			addSequential(new ShootCube(3.0, 0.4));
+			addSequential(new RotateGrabberTime(0.42, 0.6));
+			addSequential(new ShootCube(1.0, 0.4));
+			addSequential(new RotateGrabberTime(0.42, -0.6));
 
 		} else if (scalePos == 'L') {
 			System.out.println("I guess the game just hates us...");

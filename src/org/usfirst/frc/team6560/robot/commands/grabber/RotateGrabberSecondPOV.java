@@ -14,7 +14,6 @@ public class RotateGrabberSecondPOV extends Command {
 	}
 
 	protected void initialize() {
-		Robot.grabber.disable();
 	}
 
 	protected void execute() {
@@ -32,7 +31,6 @@ public class RotateGrabberSecondPOV extends Command {
 	}
 
 	protected void end() {
-		Robot.grabber.disable();
 		Robot.grabber.rotateGrabber(0);
 	}
 

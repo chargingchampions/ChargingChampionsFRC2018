@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drive drive;
 	public static Grabber grabber;
-	public static Arm arm;
+	public static ArmBasic armBasic;
 	public static CubeIntake cubeIntake;
 	public static Climber climber;
 	public static SecondClimber secondClimber;
@@ -38,10 +38,14 @@ public class Robot extends IterativeRobot {
 	// remove the following if it causes a NetworkTable exception
 	public static Preferences prefs;
 
+	/**
 	public static double grabberPVal, grabberIVal, grabberDVal, grabberAbsTol, armPVal, armIVal, armDVal, armAbsTol,
 			drivePVal, driveIVal, driveDVal, driveAbsTol, driveRotatePVal, driveRotateAbsTol, driveRotateIVal,
 			driveRotateDVal, grabberSafetySetpoint, grabberIntakeSetpoint, grabberSwitchSetpoint, grabberScaleSetpoint,
 			armIntakeSetpoint, armHighSafetySetpoint, armSwitchSetpoint, armScaleSetpoint;
+	**/
+	
+	public static double encoderAssistanceSafety = 17375, encoderAssistanceMax = 27166, encoderGrabberSafety = 683;
 
 	Command autonomousCommand;
 	SendableChooser<Integer> chooser;
@@ -50,13 +54,13 @@ public class Robot extends IterativeRobot {
 		// remove the following if it causes a NetworkTable exception
 		// Putting and loading preferences
 		prefs = Preferences.getInstance();
-		putPrefsNumbers();
-		initializePrefs();
+		//putPrefsNumbers();
+		//initializePrefs();
 		chooser = new SendableChooser<Integer>();
 		// initializing subsystems
 		drive = new Drive();
 		grabber = new Grabber();
-		arm = new Arm();
+		armBasic = new ArmBasic();
 		cubeIntake = new CubeIntake();
 		climber = new Climber();
 		secondClimber = new SecondClimber();
@@ -84,10 +88,10 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
-		arm.refreshSubsystem();
 		grabber.refreshSubsystem();
+		armBasic.resetEncoder();
 		drive.initializeEncoders();
-		initializePrefs();
+		//initializePrefs();
 
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -102,7 +106,7 @@ public class Robot extends IterativeRobot {
 		switch (chooserNum) {
 		case 0: {
 			System.out.println("Setting autonomous command to DriveStraightTime");
-			autonomousCommand = new DriveStraightTime(1.5*driveScalar, 0.7);
+			autonomousCommand = new DriveStraightTime(2.3*driveScalar, 0.7);
 			break;
 		}
 
@@ -116,7 +120,7 @@ public class Robot extends IterativeRobot {
 			System.out.println("Setting autonomous command to CenterTimeTime");
 			autonomousCommand = new CenterTimeTime(gameData, driveScalar, rotateScalar);
 			break;
-		}
+		} 
 
 		case 3: {
 			System.out.println("Setting autonomous command to RightTimeTime");
@@ -158,10 +162,15 @@ public class Robot extends IterativeRobot {
 		//tuningTools();
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Global Drive Speed Teleop Periodic", Drive.globalDriveSpeed);
-		
+		SmartDashboard.putBoolean("Encoder Assistance", encoderAssistance.activated);
 		SmartDashboard.putNumber("Arm Scalar", encoderAssistance.armScalar);
 		SmartDashboard.putNumber("Drive Scalar", encoderAssistance.driveScalar);
 		SmartDashboard.putNumber("Grabber Scalar", encoderAssistance.grabberScalar);
+		SmartDashboard.putNumber("Arm Safety", encoderAssistanceSafety);
+		SmartDashboard.putNumber("Arm Max", encoderAssistanceMax);
+		SmartDashboard.putNumber("Current Arm Position", armBasic.getEncoderPosition());
+		SmartDashboard.putNumber("Current Grabber Position", grabber.getEncoderPosition());
+		SmartDashboard.putData("Refresh Subsystems", new ResetArmAndGrabberEncoders());
 
 	}
 
@@ -169,6 +178,7 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 	}
 
+	/**
 	public void putPrefsNumbers() {
 		// insert preference values here
 		prefs.putDouble("Grabber P Value", prefs.getDouble("Grabber P Value", 0.001));
@@ -202,7 +212,9 @@ public class Robot extends IterativeRobot {
 		prefs.putDouble("Arm Switch Setpoint", prefs.getDouble("Arm Scale Setpoint", 27025.0));
 
 	}
+	**/
 
+	/**
 	public void initializePrefs() {
 		grabberPVal = prefs.getDouble("Grabber P Value", 0.001);
 		grabberIVal = prefs.getDouble("Grabber I Value", 0.0);
@@ -235,6 +247,7 @@ public class Robot extends IterativeRobot {
 		armScaleSetpoint = prefs.getDouble("Arm Scale Setpoint", 27025.0);
 
 	}
+	**/
 
 	public void tuningTools() {
 		double distance = SmartDashboard.getNumber("distance", 0.0);
@@ -242,8 +255,7 @@ public class Robot extends IterativeRobot {
 		double angleToTurnTo = SmartDashboard.getNumber("angle to turn to", 0.0);
 		double time = SmartDashboard.getNumber("time to run", 0.0);
 
-		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getPosition());
-		SmartDashboard.putNumber("Arm Encoder Relative Position", Robot.arm.getPosition());
+		SmartDashboard.putNumber("Grabber Encoder Relative Position", Robot.grabber.getEncoderPosition());
 		SmartDashboard.putNumber("Gyro angle", drive.getGyroAngle());
 		SmartDashboard.putNumber("Left Encoder", drive.drive_enc_left.getDistance());
 		SmartDashboard.putNumber("Right Encoder", drive.drive_enc_right.getDistance());
